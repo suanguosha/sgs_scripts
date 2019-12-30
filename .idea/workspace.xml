@@ -16,10 +16,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/新逐鹿天下120关(自走棋).js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="428">
+              <caret line="11" selection-start-line="11" selection-end-line="31" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#174#182#0" />
               </folding>
             </state>
           </provider>
@@ -75,8 +76,8 @@
         <option value="$USER_HOME$/Desktop/VM1236" />
         <option value="$USER_HOME$/Desktop/新游卡20191229.js" />
         <option value="$PROJECT_DIR$/逐鹿天下120关-关张.js" />
-        <option value="$PROJECT_DIR$/新逐鹿天下120关(自走棋).js" />
         <option value="$PROJECT_DIR$/新游卡20191229.js" />
+        <option value="$PROJECT_DIR$/新逐鹿天下120关(自走棋).js" />
       </list>
     </option>
   </component>
@@ -140,12 +141,13 @@
       <updated>1577610442689</updated>
       <workItem from="1577610444366" duration="24000" />
       <workItem from="1577610525813" duration="768000" />
-      <workItem from="1577615961729" duration="9339000" />
+      <workItem from="1577615961729" duration="9748000" />
+      <workItem from="1577673582672" duration="1496000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10131000" />
+    <option name="totallyTimeSpent" value="12036000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-8" width="1296" height="1056" extended-state="0" />
@@ -216,10 +218,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/新逐鹿天下120关(自走棋).js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="428">
+          <caret line="11" selection-start-line="11" selection-end-line="31" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#174#182#0" />
           </folding>
         </state>
       </provider>
