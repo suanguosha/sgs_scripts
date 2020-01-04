@@ -14,14 +14,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/新逐鹿天下120关(自走棋).js">
+        <entry file="file://$PROJECT_DIR$/日常.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="11" selection-start-line="11" selection-end-line="31" selection-end-column="2" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#174#182#0" />
-              </folding>
+            <state relative-caret-position="225">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/自动刷逐鹿天下.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -37,36 +42,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getelfinfo</find>
-      <find>competeworldgamemanager</find>
-      <find>Elf</find>
-      <find>req</find>
-      <find>competeWorldGameManager</find>
-      <find>addEventListener</find>
-      <find>IsNewZhuLu</find>
-      <find>NewCompeteWorldManager</find>
-      <find>ReqCompeteWorldBattle</find>
-      <find>NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle</find>
-      <find>MITZhuLuTianXia</find>
-      <find>CompeteWorldGameScene</find>
-      <find>TableGameManager</find>
-      <find>onNotify</find>
-      <find>UpdateResultItems</find>
-      <find>hasWindow</find>
-      <find>hasWindow(&quot;GameResult</find>
-      <find>onNotifyCompeteworld</find>
-      <find>onNotifyCom</find>
-      <find>click</find>
-      <find>Laya.Event.CLICK</find>
-      <find>onNotifyCompeteworldSweepBattleResult</find>
-      <find>rate</find>
-      <find>set</find>
-      <find>newCompeteEW</find>
-      <find>setRate</find>
-      <find>NewCompeteWorld</find>
-      <find>NewCompeteWorldSelect</find>
-      <find>newCompeteWorld</find>
-      <find>MaxBattleTimes</find>
+      <find>protovo</find>
+      <find>protoProxy.</find>
+      <find>gameGuild</find>
+      <find>SendProto</find>
+      <find>sendProtoT</find>
+      <find>sendProto</find>
+      <find>sendProtoToSelf</find>
+      <find>ProtoBufID</find>
+      <find>Protocol</find>
+      <find>2337295654</find>
+      <find>protoProxy</find>
+      <find>VP</find>
+      <find>JiangYin</find>
+      <find>extractjiangyin</find>
+      <find>reqschoolInfo</find>
+      <find>playGeneralSealEffect</find>
+      <find>.send</find>
+      <find>update</find>
+      <find>CMSG_CREQGENERALSEALCHESTOPEN</find>
+      <find>220009068</find>
+      <find>proxy</find>
+      <find>proxy.VP19</find>
+      <find>prototype</find>
+      <find>ReqBeatDrum</find>
+      <find>VP19</find>
+      <find>GetProtoNameId</find>
+      <find>CMSG_CREQGUILDBEATTHEDRUMS</find>
+      <find>GeneralElfManager</find>
+      <find>CMSG_CREQGENERALSPRITETASKREWARDGET</find>
+      <find>answer</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -76,16 +81,19 @@
         <option value="$USER_HOME$/Desktop/VM1236" />
         <option value="$USER_HOME$/Desktop/新游卡20191229.js" />
         <option value="$PROJECT_DIR$/逐鹿天下120关-关张.js" />
-        <option value="$PROJECT_DIR$/新游卡20191229.js" />
         <option value="$PROJECT_DIR$/新逐鹿天下120关(自走棋).js" />
+        <option value="$USER_HOME$/Documents/Tencent Files/1099631484/FileRecv/before.min.js" />
+        <option value="$PROJECT_DIR$/新游卡20191229.js" />
+        <option value="$PROJECT_DIR$/日常.js" />
+        <option value="$PROJECT_DIR$/自动刷逐鹿天下.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1272" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1296" />
-    <option name="height" value="1056" />
+    <option name="height" value="1100" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -143,17 +151,26 @@
       <workItem from="1577610525813" duration="768000" />
       <workItem from="1577615961729" duration="9748000" />
       <workItem from="1577673582672" duration="1496000" />
+      <workItem from="1577757595934" duration="2992000" />
+      <workItem from="1577774777827" duration="1048000" />
+      <workItem from="1577874067608" duration="958000" />
+      <workItem from="1577875099381" duration="2125000" />
+      <workItem from="1577877736865" duration="5774000" />
+      <workItem from="1577928292779" duration="58000" />
+      <workItem from="1578055620657" duration="2957000" />
+      <workItem from="1578118352711" duration="4635000" />
+      <workItem from="1578139201062" duration="82000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12036000" />
+    <option name="totallyTimeSpent" value="32665000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1272" y="-8" width="1296" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3892829" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.092986606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -172,6 +189,26 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.115051225" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="GraphQL" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -184,46 +221,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/反混淆20191012.js">
+    <entry file="file://$PROJECT_DIR$/反混淆20191012.js" />
+    <entry file="file://$PROJECT_DIR$/新逐鹿天下120关(自走棋).js" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/1099631484/FileRecv/before.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="49576" column="34" selection-start-line="49576" selection-start-column="34" selection-end-line="49576" selection-end-column="34" />
-          <folding>
-            <element signature="e#8315225#8318133#0" />
-            <element signature="e#8324606#8340844#0" />
-            <element signature="e#8327165#8327323#0" />
-          </folding>
+        <state>
+          <caret column="3119" selection-start-column="3110" selection-end-column="3119" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/逐鹿天下100关-袁绍.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/逐鹿天下100关-关张.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1800">
+          <caret line="2" column="61" lean-forward="true" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.proxy.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="38" column="72" selection-start-line="38" selection-start-column="72" selection-end-line="38" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="297" column="4" selection-start-line="297" selection-start-column="4" selection-end-line="297" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/新游卡20191229.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
-          <caret line="174350" column="137" selection-start-line="174350" selection-start-column="123" selection-end-line="174350" selection-end-column="137" />
+          <caret line="49880" column="189" selection-start-line="49880" selection-start-column="183" selection-end-line="49880" selection-end-column="189" />
           <folding>
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
+            <element signature="e#462775#469755#0" />
+            <element signature="e#469791#470429#0" />
+            <element signature="e#470459#472335#0" />
+            <element signature="e#472373#472876#0" />
+            <element signature="e#472913#473190#0" />
+            <element signature="e#477898#481666#0" />
+            <element signature="e#568135#568671#0" />
+            <element signature="e#568706#574355#0" />
+            <element signature="e#574385#581870#0" />
+            <element signature="e#581906#581991#0" />
+            <element signature="e#582030#583358#0" />
+            <element signature="e#583393#584548#0" />
+            <element signature="e#584586#585511#0" />
+            <element signature="e#1885571#1887807#0" />
+            <element signature="e#1897646#1897869#0" />
+            <element signature="e#1897912#1898302#0" />
+            <element signature="e#1898467#1899062#0" />
+            <element signature="e#1899167#1899858#0" />
+            <element signature="e#1899323#1899848#0" />
+            <element signature="e#1899905#1900354#0" />
+            <element signature="e#2217291#2219129#0" />
+            <element signature="e#6066093#6066447#0" />
+            <element signature="e#6066524#6067126#0" />
+            <element signature="e#6067173#6069201#0" />
+            <element signature="e#6069278#6069880#0" />
+            <element signature="e#10708328#10712645#0" />
+            <element signature="e#10712845#10713025#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/新逐鹿天下120关(自走棋).js">
+    <entry file="file://$PROJECT_DIR$/自动刷逐鹿天下.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="11" selection-start-line="11" selection-end-line="31" selection-end-column="2" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#174#182#0" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2617">
+          <caret line="792" column="22" lean-forward="true" selection-start-line="792" selection-start-column="22" selection-end-line="792" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/日常.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
         </state>
       </provider>
     </entry>

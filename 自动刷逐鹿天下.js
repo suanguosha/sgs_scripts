@@ -1,11 +1,9 @@
 /*
 自动刷逐鹿天下
 使用方法
-step 1: 先进入游戏，然后按ctrl+shift+i呼出控制台。
-有时开控台会回登录页，多在不同页面试几次。
-step 2: 在控制台输入TableGameManager，如果没有报错，看step 4。如果有报错，看step 3。
-step 3: 打开检查元素（自行百度“XX浏览器打开检查元素”）。和游戏界面互动一下（比如点聊天框），重复step 2
-step 4：TODO: 如果自动挑战新关卡，则zhulu(0)。如果重复刷同一关，则zhulu(关卡数字) 例:zhulu(120)。
+step 1: 通过https://web.sanguosha.com/login/index.html进入游戏(注意是https)，然后按ctrl+shift+i呼出控制台。
+step 2: 将框架切换成index.php，不懂百度“XX浏览器控制台切换框架”
+step 3：TODO: 如果自动挑战新关卡，则zhulu(0)。如果重复刷同一关，则zhulu(关卡数字) 例:zhulu(120)。
         改好后复制黏贴代码到控台，回车。
 请不要传播，不然我只能锁链接了。
 */
