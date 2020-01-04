@@ -29,4 +29,3 @@ function zhulu(towerLevel){
         }
     }, 300);
 };
-
