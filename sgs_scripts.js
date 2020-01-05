@@ -119,18 +119,25 @@ function chat(){
         switch (channelId){
             case 1:
                 channelType = ChatChannelType.WORLD;
+                break;
             case 2:
                 channelType = ChatChannelType.GUILD;
+                break;
             case 5:
                 channelType = ChatChannelType.ROOM;
+                break;
             case 6:
                 channelType = ChatChannelType.TEAM;
+                break;
             case 4:
                 channelType = ChatChannelType.COUNTRY;
+                break;
             case 3:
                 channelType = ChatChannelType.ZHAO;
+                break;
             case 7:
                 channelType = ChatChannelType.PERSONAL;
+                break;
             default:
                 main();
         }
@@ -140,7 +147,7 @@ function chat(){
         if (count === parseInt(chatMaxCount, 10)){
             clearInterval(interval);
         }
-        ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType, ChatMessageType.CMTChatMessage);
+        ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;
     },parseFloat(chatMaxCount)*1000);
 }
