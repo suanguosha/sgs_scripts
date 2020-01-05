@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    main();
+});
+
 function main(){
     var type = prompt("请选择:自动逐鹿天下1，自动刷日常2，自动发言3，自动抢红包4，钟妈算牌器5");
     switch (type){
@@ -44,8 +48,7 @@ function zhuLu(){
                     GameContext.LeaveGameScene();
                     if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0){
                         clearInterval(zhuluInterval);
-                        alert("逐鹿已刷完");
-                        main();
+                        setTimeout(function(){alert("逐鹿已刷完");main();}, 2000);
                     }
                 }
             }
@@ -98,8 +101,7 @@ function riChang(){
         pkID: pkID,
         count: cornucopiaCount
     });
-    alert("日常已刷完！");
-    main();
+    setTimeout(function(){alert("日常已刷完");main();}, 2000);
 }
 
 function chat(){
@@ -152,8 +154,8 @@ function chat(){
     var shoutInterval = setInterval(function(){
         if (count === parseInt(chatMaxCount, 10)){
             clearInterval(shoutInterval);
-            alert("发言已结束");
-            main();
+            setTimeout(function(){alert("发言已结束");
+                main();}, 2000);
         }
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;
