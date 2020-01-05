@@ -34,7 +34,7 @@ function zhuLu(){
                     return;
                 }
                 // 120关
-                var towerLevelID = towerLevel ? towerLevel: NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                var towerLevelID = ParseInt(towerLevel) ? ParseInt(towerLevel): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
             }else{  //如果在游戏中
