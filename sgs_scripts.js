@@ -149,7 +149,7 @@ function chat(){
         }
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;
-    },parseFloat(chatMaxCount)*1000);
+    },parseFloat(chatTimeInterval)*1000);
 }
 
 function hongBao(){
