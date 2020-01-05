@@ -23,19 +23,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
+        <entry file="file://$PROJECT_DIR$/sgs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="270">
+              <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sgs_scripts.min.js">
+        <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="72" selection-start-column="72" selection-end-column="72" />
+            <state relative-caret-position="180">
+              <caret line="4" column="16" selection-end-line="169" />
             </state>
           </provider>
         </entry>
@@ -120,14 +120,14 @@
         <option value="$PROJECT_DIR$/自动刷红包.js" />
         <option value="$PROJECT_DIR$/123.js" />
         <option value="$PROJECT_DIR$/../sgs/sgs.js" />
-        <option value="$PROJECT_DIR$/sgs.js" />
         <option value="$PROJECT_DIR$/sgs_scripts.js" />
+        <option value="$PROJECT_DIR$/sgs.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="690" />
+    <option name="y" value="247" />
     <option name="width" value="1294" />
     <option name="height" value="1047" />
   </component>
@@ -136,7 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -148,6 +147,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -212,17 +212,18 @@
       <workItem from="1578211405012" duration="1222000" />
       <workItem from="1578212754094" duration="4898000" />
       <workItem from="1578227665510" duration="593000" />
+      <workItem from="1578229743461" duration="19000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54846000" />
+    <option name="totallyTimeSpent" value="54865000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
+    <frame x="690" y="247" width="1294" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.08510638" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17197452" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -328,13 +329,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../sgs/sgs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="28" column="54" lean-forward="true" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../sgs/sgs.js" />
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -342,11 +337,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sgs.js" />
+    <entry file="file://$PROJECT_DIR$/sgs_scripts.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26935" selection-start-column="26935" selection-end-column="26935" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/日常.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="4" column="16" selection-end-line="169" />
         </state>
       </provider>
     </entry>
@@ -364,17 +372,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sgs_scripts.min.js">
+    <entry file="file://$PROJECT_DIR$/sgs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="72" selection-start-column="72" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="270">
+          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
         </state>
       </provider>
     </entry>
