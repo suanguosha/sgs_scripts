@@ -15,6 +15,7 @@ function main(){
             break;
         case "5":
             window.open("https://zssanguo.com/zhongma.html");
+            main();
             break;
         case null:
             break;
@@ -37,13 +38,14 @@ function zhuLu(){
         var zhuluInterval = setInterval(function () {
             if (count === parseInt(maxCount)){
                 clearInterval(zhuluInterval);
+                alert("逐鹿已刷完");
+                main();
             }
-            count++;
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-                // 120关
-                var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                // 120关                var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
+                count++;
             }else{  //如果在游戏中
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
@@ -154,6 +156,8 @@ function chat(){
     var shoutInterval = setInterval(function(){
         if (count === parseInt(chatMaxCount, 10)){
             clearInterval(shoutInterval);
+            alert("发言已结束");
+            main();
         }
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;

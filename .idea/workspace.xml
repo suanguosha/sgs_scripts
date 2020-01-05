@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="36" column="25" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="25" />
+            <state relative-caret-position="547">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -61,7 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>VP19</find>
       <find>GetProtoNameId</find>
       <find>CMSG_CREQGUILDBEATTHEDRUMS</find>
       <find>GeneralElfManager</find>
@@ -91,6 +90,7 @@
       <find>ChatChannelType</find>
       <find>send</find>
       <find>SendChatMsg</find>
+      <find>richang</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -117,10 +117,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="895" />
-    <option name="y" value="-26" />
-    <option name="width" value="1296" />
-    <option name="height" value="1056" />
+    <option name="x" value="908" />
+    <option name="y" value="26" />
+    <option name="width" value="1294" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -201,12 +201,12 @@
       <workItem from="1578185970590" duration="13698000" />
       <workItem from="1578206486436" duration="1770000" />
       <workItem from="1578211405012" duration="1222000" />
-      <workItem from="1578212754094" duration="2578000" />
+      <workItem from="1578212754094" duration="3176000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51933000" />
+    <option name="totallyTimeSpent" value="52531000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
@@ -339,13 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="163760" column="60" selection-start-line="163760" selection-start-column="60" selection-end-line="163760" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sgs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
@@ -360,10 +353,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="163760" column="60" selection-start-line="163760" selection-start-column="60" selection-end-line="163760" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="36" column="25" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="25" />
+        <state relative-caret-position="547">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
