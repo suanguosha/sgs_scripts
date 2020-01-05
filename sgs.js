@@ -27,7 +27,7 @@ function main(){
                 AV.User.logOut();
                 AV.User.logIn(username, password).then(function(user){
                     var query = new AV.Query('_File');
-                    query.get("5e117809c2b5a500086fa6fb").then(function (file) {
+                    query.get("5e119a9dc2b5a500086fbd9a").then(function (file) {
                         $.getScript(file.get("url"), function(){
                             main();
                         });
