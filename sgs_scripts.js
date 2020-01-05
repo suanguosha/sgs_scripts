@@ -25,14 +25,21 @@ function main(){
 
 function zhuLu(){
     var towerLevel = prompt("刷指定关卡请输入关卡号，挑战新关卡请输入0");
-    if (towerLevel !== null){
-        var startInterval = setInterval(function () {
+    var maxCount = prompt("刷多少次？");
+    if (towerLevel !== null && maxCount !== null){
+        // 不在逐鹿天下模式下进入
+        if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
+            RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
+            return;
+        }
+
+        var count = 0;
+        var zhuluInterval = setInterval(function () {
+            if (count === parseInt(maxCount)){
+                clearInterval(zhuluInterval);
+            }
+            count++;
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-                // 不在逐鹿天下模式下进入
-                if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
-                    RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
-                    return;
-                }
                 // 120关
                 var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
@@ -94,6 +101,7 @@ function riChang(){
         count: cornucopiaCount
     });
     alert("日常已刷完！");
+    main();
 }
 
 function chat(){
@@ -143,9 +151,9 @@ function chat(){
         }
 
     var count = 0;
-    var interval = setInterval(function(){
+    var shoutInterval = setInterval(function(){
         if (count === parseInt(chatMaxCount, 10)){
-            clearInterval(interval);
+            clearInterval(shoutInterval);
         }
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;

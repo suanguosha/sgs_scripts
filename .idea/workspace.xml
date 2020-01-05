@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="155" column="18" lean-forward="true" selection-start-line="155" selection-start-column="18" selection-end-line="155" selection-end-column="18" />
+            <state relative-caret-position="158">
+              <caret line="36" column="25" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -201,12 +201,12 @@
       <workItem from="1578185970590" duration="13698000" />
       <workItem from="1578206486436" duration="1770000" />
       <workItem from="1578211405012" duration="1222000" />
-      <workItem from="1578212754094" duration="2028000" />
+      <workItem from="1578212754094" duration="2578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51383000" />
+    <option name="totallyTimeSpent" value="51933000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
@@ -362,8 +362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="155" column="18" lean-forward="true" selection-start-line="155" selection-start-column="18" selection-end-line="155" selection-end-column="18" />
+        <state relative-caret-position="158">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="25" />
         </state>
       </provider>
     </entry>
