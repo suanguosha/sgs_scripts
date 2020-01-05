@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2212">
-              <caret line="159" column="19" selection-start-line="159" selection-start-column="19" selection-end-line="159" selection-end-column="19" />
+            <state relative-caret-position="158">
+              <caret line="35" selection-start-line="35" selection-end-line="51" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -34,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="163760" column="60" selection-start-line="163760" selection-start-column="60" selection-end-line="163760" selection-end-column="108" />
+            <state relative-caret-position="277">
+              <caret line="36294" column="19" selection-start-line="36294" selection-start-column="4" selection-end-line="36294" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -61,10 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GetProtoNameId</find>
-      <find>CMSG_CREQGUILDBEATTHEDRUMS</find>
-      <find>GeneralElfManager</find>
-      <find>CMSG_CREQGENERALSPRITETASKREWARDGET</find>
       <find>answer</find>
       <find>红包</find>
       <find>respBuyBonus</find>
@@ -91,6 +87,10 @@
       <find>send</find>
       <find>SendChatMsg</find>
       <find>richang</find>
+      <find>zhuLu</find>
+      <find>已刷完</find>
+      <find>jade</find>
+      <find>gameItem</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -201,12 +201,12 @@
       <workItem from="1578185970590" duration="13698000" />
       <workItem from="1578206486436" duration="1770000" />
       <workItem from="1578211405012" duration="1222000" />
-      <workItem from="1578212754094" duration="3419000" />
+      <workItem from="1578212754094" duration="4898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52774000" />
+    <option name="totallyTimeSpent" value="54253000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
@@ -355,15 +355,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="163760" column="60" selection-start-line="163760" selection-start-column="60" selection-end-line="163760" selection-end-column="108" />
+        <state relative-caret-position="277">
+          <caret line="36294" column="19" selection-start-line="36294" selection-start-column="4" selection-end-line="36294" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2212">
-          <caret line="159" column="19" selection-start-line="159" selection-start-column="19" selection-end-line="159" selection-end-column="19" />
+        <state relative-caret-position="158">
+          <caret line="35" selection-start-line="35" selection-end-line="51" selection-end-column="16" />
         </state>
       </provider>
     </entry>

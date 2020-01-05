@@ -26,30 +26,27 @@ function main(){
 
 function zhuLu(){
     var towerLevel = prompt("刷指定关卡请输入关卡号，挑战新关卡请输入0");
-    var maxCount = prompt("刷多少次？");
-    if (towerLevel !== null && maxCount !== null){
+    if (towerLevel !== null){
         // 不在逐鹿天下模式下进入
         if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
             RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
             return;
         }
 
-        var count = 0;
         var zhuluInterval = setInterval(function () {
-            if (count === parseInt(maxCount)){
-                clearInterval(zhuluInterval);
-                alert("逐鹿已刷完");
-                main();
-            }
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
-                count++;
             }else{  //如果在游戏中
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                     GameContext.LeaveGameScene();
+                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0){
+                        clearInterval(zhuluInterval);
+                        alert("逐鹿已刷完");
+                        main();
+                    }
                 }
             }
         }, 300);
@@ -57,7 +54,6 @@ function zhuLu(){
         main();
     }
 }
-
 function riChang(){
     //定义proxy
     var proxy = function(t, e){
