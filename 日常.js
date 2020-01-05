@@ -1,3 +1,12 @@
+/*
+自动刷日常
+使用方法
+step 1: 通过https://web.sanguosha.com/login/index.html进入游戏(注意是https)，然后按ctrl+shift+i呼出控制台。
+step 2: 将框架切换成index.php，不懂百度“XX浏览器控制台切换框架”
+step 3：复制黏贴代码到控台，回车。
+请不要传播，不然我只能锁链接了。
+*/
+
 //定义proxy
 var proxy = function(t, e){
     GameGuildManager.GetInstance().protoProxy.LE87(t,e);
