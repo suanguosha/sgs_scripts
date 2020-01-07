@@ -53,3 +53,7 @@ proxy(ProtoBufId.CMSG_CREQGENERALSPRITETASKREWARDGET, {
     count: cornucopiaCount
 });
 
+//上兵伐谋获取每天粮草
+GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyEveryDaySupply();
+
+

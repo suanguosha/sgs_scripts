@@ -13,20 +13,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/日常.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sgs.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="428">
+              <caret line="56" column="70" selection-start-line="56" selection-start-column="70" selection-end-line="56" selection-end-column="70" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -34,26 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="4" column="16" selection-end-line="169" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1653705">
-              <caret line="36294" column="19" selection-start-line="36294" selection-start-column="4" selection-end-line="36294" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/自动刷红包.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="15" column="70" lean-forward="true" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+            <state relative-caret-position="2562">
+              <caret line="207" column="16" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -70,18 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>红包</find>
-      <find>respBuyBonus</find>
-      <find>redpack</find>
-      <find>onTriggerSpell</find>
-      <find>onReceiveBonus</find>
-      <find>GetGuildBonusPkID</find>
-      <find>interval</find>
-      <find>set</find>
-      <find>tili</find>
-      <find>NewCompeteWorld</find>
-      <find>ReqCompeteWorldBattle</find>
-      <find>3763400529</find>
       <find>发言</find>
       <find>sendChat</find>
       <find>sendChatMsg</find>
@@ -100,6 +64,18 @@
       <find>jade</find>
       <find>gameItem</find>
       <find>alert</find>
+      <find>G</find>
+      <find>SpriteBInWar</find>
+      <find>hongba</find>
+      <find>上兵</find>
+      <find>zhulu</find>
+      <find>zhuluInterval</find>
+      <find>gameGuildManager</find>
+      <find>onRespGuildBonusList</find>
+      <find>1640235015</find>
+      <find>shangBing</find>
+      <find>bonus</find>
+      <find>clear</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -113,21 +89,20 @@
         <option value="$USER_HOME$/Documents/Tencent Files/1099631484/FileRecv/before.min.js" />
         <option value="$PROJECT_DIR$/新游卡20191229.js" />
         <option value="$PROJECT_DIR$/自动刷逐鹿天下.js" />
-        <option value="$PROJECT_DIR$/日常.js" />
-        <option value="$PROJECT_DIR$/新游卡20191229(参考资料).js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/自动发言.js" />
         <option value="$PROJECT_DIR$/自动刷红包.js" />
         <option value="$PROJECT_DIR$/123.js" />
         <option value="$PROJECT_DIR$/../sgs/sgs.js" />
-        <option value="$PROJECT_DIR$/sgs_scripts.js" />
         <option value="$PROJECT_DIR$/sgs.js" />
+        <option value="$PROJECT_DIR$/新游卡20191229(参考资料).js" />
+        <option value="$PROJECT_DIR$/sgs_scripts.js" />
+        <option value="$PROJECT_DIR$/日常.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="690" />
-    <option name="y" value="247" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
     <option name="width" value="1294" />
     <option name="height" value="1047" />
   </component>
@@ -213,17 +188,19 @@
       <workItem from="1578212754094" duration="4898000" />
       <workItem from="1578227665510" duration="593000" />
       <workItem from="1578229743461" duration="19000" />
+      <workItem from="1578314006684" duration="677000" />
+      <workItem from="1578397235005" duration="5582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54865000" />
+    <option name="totallyTimeSpent" value="61124000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="690" y="247" width="1294" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17197452" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17178881" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -337,31 +314,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sgs_scripts.min.js">
+    <entry file="file://$PROJECT_DIR$/sgs_scripts.min.js" />
+    <entry file="file://$PROJECT_DIR$/sgs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26935" selection-start-column="26935" selection-end-column="26935" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/日常.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="4" column="16" selection-end-line="169" />
+        <state relative-caret-position="990">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/新游卡20191229(参考资料).js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1653705">
-          <caret line="36294" column="19" selection-start-line="36294" selection-start-column="4" selection-end-line="36294" selection-end-column="19" />
+        <state relative-caret-position="312">
+          <caret line="38892" column="46" lean-forward="true" selection-start-line="38892" selection-start-column="46" selection-end-line="38892" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -372,10 +336,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sgs.js">
+    <entry file="file://$PROJECT_DIR$/sgs_scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+        <state relative-caret-position="2562">
+          <caret line="207" column="16" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/日常.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="56" column="70" selection-start-line="56" selection-start-column="70" selection-end-line="56" selection-end-column="70" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
