@@ -8,40 +8,20 @@
 // @grant        none
 // ==/UserScript==
 
-//如果协议是http，重定向，然后登录
-
-alert("打开控台后会弹窗，请点击取消");
+//防止枸杞重定向
 window.onbeforeunload = function() {
     return "蒸蒸日上";
 };
 
 window.onload = function () {
-    if (window.name !== "") {
-        window.name = "";
-        logIn();
-    }
+    autologIn();
 };
 
-if (window.location.protocol !== "https:") {
-    reloadP();
-}
-
-function reloadP() {
-    window.name = "重定向。。。";
-    window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-}
-
-function logIn() {
+function autologIn() {
     setTimeout(function(){
-        if (document.getElementsByClassName('dobest_de_btn')[0] === undefined || document.getElementsByTagName("input")[0].value === "" || document.getElementsByTagName("input")[1].value === "") {
-            alert("已屏蔽before.min.js，请重新登录");
-        }else{
-            document.getElementsByClassName('dobest_de_btn')[0].click();
-            setTimeout(function () {
-                if (document.getElementsByClassName('dobest_btn_blue dobest_btn_login')[0] !== undefined) {
-                    alert("请输入验证码");
-                }
-            }, 500);
-        }
-    },2000);
+
+    },1000);
+
+    setInterval(function(){ document.getElementsByClassName('dobest_de_btn')[0].click();
+        document.getElementById('newGoInGame').click(); }, 300);
 }
