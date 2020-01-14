@@ -2,13 +2,19 @@
 // @name         三国杀助手
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  三国杀助手,不用手打三国杀！
+// @description  三国杀助手,让你重新打开控台搞事情！
 // @author       LDY681
 // @match        http*://web.sanguosha.com/*
 // @grant        none
 // ==/UserScript==
 
 //如果协议是http，重定向，然后登录
+
+alert("打开控台后会弹窗，请点击取消");
+window.onbeforeunload = function() {
+    return "蒸蒸日上";
+};
+
 window.onload = function () {
     if (window.name !== "") {
         window.name = "";
@@ -39,22 +45,3 @@ function logIn() {
         }
     },2000);
 }
-
-$(document).ready(function(){
-    function simulateKeyPress(character) {
-        jQuery.event.trigger({ type : 'keypress', which : character.charCodeAt(0) });
-    }
-
-    $(function() {
-        $('body').keypress(function(e) {
-            alert(e.which);
-        });
-        simulateKeyPress("e");
-    });
-
-});
-/*
-x = document.getElementsByTagName("iframe")[0];
-y = x.contentWindow.document.getElementsByTagName("iframe")[0]
-y.contentWindow.document.gameGuildManager
-*/
