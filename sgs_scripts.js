@@ -199,7 +199,7 @@ function shangBing(){
             }
         }else{  //如果是大城
             for (var i = 0; i < cities.length; i++){
-                if (cities[i].nodeName === cityName){
+                if (cities[i].NodeName === cityName){
                     cityID = cities[i].CityID;
                 }
             }
