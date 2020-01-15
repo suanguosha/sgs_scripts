@@ -13,17 +13,15 @@ if (window.location.protocol !== "https:") {
     window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
 
-//防止枸杞重定向
 setTimeout(function(){
+    //防止枸杞重定向
     window.onbeforeunload = function() {
         return "蒸蒸日上";
     };
-},2000);
 
-//自动复制代码
-window.onload = function(){
+    //自动复制代码
     navigator.clipboard.writeText("$.ajax('https://www.zssanguo.com/sgs/sgs.min.js', {dataType: 'jsonp'})");
-};
+},2000);
 
 //首次登录提醒
 document.addEventListener("mousemove", alertFirstLogin);

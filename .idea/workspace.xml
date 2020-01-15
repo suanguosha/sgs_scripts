@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgsHelper.user.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgsHelper.user.js" afterDir="false" />
-    </list>
+    <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +88,7 @@
       <workItem from="1578397235005" duration="5582000" />
       <workItem from="1579011920480" duration="2487000" />
       <workItem from="1579020267869" duration="6414000" />
-      <workItem from="1579047000505" duration="2294000" />
+      <workItem from="1579047000505" duration="2668000" />
     </task>
     <servers />
   </component>
