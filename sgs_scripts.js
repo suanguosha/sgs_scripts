@@ -38,8 +38,9 @@ function main(){
 
 function zhuLu(){
     var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
+    if (towerLevel === null){return main();}
     var battleCount = prompt("请输入挑战次数，不限请输入0");
-    if (towerLevel !== null && battleCount !== null ){
+    if (battleCount === null){return main();}
         // 不在逐鹿天下模式下进入
         if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
             RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
@@ -63,9 +64,6 @@ function zhuLu(){
                 }
             }
         }, 300);
-    }else{
-        return main();
-    }
 }
 function riChang(){
     //定义proxy
@@ -178,10 +176,9 @@ function chat(){
 
 function shangBing(){
     var cityName = prompt("请输入城池名，关隘则输入关隘");
+    if (cityName === null){return main();}
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
-    if (cityName === null || jiangLing === null){
-        return main();
-    }else{
+    if (jiangLing === null){return main();}
         var jiangLingID = parseInt(jiangLing) -1;
         var cities = GameGlaivesManager.GetInstance().mapCitys;
         var cityID = -1;
@@ -193,26 +190,27 @@ function shangBing(){
                 var defenderCount = parseInt(specs[1],10);
                 var defenseTotal = parseInt(specs[2].split("/")[1],10);
                 var defenseDestroy = defenseTotal - parseInt(specs[2].split("/")[0],10);
-                alert(guildName + " " + defenderCount + " " + defenseTotal + " " + defenseDestroy);
+                alert("输入的信息 " + guildName + " " + defenderCount + " " + defenseTotal + " " + defenseDestroy);
                 for (var i = 0; i < cities.length; i++){
-                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && cities[i].DefenceTotal === defenseTotal && cities[i].defenseDestroy === defenseDestroy && cities[i].Defenders.length ===defenderCount){
+                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && cities[i].DefenceTotal === defenseTotal && cities[i].DefenceDestroy === defenseDestroy && cities[i].Defenders.length ===defenderCount){
                         cityID = cities[i].CityID;
                     }
                 }
             }
-            alert("cityId: "+cityID);
         }else{  //如果是大城
             for (var i = 0; i < cities.length; i++){
-                if (cities[i].nodeName === "cityName"){
+                if (cities[i].nodeName === cityName){
                     cityID = cities[i].CityID;
                 }
             }
         }
-        var battleCount = prompt("请输入上兵次数，不限请输入0");
         if (cityID === -1){
-            setTimeout(function(){alert("没有这个城池");
-                return main();}, 2000);
+            alert("没有这个城池");
+            return main();
         }else{
+            alert("cityId为: "+cityID);
+            var battleCount = prompt("请输入上兵次数，不限请输入0");
+            if (battleCount === null){return main();}
             var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
             stopPoint = stopPoint < 0 ? 0 : stopPoint;
 
@@ -234,7 +232,6 @@ function shangBing(){
                     }
                 }, 300);
             }
-        }
 }
 
 function hongBao(){
@@ -255,6 +252,7 @@ function hongBao(){
         }
     }
     var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
+    if (minhongBao === null){return main();}
     var startingYB = GameItemManager.GetInstance().GetItemByID(100002).ItemNum;
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
