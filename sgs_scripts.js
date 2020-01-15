@@ -58,13 +58,13 @@ function zhuLu(){
                     GameContext.LeaveGameScene();
                     if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint){
                         clearInterval(zhuluInterval);
-                        setTimeout(function(){alert("逐鹿已刷完");main();}, 2000);
+                        setTimeout(function(){alert("逐鹿已刷完");return main();}, 2000);
                     }
                 }
             }
         }, 300);
     }else{
-        main();
+        return main();
     }
 }
 function riChang(){
@@ -115,7 +115,7 @@ function riChang(){
     //上兵伐谋获取每天粮草
     GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyEveryDaySupply();
 
-    setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");main();}, 2000);
+    setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");return main();}, 2000);
 }
 
 function chat(){
@@ -169,7 +169,7 @@ function chat(){
         if (count === parseInt(chatMaxCount, 10)){
             clearInterval(shoutInterval);
             setTimeout(function(){alert("发言已结束");
-                main();}, 2000);
+                return main();}, 2000);
         }
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;
@@ -180,14 +180,14 @@ function shangBing(){
     var cityName = prompt("请输入城池名，关隘则输入关隘");
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (cityName === null || jiangLing === null){
-            main();
+        return main();
     }else{
         var jiangLingID = parseInt(jiangLing) -1;
         var cities = GameGlaivesManager.GetInstance().mapCitys;
         var cityID = -1;
         if (cityName === "关隘"){ //如果是关隘
             var guildInfo = prompt("请输入驻守公会+驻守将灵数+城防\n例：位权如山+13+2000/5000");
-            if (guildInfo === null){main();}else{
+            if (guildInfo === null){return main();}else{
                 var specs = guildInfo.split("+");
                 var guildName = specs[0];
                 var defenderCount = parseInt(specs[1],10);
@@ -211,9 +211,8 @@ function shangBing(){
         var battleCount = prompt("请输入上兵次数，不限请输入0");
         if (cityID === -1){
             setTimeout(function(){alert("没有这个城池");
-                main();}, 2000);
+                return main();}, 2000);
         }else{
-
             var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
             stopPoint = stopPoint < 0 ? 0 : stopPoint;
 
@@ -229,7 +228,7 @@ function shangBing(){
                             GameContext.LeaveGameScene();
                             if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
                                 clearInterval(shangbingInterval);
-                                setTimeout(function(){alert("上兵已刷完");main();}, 2000);
+                                setTimeout(function(){alert("上兵已刷完");return main();}, 2000);
                             }
                         }
                     }
@@ -247,8 +246,13 @@ function hongBao(){
         init[1] = 0;
         init[2] = 0;
         localStorage.setItem("hbStats", JSON.stringify(init));
+    }else if (typeof bonusInterval == 'undefined'){
+        alert("今天已抢"+hbStats[1]+"个红包，已经获得"+hbStats[2]+"元宝。");
     }else{
-        alert("今天已抢"+hbStats[1]+"个红包\n已经获得"+hbStats[2]+"元宝");
+        var confirmation = confirm("正在抢红包中。。。\n已抢"+hbStats[1]+"个红包，已得"+hbStats[2]+"元宝。\n是否修改抢红包设置");
+        if (!confirmation){
+            return main();
+        }
     }
     var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
     var startingYB = GameItemManager.GetInstance().GetItemByID(100002).ItemNum;
@@ -259,10 +263,12 @@ function hongBao(){
             if (minhongBao <= bonusGetter.guildBonusList.Maps[bonusID].goldNum/bonusGetter.guildBonusList.Maps[bonusID].pieceNum){
                 GameGuildManager.GetInstance().ReqGuildBonusReceive(bonusID);
                 var hbStats = JSON.parse(localStorage.getItem("hbStats"));
-                if (hbStats[0] !== currDate){
-                    hbStats[1]++;
-                    hbStats[2] = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - startingYB;
-                    localStorage.setItem("hbStats", JSON.stringify(hbStats));
+                hbStats[1]++;
+                hbStats[2] = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - startingYB;
+                localStorage.setItem("hbStats", JSON.stringify(hbStats));
+                if (hbStats[1] === 30){
+                    clearInterval(bonusInterval);
+                    setTimeout(function(){alert("红包已刷完");return main();}, 2000);
                 }
             }
         }
