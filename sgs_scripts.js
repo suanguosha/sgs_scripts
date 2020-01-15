@@ -5,7 +5,7 @@ $(document).ready(function(){
 //快捷键打开菜单
 window.onkeypress = function(e) {
     e = e || window.event;
-    if (e.code === "keyM" && e.ctrlKey === true){  //key ctrl+M
+    if (e.code === "KeyM" && e.ctrlKey === true){  //key ctrl+M
         e.preventDefault();
         main();
     }
