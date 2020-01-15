@@ -27,7 +27,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/SANGUOSHA-ZHONGMA" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -91,6 +91,7 @@
       <workItem from="1578397235005" duration="5582000" />
       <workItem from="1579011920480" duration="2487000" />
       <workItem from="1579020267869" duration="6414000" />
+      <workItem from="1579047000505" duration="2294000" />
     </task>
     <servers />
   </component>
