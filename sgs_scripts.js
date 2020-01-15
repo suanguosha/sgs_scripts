@@ -47,7 +47,7 @@ function zhuLu(){
 
         var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
-        var zhuluInterval = setInterval(function () {
+        zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
@@ -127,7 +127,7 @@ function chat(){
     if (chatChannel === null){
         return main();
     }
-    var chatTimeInterval = prompt("请输入每次发言时间间隔，最少3秒");
+     chatTimeInterval = prompt("请输入每次发言时间间隔，最少3秒");
     if (chatTimeInterval === null){
         return main();
     }
@@ -165,7 +165,7 @@ function chat(){
         }
 
     var count = 0;
-    var shoutInterval = setInterval(function(){
+     shoutInterval = setInterval(function(){
         if (count === parseInt(chatMaxCount, 10)){
             clearInterval(shoutInterval);
             setTimeout(function(){alert("发言已结束");
@@ -219,7 +219,7 @@ function shangBing(){
                 // 进入上兵伐谋
                 GameGlaivesManager.GetInstance().BattleBack();
 
-                var shangbingInterval = setInterval(function () {
+                 shangbingInterval = setInterval(function () {
                     if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                         GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
                     }else{  //如果在游戏中
@@ -246,7 +246,7 @@ function hongBao(){
         init[1] = 0;
         init[2] = 0;
         localStorage.setItem("hbStats", JSON.stringify(init));
-    }else if (typeof bonusInterval == 'undefined'){
+    }else if (typeof bonusInterval === 'undefined'){
         alert("今天已抢"+hbStats[1]+"个红包，已经获得"+hbStats[2]+"元宝。");
     }else{
         var confirmation = confirm("正在抢红包中。。。\n已抢"+hbStats[1]+"个红包，已得"+hbStats[2]+"元宝。\n是否修改抢红包设置");
@@ -256,7 +256,7 @@ function hongBao(){
     }
     var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
     var startingYB = GameItemManager.GetInstance().GetItemByID(100002).ItemNum;
-    var bonusInterval = setInterval(function(){
+    bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
         if (bonusGetter.BHaveCanReceiveBonus() === true){
             var bonusID = parseInt(bonusGetter.guildBonusList.keys[0],10) + bonusGetter.guildBonusList.count -1;
@@ -274,3 +274,8 @@ function hongBao(){
         }
     },300);
 }
+var zhuluInterval;
+var chatTimeInterval;
+var shoutInterval;
+var shangbingInterval;
+var bonusInterval;
