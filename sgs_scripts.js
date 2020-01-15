@@ -2,8 +2,17 @@ $(document).ready(function(){
     main();
 });
 
+//快捷键打开菜单
+window.onkeypress = function(e) {
+    e = e || window.event;
+    if (e.code === "keyM" && e.ctrlKey === true){  //key ctrl+M
+        e.preventDefault();
+        main();
+    }
+};
+
 function main(){
-    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，钟妈算牌器56");
+    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单");
     switch (type){
         case "1":
             zhuLu();
@@ -20,10 +29,6 @@ function main(){
         case "5":
             hongBao();
             break;
-        case "6":
-            window.open("https://zssanguo.com/zhongma.html");
-            main();
-            break;
         case null:
             break;
         default:
@@ -32,13 +37,16 @@ function main(){
 }
 
 function zhuLu(){
-    var towerLevel = prompt("刷指定关卡请输入关卡号，挑战新关卡请输入0");
-    if (towerLevel !== null){
+    var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
+    var battleCount = prompt("请输入挑战次数，不限请输入0");
+    if (towerLevel !== null && battleCount !== null ){
         // 不在逐鹿天下模式下进入
         if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
             RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
         }
 
+        var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
+        stopPoint = stopPoint < 0 ? 0 : stopPoint;
         var zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
@@ -48,7 +56,7 @@ function zhuLu(){
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                     GameContext.LeaveGameScene();
-                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0){
+                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint){
                         clearInterval(zhuluInterval);
                         setTimeout(function(){alert("逐鹿已刷完");main();}, 2000);
                     }
@@ -103,7 +111,11 @@ function riChang(){
         pkID: pkID,
         count: cornucopiaCount
     });
-    setTimeout(function(){alert("日常已刷完");main();}, 2000);
+
+    //上兵伐谋获取每天粮草
+    GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyEveryDaySupply();
+
+    setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");main();}, 2000);
 }
 
 function chat(){
@@ -205,7 +217,6 @@ function shangBing(){
 }
 
 function hongBao(){
-    alert("开始刷红包");
     var bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
         console.log(bonusGetter.BHaveCanReceiveBonus());
