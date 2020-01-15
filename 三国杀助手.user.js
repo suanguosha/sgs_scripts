@@ -29,7 +29,7 @@ document.addEventListener("mousemove", alertFirstLogin);
 function alertFirstLogin() {
     if (sessionStorage.getItem("firstLogin") === null){
         sessionStorage.setItem("firstLogin","no");
-        alert("若提示重新加载此页面：点击取消");
+        alert("三国杀助手运行中。。。\n打开控台时，会提示重新加载页面，请点击取消");
     }
     document.removeEventListener("mousemove", alertFirstLogin);
 }

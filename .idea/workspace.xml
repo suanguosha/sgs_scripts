@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sgs_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs_scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/三国杀助手.user.js" beforeDir="false" afterPath="$PROJECT_DIR$/三国杀助手.user.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +93,7 @@
       <workItem from="1579047000505" duration="4560000" />
       <workItem from="1579052853484" duration="416000" />
       <workItem from="1579053428897" duration="225000" />
+      <workItem from="1579093586079" duration="331000" />
     </task>
     <servers />
   </component>
