@@ -17,7 +17,7 @@ function main(){
                     AV.User.logIn(username, password).then(function(){
                         var query = new AV.Query('_File');
                         query.first().then(function (file){
-                            $.getScript(file.get("url"));
+                            var myWorker = new Worker(file.get("url"));
                         });
                     }, function () {
                         alert("请联系ldydyx@gmail.com");
