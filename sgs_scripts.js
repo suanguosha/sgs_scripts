@@ -70,7 +70,7 @@ function zhuLu(){
 function riChang(){
     //定义proxy
     var proxy = function(t, e){
-        GameGuildManager.GetInstance().protoProxy.LE87(t,e);
+        GameGuildManager.GetInstance().protoProxy.TX55(t,e);
     };
 
 //每日签到
