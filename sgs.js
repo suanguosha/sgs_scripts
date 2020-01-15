@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 function main(){
         //检测框架
-        if (typeof SceneManager !== "undefined"){   //TODO:改成 ===
+        if (typeof SceneManager === "undefined"){
             alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重新运行脚本");
         }else{
             var username = prompt("请输入账号");
@@ -17,7 +17,7 @@ function main(){
                     AV.User.logIn(username, password).then(function(){
                         var query = new AV.Query('_File');
                         query.first().then(function (file){
-                            $.getScript("sgs_scripts.js");   //改成file.get("url")
+                            $.getScript(file.get("url"));
                         });
                     }, function () {
                         alert("请联系ldydyx@gmail.com");
