@@ -12,7 +12,7 @@ window.onkeypress = function(e) {
 };
 
 function main(){
-    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单");
+    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
     switch (type){
         case "1":
             zhuLu();
@@ -177,18 +177,35 @@ function chat(){
 }
 
 function shangBing(){
-    var cityName = prompt("请输入城池名（目前仅支持州城和郡城）");
-    var jiangLing = prompt("选择出战将灵（第几个）");
+    var cityName = prompt("请输入城池名，关隘则输入关隘");
+    var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (cityName === null || jiangLing === null){
-        setTimeout(function(){alert("城池名为中文，出战将灵为数字");
-            main();}, 2000);
+            main();
     }else{
         var jiangLingID = parseInt(jiangLing) -1;
         var cities = GameGlaivesManager.GetInstance().mapCitys;
         var cityID = -1;
-        for (var i = 0; i < cities.length; i++){
-            if (cities[i].nodeName === "cityName"){
-                cityID = cities[i].CityID;
+        if (cityName === "关隘"){ //如果是关隘
+            var guildInfo = prompt("请输入驻守公会+驻守将灵数+城防\n例：位权如山+13+2000/5000");
+            if (guildInfo === null){main();}else{
+                var specs = guildInfo.split("+");
+                var guildName = specs[0];
+                var defenderCount = parseInt(specs[1],10);
+                var defenseTotal = parseInt(specs[2].split("/")[1],10);
+                var defenseDestroy = defenseTotal - parseInt(specs[2].split("/")[0],10);
+                alert(guildName + " " + defenderCount + " " + defenseTotal + " " + defenseDestroy);
+                for (var i = 0; i < cities.length; i++){
+                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && cities[i].DefenceTotal === defenseTotal && cities[i].defenseDestroy === defenseDestroy && cities[i].Defenders.length ===defenderCount){
+                        cityID = cities[i].CityID;
+                    }
+                }
+            }
+            alert("cityId: "+cityID);
+        }else{  //如果是大城
+            for (var i = 0; i < cities.length; i++){
+                if (cities[i].nodeName === "cityName"){
+                    cityID = cities[i].CityID;
+                }
             }
         }
         if (cityID === -1){
@@ -217,13 +234,32 @@ function shangBing(){
 }
 
 function hongBao(){
+    var hbStats = JSON.parse(localStorage.getItem("hbStats"));
+    var d = new Date(); var currDate = d.getDate();
+    if (hbStats === null || hbStats[0] !== currDate ){
+        var init = [];
+        init[0] = currDate;
+        init[1] = 0;
+        init[2] = 0;
+        localStorage.setItem("hbStats", JSON.stringify(init));
+    }else{
+        alert("今天已抢"+hbStats[1]+"个红包\n已经获得"+hbStats[2]+"元宝");
+    }
+    var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
+    var startingYB = GameItemManager.GetInstance().GetItemByID(100002).ItemNum;
     var bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
-        console.log(bonusGetter.BHaveCanReceiveBonus());
         if (bonusGetter.BHaveCanReceiveBonus() === true){
-            var lastIndex = 700 + bonusGetter.guildBonusList.count;
-            var bonusID = bonusGetter.guildBonusList.Maps[lastIndex].pkID;
-            GameGuildManager.GetInstance().ReqGuildBonusReceive(bonusID);
+            var bonusID = parseInt(bonusGetter.guildBonusList.keys[0],10) + bonusGetter.guildBonusList.count -1;
+            if (minhongBao <= bonusGetter.guildBonusList.Maps[bonusID].goldNum/bonusGetter.guildBonusList.Maps[bonusID].pieceNum){
+                GameGuildManager.GetInstance().ReqGuildBonusReceive(bonusID);
+                var hbStats = JSON.parse(localStorage.getItem("hbStats"));
+                if (hbStats[0] !== currDate){
+                    hbStats[1]++;
+                    hbStats[2] = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - startingYB;
+                    localStorage.setItem("hbStats", JSON.stringify(hbStats));
+                }
+            }
         }
     },300);
 }

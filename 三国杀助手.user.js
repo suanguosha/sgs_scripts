@@ -27,9 +27,9 @@ setTimeout(function(){
 document.addEventListener("mousemove", alertFirstLogin);
 
 function alertFirstLogin() {
-    if (sessionStorage.getItem("firstLogin") === null){
-        sessionStorage.setItem("firstLogin","no");
-        alert("三国杀助手运行中。。。\n打开控台时，会提示重新加载页面，请点击取消");
+    if (localStorage.getItem("firstLogin") === null){
+        localStorage.setItem("firstLogin","no");
+        alert("新手教程（之后不会提示）\n代码会自动帮您复制到剪贴板\n打开控台时，询问是否重载页面，请点击取消");
     }
     document.removeEventListener("mousemove", alertFirstLogin);
 }
