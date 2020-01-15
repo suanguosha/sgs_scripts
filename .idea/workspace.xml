@@ -3,24 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main(参考资料).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/main(参考资料).js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgs_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs_scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/三国杀助手.user.js" beforeDir="false" afterPath="$PROJECT_DIR$/三国杀助手.user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/反混淆20191012(参考资料).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/反混淆20191012(参考资料).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/国战演武强退(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/国战演武强退(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/新游卡20191229(参考资料).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/新游卡20191229(参考资料).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/日常(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/日常(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/日常.js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/日常.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/自动刷红包.js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/自动刷红包.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/自动刷逐鹿天下.js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/自动刷逐鹿天下.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/自动发言.js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/自动发言.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/逐鹿天下100关-关张(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/逐鹿天下100关-关张(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/逐鹿天下100关-袁绍(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/逐鹿天下100关-袁绍(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/逐鹿天下110关-廖化神周瑜(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/逐鹿天下110关-廖化神周瑜(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/逐鹿天下120关-关张(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/逐鹿天下120关-关张(已作废).js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/逐鹿天下120关-魏平香(已作废).js" beforeDir="false" afterPath="$PROJECT_DIR$/参考资料/逐鹿天下120关-魏平香(已作废).js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,6 +97,7 @@
       <workItem from="1579053428897" duration="225000" />
       <workItem from="1579093586079" duration="2015000" />
       <workItem from="1579096080940" duration="8817000" />
+      <workItem from="1579107347369" duration="502000" />
     </task>
     <servers />
   </component>

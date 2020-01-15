@@ -208,10 +208,15 @@ function shangBing(){
                 }
             }
         }
+        var battleCount = prompt("请输入上兵次数，不限请输入0");
         if (cityID === -1){
             setTimeout(function(){alert("没有这个城池");
                 main();}, 2000);
         }else{
+
+            var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
+            stopPoint = stopPoint < 0 ? 0 : stopPoint;
+
                 // 进入上兵伐谋
                 GameGlaivesManager.GetInstance().BattleBack();
 
@@ -222,7 +227,7 @@ function shangBing(){
                         //牌局中出现结算按钮，离开游戏
                         if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                             GameContext.LeaveGameScene();
-                            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === 0){
+                            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
                                 clearInterval(shangbingInterval);
                                 setTimeout(function(){alert("上兵已刷完");main();}, 2000);
                             }
