@@ -48,25 +48,26 @@ function zhuLu(){
 
         var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
-        var zhuluWorker = new Worker("https://www.zssanguo.com/sgs/timeWorker.js");
-        zhuluWorker.postMessage(0.3);
-        zhuluWorker.onmessage = function(event) {
-        if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-            var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
-            var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
-            NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
-        }else{  //如果在游戏中
-            //牌局中出现结算按钮，离开游戏
-            if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
-                GameContext.LeaveGameScene();
-                if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint){
-                    zhuluWorker.terminate();
-                    alert("逐鹿已刷完");
-                    return main();
+        XHRWorker("https://www.zssanguo.com/sgs/timeWorker.js", function(worker) {
+        worker.postMessage(0.3);
+        worker.onmessage = function(event) {
+            if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+                var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
+                NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
+            }else{  //如果在游戏中
+                //牌局中出现结算按钮，离开游戏
+                if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
+                    GameContext.LeaveGameScene();
+                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint){
+                        zhuluWorker.terminate();
+                        alert("逐鹿已刷完");
+                        return main();
+                    }
                 }
             }
-        }
-    };
+        };
+    }, this);
 }
 function riChang(){
     //定义proxy
@@ -118,7 +119,6 @@ function riChang(){
 
     setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");return main();}, 2000);
 }
-
 function chat(){
     var chatMessage = prompt("欢迎进入自动发言。请输入发言内容");
     if (chatMessage === null){
@@ -177,7 +177,6 @@ function chat(){
         count++;
     },parseFloat(chatTimeInterval)*1000);
 }
-
 function shangBing(){
     var cityName = prompt("请输入城池名，关隘则输入关隘");
     if (cityName === null){return main();}
@@ -237,7 +236,6 @@ function shangBing(){
                 }, 300);
             }
 }
-
 function hongBao(){
     var hbStats = JSON.parse(localStorage.getItem("hbStats"));
     var d = new Date(); var currDate = d.getDate();
@@ -275,4 +273,16 @@ function hongBao(){
             }
         }
     },300);
+}
+function XHRWorker(url, ready, scope) {
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener('load', function() {
+        var worker = new Worker(window.URL.createObjectURL(new Blob([this.responseText])));
+        if (ready) {
+            ready.call(scope, worker);
+        }
+    }, oReq);
+    oReq.open("get", url, true);
+    oReq.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+    oReq.send();
 }
