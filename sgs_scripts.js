@@ -48,26 +48,25 @@ function zhuLu(){
 
         var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
-        XHRWorker("http://www.zssanguo.com/sgs/timeWorker.js", function(worker) {
-        worker.postMessage(0.3);
-        worker.onmessage = function(event) {
+        zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-                var towerLevelID = parseInt(towerLevel,10) ? parseInt(towerLevel,10): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
-            }else{  //如果在游戏中
+            } else {  //如果在游戏中
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                     GameContext.LeaveGameScene();
-                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint){
-                        zhuluWorker.terminate();
-                        alert("逐鹿已刷完");
-                        return main();
+                    if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
+                        clearInterval(zhuluInterval);
+                        setTimeout(function () {
+                            alert("逐鹿已刷完");
+                            return main();
+                        }, 2000);
                     }
                 }
             }
-        };
-    }, this);
+        },300);
 }
 function riChang(){
     //定义proxy
@@ -273,15 +272,4 @@ function hongBao(){
             }
         }
     },300);
-}
-function XHRWorker(url, ready, scope) {
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener('load', function() {
-        var worker = new Worker(window.URL.createObjectURL(new Blob([this.responseText])));
-        if (ready) {
-            ready.call(scope, worker);
-        }
-    }, oReq);
-    oReq.open("get", url, true);
-    oReq.send();
 }
