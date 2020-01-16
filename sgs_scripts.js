@@ -48,7 +48,7 @@ function zhuLu(){
 
         var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
-        XHRWorker("https://www.zssanguo.com/sgs/timeWorker.js", function(worker) {
+        XHRWorker("http://www.zssanguo.com/sgs/timeWorker.js", function(worker) {
         worker.postMessage(0.3);
         worker.onmessage = function(event) {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
@@ -283,6 +283,5 @@ function XHRWorker(url, ready, scope) {
         }
     }, oReq);
     oReq.open("get", url, true);
-    oReq.setRequestHeader( 'Access-Control-Allow-Origin', '*');
     oReq.send();
 }
