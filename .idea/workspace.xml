@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgs_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs_scripts.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,7 +31,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../esanguo-cloud" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sgs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -114,7 +115,8 @@
       <workItem from="1579189716454" duration="146000" />
       <workItem from="1579205691350" duration="4491000" />
       <workItem from="1579225256197" duration="2756000" />
-      <workItem from="1579267372003" duration="2028000" />
+      <workItem from="1579267372003" duration="4584000" />
+      <workItem from="1579272397684" duration="1711000" />
     </task>
     <servers />
   </component>

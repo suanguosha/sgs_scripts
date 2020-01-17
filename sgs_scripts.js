@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 function checkValidUser(){
     AV.User.logOut();
-    AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword").then(function(user){
+    AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword")).then(function(user){
         var userID = GameGuildManager.GetInstance().GetGuildSelfUserInfo().userID;
         if (typeof user.get("uid") === "undefined"){
             var paramsJson = {
@@ -38,18 +38,24 @@ function checkValidUser(){
                         default:
                             main();
                     }
-                }
+                };
                 main();
             },function(){
-                main = function(){
-                    alert("绑定三国杀账号失败,请联系QQ:2891532094");
-                };
+                main = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                zhuLu = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                riChang = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                shangBing = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                chat = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                hongBao = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
                 main();
             });
         }else if (userID !== user.get("uid")){
-            main = function(){
-                alert("一个代码杀只允许绑定一个三国杀");
-            };
+            main = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            zhuLu = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            riChang = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            shangBing = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            chat = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            hongBao = function(){alert("一个代码杀只允许绑定一个三国杀");};
             main();
         }else{
             main = function(){
@@ -75,13 +81,16 @@ function checkValidUser(){
                     default:
                         main();
                 }
-            }
+            };
             main();
         }
-    }),function(){
-        main = function(){
-            alert("登录失败，请联系QQ:2891532094");
-        };
+    },function(){
+        main = function(){alert("登录失败，请联系QQ:2891532094");};
+        zhuLu = function(){alert("登录失败，请联系QQ:2891532094");};
+        riChang = function(){alert("登录失败，请联系QQ:2891532094");};
+        shangBing = function(){alert("登录失败，请联系QQ:2891532094");};
+        chat = function(){alert("登录失败，请联系QQ:2891532094");};
+        hongBao = function(){alert("登录失败，请联系QQ:2891532094");};
         main();
     });
 }
@@ -95,9 +104,7 @@ window.onkeypress = function(e) {
     }
 };
 
-function main(){
-}
-
+function main(){}
 function zhuLu(){
     var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
     if (towerLevel === null){return main();}
@@ -133,7 +140,8 @@ function zhuLu(){
 function riChang(){
     //定义proxy
     var proxy = function(t, e){
-        GameGuildManager.GetInstance().protoProxy.JC34(t,e);
+        GameGuildManager.GetInstance().protoProxy.HZ88(t,e);
+        //ƒ (t,e){var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)}
     };
 
 //每日签到
@@ -300,23 +308,23 @@ function shangBing(){
 function hongBao(){
     var hbStats = JSON.parse(localStorage.getItem("hbStats"));
     var d = new Date(); var currDate = d.getDate();
+    var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
     if (hbStats === null || hbStats[0] !== currDate ){
         var init = [];
         init[0] = currDate;
         init[1] = 0;
-        init[2] = 0;
         localStorage.setItem("hbStats", JSON.stringify(init));
     }else if (typeof bonusInterval === 'undefined'){
-        alert("今天已抢"+hbStats[1]+"个红包，已经获得"+hbStats[2]+"元宝。");
+        alert("今天已抢"+hbStats[1]+"个红包，已经获得"+ybGain+"元宝。");
     }else{
-        var confirmation = confirm("正在抢红包中。。。\n已抢"+hbStats[1]+"个红包，已得"+hbStats[2]+"元宝。\n是否修改抢红包设置");
+        var confirmation = confirm("正在抢红包中。。。\n已抢"+hbStats[1]+"个红包，已得"+ybGain+"元宝。\n是否修改抢红包设置");
         if (!confirmation){
             return main();
         }
     }
     var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
     if (minhongBao === null){return main();}
-    var startingYB = GameItemManager.GetInstance().GetItemByID(100002).ItemNum;
+   localStorage.setItem("initYB",GameItemManager.GetInstance().GetItemByID(100002).ItemNum);
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
         if (bonusGetter.BHaveCanReceiveBonus() === true){
@@ -325,13 +333,13 @@ function hongBao(){
                 GameGuildManager.GetInstance().ReqGuildBonusReceive(bonusID);
                 var hbStats = JSON.parse(localStorage.getItem("hbStats"));
                 hbStats[1]++;
-                hbStats[2] = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - startingYB;
                 localStorage.setItem("hbStats", JSON.stringify(hbStats));
                 if (hbStats[1] === 30){
                     clearInterval(bonusInterval);
-                    setTimeout(function(){alert("红包已刷完");return main();}, 2000);
+                    var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
+                    setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 2000);
                 }
             }
         }
-    },300);
+    },100);
 }
