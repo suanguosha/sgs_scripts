@@ -1,6 +1,22 @@
 $(document).ready(function(){
-    main();
+    if (typeof SceneManager === "undefined"){
+        alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
+    }else{
+        checkValidUser();
+    }
 });
+
+function checkValidUser(){
+    AV.User.logOut();
+    AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword").then(function(){
+        main();
+    }),function(){
+        main = function(){
+            alert("登录失败，请联系QQ:2891532094");
+        };
+        main();
+    });
+}
 
 //快捷键打开菜单
 window.onkeypress = function(e) {
