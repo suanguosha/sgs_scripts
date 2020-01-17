@@ -3,8 +3,8 @@ $(document).ready(function(){
 });
 
 function main(){
-            var confirm = confirm("欢迎使用代码杀：登录点确定，注册点取消");
-            if (!confirm){
+            var login = confirm("欢迎使用代码杀：登录点确定，注册点取消");
+            if (!login){
                 window.open(
                     'https://docs.qq.com/doc/DVERHVU5vdkFzVGpX',
                     '_blank' // <- This is what makes it open in a new window.
