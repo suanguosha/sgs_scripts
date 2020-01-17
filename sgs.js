@@ -11,7 +11,7 @@ function main(){
                 );
                 return;
             }
-            var username = prmopt("请输入用户");
+            var username = prompt("请输入用户");
             var password = prompt("请输入密码");
             if (username !== null && password !== null){
                 $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js", function(){
