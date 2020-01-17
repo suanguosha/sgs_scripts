@@ -8,8 +8,76 @@ $(document).ready(function(){
 
 function checkValidUser(){
     AV.User.logOut();
-    AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword").then(function(){
-        main();
+    AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword").then(function(user){
+        var userID = GameGuildManager.GetInstance().GetGuildSelfUserInfo().userID;
+        if (typeof user.get("uid") === "undefined"){
+            var paramsJson = {
+                uid: userID
+            };
+            AV.Cloud.run('recordUID', paramsJson).then(function () {
+                main = function(){
+                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                    switch (type){
+                        case "1":
+                            zhuLu();
+                            break;
+                        case "2":
+                            riChang();
+                            break;
+                        case "3":
+                            chat();
+                            break;
+                        case "4":
+                            shangBing();
+                            break;
+                        case "5":
+                            hongBao();
+                            break;
+                        case null:
+                            break;
+                        default:
+                            main();
+                    }
+                }
+                main();
+            },function(){
+                main = function(){
+                    alert("绑定三国杀账号失败,请联系QQ:2891532094");
+                };
+                main();
+            });
+        }else if (userID !== user.get("uid")){
+            main = function(){
+                alert("一个代码杀只允许绑定一个三国杀");
+            };
+            main();
+        }else{
+            main = function(){
+                var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                switch (type){
+                    case "1":
+                        zhuLu();
+                        break;
+                    case "2":
+                        riChang();
+                        break;
+                    case "3":
+                        chat();
+                        break;
+                    case "4":
+                        shangBing();
+                        break;
+                    case "5":
+                        hongBao();
+                        break;
+                    case null:
+                        break;
+                    default:
+                        main();
+                }
+            }
+            main();
+        }
     }),function(){
         main = function(){
             alert("登录失败，请联系QQ:2891532094");
@@ -28,28 +96,6 @@ window.onkeypress = function(e) {
 };
 
 function main(){
-    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
-    switch (type){
-        case "1":
-            zhuLu();
-            break;
-        case "2":
-            riChang();
-            break;
-        case "3":
-            chat();
-            break;
-        case "4":
-            shangBing();
-            break;
-        case "5":
-            hongBao();
-            break;
-        case null:
-            break;
-        default:
-            main();
-    }
 }
 
 function zhuLu(){
