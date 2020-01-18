@@ -12,7 +12,7 @@ $(document).ready(function(){
     if (username !== null && password !== null){
         $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js", function(){
             var { Query, User } = AV;
-            AV.init({appId: 'NfWGojPRuRF4Oxap1AopJmwr-MdYXbMMI', appKey: 'SenLjQ9pdilz63KeDxsWTmjL'});
+            AV.init({appId: "NfWGojPRuRF4Oxap1AopJmwr-MdYXbMMI", appKey: "SenLjQ9pdilz63KeDxsWTmjL"});
             AV.User.logOut();
             AV.User.logIn(username, password).then(function(){
                 localStorage.setItem("AVusername",username);

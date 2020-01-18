@@ -1,12 +1,19 @@
 $(document).ready(function(){
     if (typeof SceneManager === "undefined"){
-        alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
+        main = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");};
+        zhuLu = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        riChang = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        shangBing = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        chat = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        hongBao = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        main();
     }else{
         checkValidUser();
     }
 });
 
 function checkValidUser(){
+    var { Query, User } = AV;
     AV.User.logOut();
     AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword")).then(function(user){
         var userID = GameGuildManager.GetInstance().GetGuildSelfUserInfo().userID;
@@ -247,7 +254,7 @@ function chat(){
     },parseFloat(chatTimeInterval)*1000);
 }
 function shangBing(){
-    var cityName = prompt("请输入城池名，关隘则输入关隘");
+    var cityName = prompt("请输入城池名，如果城池名为关隘则输入关隘");
     if (cityName === null){return main();}
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (jiangLing === null){return main();}
@@ -262,15 +269,14 @@ function shangBing(){
                 var defenderCount = parseInt(specs[1],10);
                 var defenseTotal = parseInt(specs[2].split("/")[1],10);
                 var defenseDestroy = defenseTotal - parseInt(specs[2].split("/")[0],10);
-                alert("输入的信息 " + guildName + " " + defenderCount + " " + defenseTotal + " " + defenseDestroy);
-                for (var i = 0; i < cities.length; i++){
-                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && cities[i].DefenceTotal === defenseTotal && cities[i].DefenceDestroy === defenseDestroy && cities[i].Defenders.length ===defenderCount){
+                for (let i = 0; i < 457; i++){
+                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && defenseTotal - cities[i].DefenceTotal <=50 && cities[i].DefenceDestroy === defenseDestroy && cities[i].DefenderNum ===defenderCount){
                         cityID = cities[i].CityID;
                     }
                 }
             }
         }else{  //如果是大城
-            for (var i = 0; i < cities.length; i++){
+            for (let i = 0; i < 457; i++){
                 if (cities[i].NodeName === cityName){
                     cityID = cities[i].CityID;
                 }
@@ -280,7 +286,6 @@ function shangBing(){
             alert("没有这个城池");
             return main();
         }else{
-            alert("cityId为: "+cityID);
             var battleCount = prompt("请输入上兵次数，不限请输入0");
             if (battleCount === null){return main();}
             var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
