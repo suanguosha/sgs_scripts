@@ -6,6 +6,12 @@ $(document).ready(function(){
         shangBing = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
         chat = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
         hongBao = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        gongHui = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        todayDrum = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        weekContribution = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        weekBattle = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        monthBattle = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
+        bonusReceive = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
         main();
     }else{
         checkValidUser();
@@ -23,7 +29,7 @@ function checkValidUser(){
             };
             AV.Cloud.run('recordUID', paramsJson).then(function () {
                 main = function(){
-                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
                     switch (type){
                         case "1":
                             zhuLu();
@@ -40,6 +46,9 @@ function checkValidUser(){
                         case "5":
                             hongBao();
                             break;
+                        case "6":
+                            gongHui();
+                            break;
                         case null:
                             break;
                         default:
@@ -54,6 +63,12 @@ function checkValidUser(){
                 shangBing = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
                 chat = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
                 hongBao = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                gongHui = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                todayDrum = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                weekContribution = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                weekBattle = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                monthBattle = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
+                bonusReceive = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
                 main();
             });
         }else if (userID !== user.get("uid")){
@@ -63,10 +78,16 @@ function checkValidUser(){
             shangBing = function(){alert("一个代码杀只允许绑定一个三国杀");};
             chat = function(){alert("一个代码杀只允许绑定一个三国杀");};
             hongBao = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            gongHui = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            todayDrum = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            weekContribution = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            weekBattle = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            monthBattle = function(){alert("一个代码杀只允许绑定一个三国杀");};
+            bonusReceive = function(){alert("一个代码杀只允许绑定一个三国杀");};
             main();
         }else{
             main = function(){
-                var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
                 switch (type){
                     case "1":
                         zhuLu();
@@ -82,6 +103,9 @@ function checkValidUser(){
                         break;
                     case "5":
                         hongBao();
+                        break;
+                    case "6":
+                        gongHui();
                         break;
                     case null:
                         break;
@@ -127,7 +151,7 @@ function zhuLu(){
         zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
-                var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(this.MaxGeneralCount);
+                var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
             } else {  //如果在游戏中
                 //牌局中出现结算按钮，离开游戏
@@ -146,9 +170,12 @@ function zhuLu(){
 }
 function riChang(){
     //定义proxy
-    var proxy = function(t, e){
-        GameGuildManager.GetInstance().protoProxy.HZ88(t,e);
+    GameGuildManager.GetInstance().protoProxy.fakeProxy = function(t,e){
         //ƒ (t,e){var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)}
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameGuildManager.GetInstance().protoProxy.fakeProxy(t,e);
     };
 
 //每日签到
@@ -204,7 +231,7 @@ function chat(){
     if (chatChannel === null){
         return main();
     }
-     var chatTimeInterval = prompt("请输入每次发言时间间隔，最少3秒");
+     var chatTimeInterval = prompt("请输入每次发言时间间隔，建议10秒");
     if (chatTimeInterval === null){
         return main();
     }
@@ -327,24 +354,140 @@ function hongBao(){
             return main();
         }
     }
-    var minhongBao = parseInt(prompt("单价达到多少才抢\n最小红包为500元宝，10份，则单价就是50"),10);
+    var minhongBao = parseInt(prompt("单价达到多少才抢\n红包为500元宝，10份，则单价就是50"),10);
     if (minhongBao === null){return main();}
    localStorage.setItem("initYB",GameItemManager.GetInstance().GetItemByID(100002).ItemNum);
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
-        if (bonusGetter.BHaveCanReceiveBonus() === true){
-            var bonusID = parseInt(bonusGetter.guildBonusList.keys[0],10) + bonusGetter.guildBonusList.count -1;
-            if (minhongBao <= bonusGetter.guildBonusList.Maps[bonusID].goldNum/bonusGetter.guildBonusList.Maps[bonusID].pieceNum){
-                GameGuildManager.GetInstance().ReqGuildBonusReceive(bonusID);
-                var hbStats = JSON.parse(localStorage.getItem("hbStats"));
-                hbStats[1]++;
-                localStorage.setItem("hbStats", JSON.stringify(hbStats));
-                if (hbStats[1] === 30){
-                    clearInterval(bonusInterval);
-                    var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
-                    setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 2000);
-                }
+            bonusGetter.guildBonusList.breakForEach(function(e,i){
+                 if (i.CanReceive() && minhongBao <= i.goldNum/i.pieceNum){
+                     GameGuildManager.GetInstance().ReqGuildBonusReceive(i.pkID);
+                     if (i.CanReceive() === false){ //如果收取成功
+                         var hbStats = JSON.parse(localStorage.getItem("hbStats"));
+                         hbStats[1]++;
+                         localStorage.setItem("hbStats", JSON.stringify(hbStats));
+                     }
+                     if (hbStats[1] === 30){
+                         clearInterval(bonusInterval);
+                         var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
+                         setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 2000);
+                     }
+                 }
+            });
+    },300);
+}
+
+//通过每周比较数据算出7日的争霸
+function gongHui(){
+    var type = prompt("请选择考勤模式：本日3敲1，七日贡献2，本周胜场3，本月胜场4，抓挂机抢红包5");
+    switch (type){
+        case "1":
+            todayDrum();
+            break;
+        case "2":
+            weekContribution();
+            break;
+        case "3":
+            weekBattle();
+            break;
+        case "4":
+            monthBattle();
+            break;
+        case "5":
+            bonusReceive();
+            break;
+        default:
+             main();
+             break;
+    }
+}
+function todayDrum(){
+    var userList = [];
+    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var tempList = [];
+        userList.forEach(function(userID){
+            if (maps[userID].drumsTimes < 3){
+                tempList.push(maps[userID].user.nickname);
+            }
+        });
+        navigator.clipboard.writeText(tempList.join("\n"));
+        alert("已将今日未3敲的玩家复制到剪切板");
+}
+function weekContribution(){
+    var contribution = prompt("查找本周贡献小于多少的玩家？（不包含等于）");
+    var copy = confirm("是否将该玩家的本周贡献一并复制？");
+    var contri = parseInt(contribution);
+    var userList = [];
+    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var tempList = [];
+    userList.forEach(function(userID){
+        if (maps[userID].contribution < contri){
+            if (copy){
+                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].contribution);
+            }else {
+                tempList.push(maps[userID].user.nickname);
             }
         }
-    },100);
+    });
+    navigator.clipboard.writeText(tempList.join("\n"));
+    alert("已将本周贡献不足的玩家复制到剪切板");
+}
+function weekBattle(){
+    var battle = prompt("查找本周争霸赛胜场小于多少的玩家？（不包含等于）");
+    var copy = confirm("是否将该玩家的本周胜场一并复制？");
+    var battleWin = parseInt(battle);
+    var userList = [];
+    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var tempList = [];
+    userList.forEach(function(userID){
+        if (maps[userID].battleWinTimes < battleWin){
+            if (copy){
+                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].battleWinTimes);
+            }else {
+                tempList.push(maps[userID].user.nickname);
+            }
+        }
+    });
+    navigator.clipboard.writeText(tempList.join("\n"));
+    alert("已将本周胜场不足的玩家复制到剪切板");
+
+}
+function monthBattle(){
+    var battleMo = prompt("查找本月争霸赛胜场小于多少的玩家？（不包含等于）");
+    var copy = confirm("是否将该玩家的本月胜场一并复制？");
+    var battleWinMo = parseInt(battleMo);
+    var userList = [];
+    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var tempList = [];
+    userList.forEach(function(userID){
+        if (maps[userID].dataStatistics.currentMonth.battleWinTimesTotal < battleWinMo){
+            if (copy){
+                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].dataStatistics.currentMonth.battleWinTimesTotal);
+            }else {
+                tempList.push(maps[userID].user.nickname);
+            }
+        }
+    });
+    navigator.clipboard.writeText(tempList.join("\n"));
+    alert("已将本月胜场不足的玩家复制到剪切板");
+}
+function bonusReceive(){
+    var userList = [];
+    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var tempList = [];
+    userList.forEach(function(userID){
+        if (maps[userID].guildBonusReceive !== null){
+            tempList.push([maps[userID].user.nickname,maps[userID].guildBonusReceive.times]);
+        }
+    });
+    var sortedList = tempList.sort(function(a, b) {
+        return b[1] - a[1];    // sort by length
+    });
+    navigator.clipboard.writeText(sortedList.join("\n"));
+    alert("已将玩家按抢红包数量从大到小复制到剪切板");
 }
