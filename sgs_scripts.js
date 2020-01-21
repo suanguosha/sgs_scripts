@@ -166,7 +166,7 @@ function zhuLu(){
                     }
                 }
             }
-        },300);
+        },1000);
 }
 function riChang(){
     //定义proxy
@@ -281,34 +281,14 @@ function chat(){
     },parseFloat(chatTimeInterval)*1000);
 }
 function shangBing(){
-    var cityName = prompt("请输入城池名，如果城池名为关隘则输入关隘");
-    if (cityName === null){return main();}
+    var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
+    if (currWindow.name !== "GameGlaivesCityInfoWindow"){
+        alert("请打开进攻城池的窗口（需要从窗口中读取城池ID）\n然后重新运行上兵脚本");
+        return;
+    }
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (jiangLing === null){return main();}
-        var jiangLingID = parseInt(jiangLing) -1;
-        var cities = GameGlaivesManager.GetInstance().mapCitys;
-        var cityID = -1;
-        if (cityName === "关隘"){ //如果是关隘
-            var guildInfo = prompt("请输入驻守公会+驻守将灵数+城防\n例：位权如山+13+2000/5000");
-            if (guildInfo === null){return main();}else{
-                var specs = guildInfo.split("+");
-                var guildName = specs[0];
-                var defenderCount = parseInt(specs[1],10);
-                var defenseTotal = parseInt(specs[2].split("/")[1],10);
-                var defenseDestroy = defenseTotal - parseInt(specs[2].split("/")[0],10);
-                for (let i = 0; i < 457; i++){
-                    if (cities[i].CityType === 4 && cities[i].guildName === guildName && defenseTotal - cities[i].DefenceTotal <=50 && cities[i].DefenceDestroy === defenseDestroy && cities[i].DefenderNum ===defenderCount){
-                        cityID = cities[i].CityID;
-                    }
-                }
-            }
-        }else{  //如果是大城
-            for (let i = 0; i < 457; i++){
-                if (cities[i].NodeName === cityName){
-                    cityID = cities[i].CityID;
-                }
-            }
-        }
+    var cityID = currWindow.cityVo.CityID;
         if (cityID === -1){
             alert("没有这个城池");
             return main();
@@ -317,11 +297,8 @@ function shangBing(){
             if (battleCount === null){return main();}
             var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
             stopPoint = stopPoint < 0 ? 0 : stopPoint;
-
                 // 进入上兵伐谋
-                GameGlaivesManager.GetInstance().BattleBack();
-
-                 shangbingInterval = setInterval(function () {
+                shangbingInterval = setInterval(function () {
                     if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                         GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
                     }else{  //如果在游戏中
@@ -331,10 +308,15 @@ function shangBing(){
                             if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
                                 clearInterval(shangbingInterval);
                                 setTimeout(function(){alert("上兵已刷完");return main();}, 2000);
+                                return;
+                            }
+                            if (GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID].Country === GameGlaivesManager.GetInstance().country){
+                                clearInterval(shangbingInterval);
+                                setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 2000);
                             }
                         }
                     }
-                }, 300);
+                }, 1000);
             }
 }
 function hongBao(){
