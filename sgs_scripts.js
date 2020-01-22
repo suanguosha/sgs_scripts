@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $.getScript("https://unpkg.com/hotkeys-js/dist/hotkeys.min.js",function(){
-        hotkeys('ctrl+m,ctrl+shift+m', function (){alert("123");});
+        hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
     });
     $.getScript("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js");
     if (typeof SceneManager === "undefined"){
