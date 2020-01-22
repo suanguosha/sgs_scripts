@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    $.getScript("https://unpkg.com/hotkeys-js/dist/hotkeys.min.js",function(){
+        hotkeys('ctrl+m,ctrl+shift+m', function (){alert("123");});
+    });
+    $.getScript("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js");
     if (typeof SceneManager === "undefined"){
         main = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");};
         zhuLu = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
@@ -29,7 +33,7 @@ function checkValidUser(){
             };
             AV.Cloud.run('recordUID', paramsJson).then(function () {
                 main = function(){
-                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M(或ctrl+shift+M) 打开菜单 ESC 关闭菜单");
                     switch (type){
                         case "1":
                             zhuLu();
@@ -125,15 +129,6 @@ function checkValidUser(){
         main();
     });
 }
-
-//快捷键打开菜单
-window.onkeypress = function(e) {
-    e = e || window.event;
-    if (e.code === "KeyM" && e.ctrlKey === true){  //key ctrl+M
-        e.preventDefault();
-        main();
-    }
-};
 
 function main(){}
 function zhuLu(){
@@ -361,7 +356,7 @@ function hongBao(){
 
 //通过每周比较数据算出7日的争霸
 function gongHui(){
-    var type = prompt("请选择考勤模式：本日3敲1，七日贡献2，本周胜场3，本月胜场4，抓挂机抢红包5");
+    var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抓挂机抢红包5");
     switch (type){
         case "1":
             todayDrum();
@@ -393,8 +388,11 @@ function todayDrum(){
                 tempList.push(maps[userID].user.nickname);
             }
         });
-        navigator.clipboard.writeText(tempList.join("\n"));
-        alert("已将今日未3敲的玩家复制到剪切板");
+        var text = tempList.join("\n");
+        var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+        var date = new Date();
+        var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日三鼓未满名单";
+        saveAs(blob,filename);
 }
 function weekContribution(){
     var contribution = prompt("查找本周贡献小于多少的玩家？（不包含等于）");
@@ -413,8 +411,11 @@ function weekContribution(){
             }
         }
     });
-    navigator.clipboard.writeText(tempList.join("\n"));
-    alert("已将本周贡献不足的玩家复制到剪切板");
+    var text = tempList.join("\n");
+    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var date = new Date();
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周贡献未满名单";
+    saveAs(blob,filename);
 }
 function weekBattle(){
     var battle = prompt("查找本周争霸赛胜场小于多少的玩家？（不包含等于）");
@@ -433,9 +434,11 @@ function weekBattle(){
             }
         }
     });
-    navigator.clipboard.writeText(tempList.join("\n"));
-    alert("已将本周胜场不足的玩家复制到剪切板");
-
+    var text = tempList.join("\n");
+    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var date = new Date();
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周胜场未满名单";
+    saveAs(blob,filename);
 }
 function monthBattle(){
     var battleMo = prompt("查找本月争霸赛胜场小于多少的玩家？（不包含等于）");
@@ -454,8 +457,11 @@ function monthBattle(){
             }
         }
     });
-    navigator.clipboard.writeText(tempList.join("\n"));
-    alert("已将本月胜场不足的玩家复制到剪切板");
+    var text = tempList.join("\n");
+    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var date = new Date();
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本月胜场未满名单";
+    saveAs(blob,filename);
 }
 function bonusReceive(){
     var userList = [];
@@ -470,6 +476,9 @@ function bonusReceive(){
     var sortedList = tempList.sort(function(a, b) {
         return b[1] - a[1];    // sort by length
     });
-    navigator.clipboard.writeText(sortedList.join("\n"));
-    alert("已将玩家按抢红包数量从大到小复制到剪切板");
+    var text = sortedList.join("\n");
+    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var date = new Date();
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日抢红包名单";
+    saveAs(blob,filename);
 }

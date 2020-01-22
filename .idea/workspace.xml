@@ -30,7 +30,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zhongma-calc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -127,6 +127,9 @@
       <workItem from="1579543390373" duration="680000" />
       <workItem from="1579545479540" duration="1319000" />
       <workItem from="1579615280240" duration="1958000" />
+      <workItem from="1579634691662" duration="599000" />
+      <workItem from="1579636035041" duration="45000" />
+      <workItem from="1579652489780" duration="3178000" />
     </task>
     <servers />
   </component>
