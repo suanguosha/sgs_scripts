@@ -277,7 +277,7 @@ function chat(){
 }
 function shangBing(){
     var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
-    if (currWindow.name !== "GameGlaivesCityInfoWindow"){
+    if (typeof currWindow === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
         alert("请打开进攻城池的窗口（需要从窗口中读取城池ID）\n然后重新运行上兵脚本");
         return;
     }
