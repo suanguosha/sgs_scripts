@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bda0927f-5735-4b17-963e-d7791749dc45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dms.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/dms.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgs_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/sgs_scripts.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,7 +32,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zhongma-calc" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -133,6 +135,20 @@
       <workItem from="1579655871217" duration="765000" />
       <workItem from="1579657479362" duration="43000" />
       <workItem from="1579657734818" duration="438000" />
+      <workItem from="1579700324119" duration="650000" />
+      <workItem from="1579722874597" duration="832000" />
+      <workItem from="1579744259027" duration="380000" />
+      <workItem from="1579785144873" duration="1174000" />
+      <workItem from="1579798387455" duration="942000" />
+      <workItem from="1579803938481" duration="848000" />
+      <workItem from="1579805517350" duration="175000" />
+      <workItem from="1579805815695" duration="5354000" />
+      <workItem from="1579811297023" duration="611000" />
+      <workItem from="1579813980792" duration="598000" />
+      <workItem from="1579870951882" duration="353000" />
+      <workItem from="1579982656807" duration="820000" />
+      <workItem from="1580085934937" duration="3974000" />
+      <workItem from="1580090636762" duration="471000" />
     </task>
     <servers />
   </component>

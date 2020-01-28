@@ -2,31 +2,18 @@ $(document).ready(function(){
     $.getScript("https://unpkg.com/hotkeys-js/dist/hotkeys.min.js",function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
     });
-    $.getScript("https://raw.githubusercontent.com/eligrey/FileSaver.js/master/src/FileSaver.js");
     if (typeof SceneManager === "undefined"){
-        main = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");};
-        zhuLu = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        riChang = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        shangBing = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        chat = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        hongBao = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        gongHui = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        todayDrum = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        weekContribution = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        weekBattle = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        monthBattle = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        bonusReceive = function(){alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开")};
-        main();
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+        alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
     }else{
         checkValidUser();
     }
 });
-
 function checkValidUser(){
     var { Query, User } = AV;
     AV.User.logOut();
     AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword")).then(function(user){
-        var userID = GameGuildManager.GetInstance().GetGuildSelfUserInfo().userID;
+        var userID = GameShopManager.GetInstance().guildContributionInfo.userID;
         if (typeof user.get("uid") === "undefined"){
             var paramsJson = {
                 uid: userID
@@ -61,34 +48,12 @@ function checkValidUser(){
                 };
                 main();
             },function(){
-                main = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                zhuLu = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                riChang = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                shangBing = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                chat = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                hongBao = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                gongHui = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                todayDrum = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                weekContribution = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                weekBattle = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                monthBattle = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                bonusReceive = function(){alert("绑定三国杀账号失败,请联系QQ:2891532094");};
-                main();
+                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+                alert("绑定三国杀账号失败,请联系QQ:2891532094");
             });
         }else if (userID !== user.get("uid")){
-            main = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            zhuLu = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            riChang = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            shangBing = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            chat = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            hongBao = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            gongHui = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            todayDrum = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            weekContribution = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            weekBattle = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            monthBattle = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            bonusReceive = function(){alert("一个代码杀只允许绑定一个三国杀");};
-            main();
+            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+            alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
                 var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
@@ -129,9 +94,13 @@ function checkValidUser(){
         main();
     });
 }
-
 function main(){}
 function zhuLu(){
+    var tili = GameItemManager.GetInstance().GetItemByID(720027).ItemNum;
+    if (tili === 0){
+        alert("您当前没有体力，稍后为您打开主菜单");
+        return main();
+    }
     var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
     if (towerLevel === null){return main();}
     var battleCount = prompt("请输入挑战次数，不限请输入0");
@@ -165,21 +134,15 @@ function zhuLu(){
 }
 function riChang(){
     //定义proxy
-    GameGuildManager.GetInstance().protoProxy.fakeProxy = function(t,e){
-        //ƒ (t,e){var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)}
+    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
         var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
     };
     var proxy = function(t, e){
-        GameGuildManager.GetInstance().protoProxy.fakeProxy(t,e);
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
     };
 
 //每日签到
     DailySignManager.GetInstance().ReqGetSignInReward(1, DailySignManager.GetInstance().initSignDate);
-
-//公会敲鼓3次
-    for (var i = 0; i < 3; i++) {
-        GameGuildManager.GetInstance().ReqBeatDrum(0);
-    }
 
 // 领取公会每日任务奖励,活跃值,活跃奖励
     var taskIDList = [401, 402, 403, 1001, 1002, 1003, 1004];
@@ -195,9 +158,6 @@ function riChang(){
 
 //每日抽取免费秀
     proxy(ProtoBufId.CMSG_CREQDRESSOPEN, {});
-
-// 领取工会战奖励
-    GameGuildManager.GetInstance().ReqGuildBattleUserWinTimesReward();
 
 // 领取将灵聚宝盆和出征奖励
     var CornucopiaElfInfo = GeneralElfManager.GetInstance().CornucopiaElfInfo;
@@ -215,6 +175,12 @@ function riChang(){
     //上兵伐谋获取每天粮草
     GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyEveryDaySupply();
 
+//公会敲鼓3次
+    for (var i = 0; i < 3; i++) {
+        GameGuildManager.GetInstance().ReqBeatDrum(0);
+    }
+// 领取工会战奖励
+    GameGuildManager.GetInstance().ReqGuildBattleUserWinTimesReward();
     setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");return main();}, 2000);
 }
 function chat(){
@@ -276,123 +242,132 @@ function chat(){
     },parseFloat(chatTimeInterval)*1000);
 }
 function shangBing(){
+    var liangcao = GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
+    if (liangcao === 0){
+        alert("您当前没有粮草，稍后为您打开主菜单");
+        return main();
+    }
     var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
-    if (typeof currWindow === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
-        alert("请打开进攻城池的窗口（需要从窗口中读取城池ID）\n然后重新运行上兵脚本");
+    if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
+        alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
         return;
     }
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (jiangLing === null){return main();}
     var cityID = currWindow.cityVo.CityID;
-        if (cityID === -1){
-            alert("没有这个城池");
-            return main();
-        }else{
-            var battleCount = prompt("请输入上兵次数，不限请输入0");
-            if (battleCount === null){return main();}
-            var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
-            stopPoint = stopPoint < 0 ? 0 : stopPoint;
-                // 进入上兵伐谋
-                shangbingInterval = setInterval(function () {
-                    if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-                        GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
-                    }else{  //如果在游戏中
-                        //牌局中出现结算按钮，离开游戏
-                        if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
-                            GameContext.LeaveGameScene();
-                            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
-                                clearInterval(shangbingInterval);
-                                setTimeout(function(){alert("上兵已刷完");return main();}, 2000);
-                                return;
-                            }
-                            if (GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID].Country === GameGlaivesManager.GetInstance().country){
-                                clearInterval(shangbingInterval);
-                                setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 2000);
-                            }
-                        }
+    var battleCount = prompt("请输入上兵次数，不限请输入0");
+    if (battleCount === null){return main();}
+    var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
+    stopPoint = stopPoint < 0 ? 0 : stopPoint;
+    // 进入上兵伐谋
+    shangbingInterval = setInterval(function () {
+            if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+                GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+            }else{  //如果在游戏中
+                //牌局中出现结算按钮，离开游戏
+                if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
+                    GameContext.LeaveGameScene();
+                    if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
+                        clearInterval(shangbingInterval);
+                        setTimeout(function(){alert("上兵已刷完");return main();}, 2000);
+                        return;
                     }
-                }, 1000);
+                    if (GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID].Country === GameGlaivesManager.GetInstance().country){
+                        clearInterval(shangbingInterval);
+                        setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 2000);
+                        return;
+                    }
+                }
             }
+        }, 1000);
 }
 function hongBao(){
-    var hbStats = JSON.parse(localStorage.getItem("hbStats"));
-    var d = new Date(); var currDate = d.getDate();
-    var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
-    if (hbStats === null || hbStats[0] !== currDate ){
-        var init = [];
-        init[0] = currDate;
-        init[1] = 0;
-        localStorage.setItem("hbStats", JSON.stringify(init));
-    }else if (typeof bonusInterval === 'undefined'){
-        alert("今天已抢"+hbStats[1]+"个红包，已经获得"+ybGain+"元宝。");
-    }else{
-        var confirmation = confirm("正在抢红包中。。。\n已抢"+hbStats[1]+"个红包，已得"+ybGain+"元宝。\n是否修改抢红包设置");
-        if (!confirmation){
-            return main();
-        }
+    var lastDate = localStorage.getItem("lastDate");
+    if ((lastDate !== null && new Date().getDate() !== parseInt(lastDate)) || lastDate === null){   //换天或者首次，设置initYB和lastDate
+        localStorage.setItem("initYB", GameItemManager.GetInstance().GetItemByID(100002).ItemNum);
+        localStorage.setItem("lastDate", new Date().getDate());
+        localStorage.setItem("hbCount", 0);
     }
-    var minhongBao = parseInt(prompt("单价达到多少才抢\n红包为500元宝，10份，则单价就是50"),10);
+    var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
+    var confirmation = confirm("今天已抢"+GameGuildManager.GetInstance().SelfGuildInfo.guildBonusReceive.times+"个红包\n已经获得"+ybGain+"元宝。\n是否进入/修改抢红包设置?");
+    if (!confirmation){return main();}
+    var minhongBao = parseInt(prompt("请设置最小红包单价\n红包为500元宝，10份，则单价就是50"),10);
     if (minhongBao === null){return main();}
-   localStorage.setItem("initYB",GameItemManager.GetInstance().GetItemByID(100002).ItemNum);
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
             bonusGetter.guildBonusList.breakForEach(function(e,i){
                  if (i.CanReceive() && minhongBao <= i.goldNum/i.pieceNum){
                      GameGuildManager.GetInstance().ReqGuildBonusReceive(i.pkID);
+                     var hbCount = parseInt(localStorage.getItem("hbCount"));
                      if (i.CanReceive() === false){ //如果收取成功
-                         var hbStats = JSON.parse(localStorage.getItem("hbStats"));
-                         hbStats[1]++;
-                         localStorage.setItem("hbStats", JSON.stringify(hbStats));
+                         hbCount += 1;
+                         localStorage.setItem("hbCount", hbCount);
                      }
-                     if (hbStats[1] === 30){
+                     if (hbCount === 30){
                          clearInterval(bonusInterval);
                          var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
                          setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 2000);
                      }
                  }
             });
-    },300);
+    },1000);
 }
-
 //通过每周比较数据算出7日的争霸
 function gongHui(){
-    var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抓挂机抢红包5");
-    switch (type){
-        case "1":
-            todayDrum();
-            break;
-        case "2":
-            weekContribution();
-            break;
-        case "3":
-            weekBattle();
-            break;
-        case "4":
-            monthBattle();
-            break;
-        case "5":
-            bonusReceive();
-            break;
-        default:
-             main();
-             break;
-    }
+    $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
+        $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
+            var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5,上兵排行6");
+            switch (type){
+                case "1":
+                    todayDrum();
+                    break;
+                case "2":
+                    weekContribution();
+                    break;
+                case "3":
+                    weekBattle();
+                    break;
+                case "4":
+                    monthBattle();
+                    break;
+                case "5":
+                    bonusReceive();
+                    break;
+                case "6":
+                    shangBingGongHui();
+                    break;
+                default:
+                    main();
+                    break;
+            }
+        });});
 }
 function todayDrum(){
+    var copy = confirm("是否将该玩家的本日敲鼓次数一并复制？");
     var userList = [];
     GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
     var maps = GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
         userList.forEach(function(userID){
             if (maps[userID].drumsTimes < 3){
-                tempList.push(maps[userID].user.nickname);
+                if(copy){
+                    tempList.push([maps[userID].user.nickname, maps[userID].drumsTimes]);
+                }else{
+                    tempList.push([maps[userID].user.nickname]);
+                }
+
             }
         });
-        var text = tempList.join("\n");
-        var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
-        var date = new Date();
-        var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日三鼓未满名单";
-        saveAs(blob,filename);
+    var sortedList = tempList.sort(function(a, b) {
+        return b[1] - a[1];    // sort by length
+    });
+    sortedList.unshift(["名字","本日敲鼓次数"]);
+    var date = new Date();
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日三鼓未满名单.xlsx";
+    var ws_name = "Q群957630760";
+    var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(sortedList);
+    XLSX.utils.book_append_sheet(wb, ws, ws_name);
+    XLSX.writeFile(wb, filename);
 }
 function weekContribution(){
     var contribution = prompt("查找本周贡献小于多少的玩家？（不包含等于）");
@@ -405,17 +380,22 @@ function weekContribution(){
     userList.forEach(function(userID){
         if (maps[userID].contribution < contri){
             if (copy){
-                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].contribution);
+                tempList.push([maps[userID].user.nickname, maps[userID].contribution]);
             }else {
-                tempList.push(maps[userID].user.nickname);
+                tempList.push([maps[userID].user.nickname]);
             }
         }
     });
-    var text = tempList.join("\n");
-    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var sortedList = tempList.sort(function(a, b) {
+        return b[1] - a[1];    // sort by length
+    });
+    sortedList.unshift(["名字","本周贡献"]);
     var date = new Date();
-    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周贡献未满名单";
-    saveAs(blob,filename);
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周贡献未满名单.xlsx";
+    var ws_name = "Q群957630760";
+    var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(sortedList);
+    XLSX.utils.book_append_sheet(wb, ws, ws_name);
+    XLSX.writeFile(wb, filename);
 }
 function weekBattle(){
     var battle = prompt("查找本周争霸赛胜场小于多少的玩家？（不包含等于）");
@@ -428,17 +408,22 @@ function weekBattle(){
     userList.forEach(function(userID){
         if (maps[userID].battleWinTimes < battleWin){
             if (copy){
-                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].battleWinTimes);
+                tempList.push([maps[userID].user.nickname,maps[userID].battleWinTimes]);
             }else {
-                tempList.push(maps[userID].user.nickname);
+                tempList.push([maps[userID].user.nickname]);
             }
         }
     });
-    var text = tempList.join("\n");
-    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var sortedList = tempList.sort(function(a, b) {
+        return b[1] - a[1];    // sort by length
+    });
+    sortedList.unshift(["名字","本周胜场"]);
     var date = new Date();
-    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周胜场未满名单";
-    saveAs(blob,filename);
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本周胜场未满名单.xlsx";
+    var ws_name = "Q群957630760";
+    var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(sortedList);
+    XLSX.utils.book_append_sheet(wb, ws, ws_name);
+    XLSX.writeFile(wb, filename);
 }
 function monthBattle(){
     var battleMo = prompt("查找本月争霸赛胜场小于多少的玩家？（不包含等于）");
@@ -451,17 +436,22 @@ function monthBattle(){
     userList.forEach(function(userID){
         if (maps[userID].dataStatistics.currentMonth.battleWinTimesTotal < battleWinMo){
             if (copy){
-                tempList.push(maps[userID].user.nickname + ": "+ maps[userID].dataStatistics.currentMonth.battleWinTimesTotal);
+                tempList.push([maps[userID].user.nickname,maps[userID].dataStatistics.currentMonth.battleWinTimesTotal]);
             }else {
-                tempList.push(maps[userID].user.nickname);
+                tempList.push([maps[userID].user.nickname]);
             }
         }
     });
-    var text = tempList.join("\n");
-    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    var sortedList = tempList.sort(function(a, b) {
+        return b[1] - a[1];    // sort by length
+    });
+    sortedList.unshift(["名字","本周胜场"]);
     var date = new Date();
-    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本月胜场未满名单";
-    saveAs(blob,filename);
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本月胜场未满名单.xlsx";
+    var ws_name = "Q群957630760";
+    var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(sortedList);
+    XLSX.utils.book_append_sheet(wb, ws, ws_name);
+    XLSX.writeFile(wb, filename);
 }
 function bonusReceive(){
     var userList = [];
@@ -476,9 +466,41 @@ function bonusReceive(){
     var sortedList = tempList.sort(function(a, b) {
         return b[1] - a[1];    // sort by length
     });
-    var text = sortedList.join("\n");
-    var blob = new Blob([text],{type: "text/plain;charset=utf-8"});
+    sortedList.unshift(["名字","抢红包次数"]);
     var date = new Date();
-    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日抢红包名单";
-    saveAs(blob,filename);
+    var filename = "("+(date.getMonth()+1) + "月" + date.getDate()+ "日)本日抢红包名单.xlsx";
+    var ws_name = "Q群957630760";
+    var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(sortedList);
+    XLSX.utils.book_append_sheet(wb, ws, ws_name);
+    XLSX.writeFile(wb, filename);
 }
+function shangBingGongHui(){
+    var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
+    if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesRewardWindow"){
+        alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开左上角的奖励窗口-点击公会奖池\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
+        return;
+    }
+    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var guildRankInfo = currWindow.rankInfo.userScoreRankList;
+    if (guildRankInfo[0].guildRewardPool.length === 0 || guildRankInfo[0].userRewardPool.length === 0){
+            alert("识别失败！\n请重新打开奖励-公会奖池（需要从窗口中读取信息）\n然后重新运行上兵脚本");
+            return;
+    }
+    var rankList = [];
+    rankList.push(["游戏名","积分","公会财富","公会经验","上兵箱子","绿石头","公会贡献"]);
+    guildRankInfo.forEach(function(user){
+        //名字，积分，公会财富,公会经验,上兵箱子，石头，公会贡献
+        rankList.push([maps[user.userID].user.nickname, user.totalScore, user.guildRewardPool[0].Num, user.guildRewardPool[1].Num, user.userRewardPool[0].Num,user.userRewardPool[1].Num,user.userRewardPool[2].Num]);
+    });
+    $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
+        $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
+            var filename = "上兵伐谋公会成员贡献名单.xlsx";
+            var data = rankList;
+            var ws_name = "Q群957630760";
+            var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, ws_name);
+            XLSX.writeFile(wb, filename);
+        });
+    });
+}
+

@@ -5,21 +5,21 @@ $(document).ready(function(){
     var username;
     var password;
     if (!currUser || !currPass){    //如果没有user和password
-        message = "欢迎使用代码杀：登录请按1，注册请按2"
+        message = "欢迎来到代码杀-最强三国杀代码辅助\n已成为代码杀会员?会员登录请输1\n还不是会员？获取会员请输2（一键加群）"
     }else{
-        message = "您当前代码杀账户为："+ currUser+" 切换账号请按1，注册请按2，自动登录请按3";
+        message = "您当前代码杀账号为："+ currUser+" 切换账号请按1，获取会员请按2，自动登录请按3";
     }
     var loginStr = prompt(message);
     var login = parseInt(loginStr);
     if (login === 2){
         window.open(
-            'https://docs.qq.com/doc/DVERHVU5vdkFzVGpX',
+            'https://jq.qq.com/?_wv=1027&k=57gQxzG',
             '_blank' // <- This is what makes it open in a new window.
         );
         return;
     }else if (login === 1){
-        username = prompt("请输入用户");
-        password = prompt("请输入密码");
+        username = prompt("请输入代码杀会员账号");
+        password = prompt("请输入代码杀会员密码");
     }else{
         username = currUser;
         password = currPass;
@@ -38,7 +38,7 @@ $(document).ready(function(){
                 });
             }, function () {
                 window.open(
-                    'https://docs.qq.com/doc/DVERHVU5vdkFzVGpX',
+                    'https://jq.qq.com/?_wv=1027&k=57gQxzG',
                     '_blank' // <- This is what makes it open in a new window.
                 );
             });
