@@ -3,7 +3,7 @@ $(document).ready(function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
     });
     if (typeof SceneManager === "undefined"){
-        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
         alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
     }else{
         checkValidUser();
@@ -48,11 +48,11 @@ function checkValidUser(){
                 };
                 main();
             },function(){
-                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
                 alert("绑定三国杀账号失败,请联系QQ:2891532094");
             });
         }else if (userID !== user.get("uid")){
-            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};
+            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
             alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
@@ -253,7 +253,7 @@ function shangBing(){
         return;
     }
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
-    if (jiangLing === null){return main();}
+    if (jiangLing === null){return main();}else{var jiangLingID = parseInt(jiangLing)-1;}
     var cityID = currWindow.cityVo.CityID;
     var battleCount = prompt("请输入上兵次数，不限请输入0");
     if (battleCount === null){return main();}
