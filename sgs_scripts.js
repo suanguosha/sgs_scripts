@@ -1,3 +1,12 @@
+var zhuluInterval;
+var shoutInterval;
+var shangbingInterval;
+var bonusInterval;
+var zhuLuActive = false;
+var shoutActive = false;
+var shangbingActive = false;
+var bonusActive = false;
+
 $(document).ready(function(){
     $.getScript("https://unpkg.com/hotkeys-js/dist/hotkeys.min.js",function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
@@ -20,7 +29,7 @@ function checkValidUser(){
             };
             AV.Cloud.run('recordUID', paramsJson).then(function () {
                 main = function(){
-                    var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M(或ctrl+shift+M) 打开菜单 ESC 关闭菜单");
+                    var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n自动上兵:(输入城池名-快速不用找)6/(读取窗口-兼容无名关隘)7\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
                     switch (type){
                         case "1":
                             zhuLu();
@@ -32,13 +41,16 @@ function checkValidUser(){
                             chat();
                             break;
                         case "4":
-                            shangBing();
-                            break;
-                        case "5":
                             hongBao();
                             break;
-                        case "6":
+                        case "5":
                             gongHui();
+                            break;
+                        case "6":
+                            shangBing(true);
+                            break;
+                        case "7":
+                            shangBing(false);
                             break;
                         case null:
                             break;
@@ -56,7 +68,7 @@ function checkValidUser(){
             alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
-                var type = prompt("请选择:逐鹿天下1，一键日常2，自动发言3，上兵伐谋4，自动红包5，公会管理6\n快捷键:ctrl+M 打开菜单 ESC 关闭菜单");
+                var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n自动上兵:(输入城池名-快速不用找)6/(读取窗口-兼容无名关隘)7\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
                 switch (type){
                     case "1":
                         zhuLu();
@@ -68,13 +80,16 @@ function checkValidUser(){
                         chat();
                         break;
                     case "4":
-                        shangBing();
-                        break;
-                    case "5":
                         hongBao();
                         break;
-                    case "6":
+                    case "5":
                         gongHui();
+                        break;
+                    case "6":
+                        shangBing(true);
+                        break;
+                    case "7":
+                        shangBing(false);
                         break;
                     case null:
                         break;
@@ -85,17 +100,41 @@ function checkValidUser(){
             main();
         }
     },function(){
-        main = function(){alert("登录失败，请联系QQ:2891532094");};
-        zhuLu = function(){alert("登录失败，请联系QQ:2891532094");};
-        riChang = function(){alert("登录失败，请联系QQ:2891532094");};
-        shangBing = function(){alert("登录失败，请联系QQ:2891532094");};
-        chat = function(){alert("登录失败，请联系QQ:2891532094");};
-        hongBao = function(){alert("登录失败，请联系QQ:2891532094");};
-        main();
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
+        alert("登录失败，请联系QQ:2891532094");
     });
+}
+function checkActive(intervalName){
+    var modifier = false;
+    switch(intervalName){
+        case "zhuLuActive":
+            if (zhuLuActive){
+                modifier = confirm("自动逐鹿正在运行中,是否修改设置?");
+            }
+            break;
+        case "shoutActive":
+            if (shoutActive){
+                modifier = confirm("自动发言正在运行中,是否修改设置?");
+            }
+            break;
+        case "shangbingActive":
+            if (shangbingActive){
+                modifier = confirm("自动上兵正在运行中,是否修改设置?");
+            }
+            break;
+        case "bonusActive":
+            if (bonusActive){
+                modifier = confirm("挂机红包正在运行中,是否修改设置?");
+            }
+            break;
+        default:
+            break;
+    }
+    return modifier;
 }
 function main(){}
 function zhuLu(){
+    if (!checkActive("zhuLuActive")){return main();}
     var tili = GameItemManager.GetInstance().GetItemByID(720027).ItemNum;
     if (tili === 0){
         alert("您当前没有体力，稍后为您打开主菜单");
@@ -184,6 +223,7 @@ function riChang(){
     setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");return main();}, 2000);
 }
 function chat(){
+    if (!checkActive("shoutActive")){return main();}
     var chatMessage = prompt("欢迎进入自动发言。请输入发言内容");
     if (chatMessage === null){
         return main();
@@ -241,20 +281,37 @@ function chat(){
         count++;
     },parseFloat(chatTimeInterval)*1000);
 }
-function shangBing(){
+function shangBing(hasCityName){
+    if (!checkActive("shangbingActive")){return main();}
     var liangcao = GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
     if (liangcao === 0){
         alert("您当前没有粮草，稍后为您打开主菜单");
         return main();
     }
-    var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
-    if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
-        alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
-        return;
+    if (hasCityName === true){
+        var cityName = prompt("请输入城池名称");
+        if (cityName === null){return main();}
+    }else{
+        var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
+        if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
+            alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
+            return;
+        }
     }
     var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (jiangLing === null){return main();}else{var jiangLingID = parseInt(jiangLing)-1;}
-    var cityID = currWindow.cityVo.CityID;
+    var cityID = -1;
+    if (hasCityName){
+        var mapCities = GameGlaivesManager.GetInstance().mapCitys;
+        for (var i = 0; i < 457; i++){
+            if (mapCities[i].NodeName === cityName){
+                cityID = mapCities[i].CityID;
+            }
+        }
+    }else{
+        cityID = currWindow.cityVo.CityID;
+    }
+    if (cityID === -1){alert("没有找到城池");return main();}
     var battleCount = prompt("请输入上兵次数，不限请输入0");
     if (battleCount === null){return main();}
     var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
@@ -282,6 +339,7 @@ function shangBing(){
         }, 1000);
 }
 function hongBao(){
+    if (!checkActive("bonusActive")){return main();}
     var lastDate = localStorage.getItem("lastDate");
     if ((lastDate !== null && new Date().getDate() !== parseInt(lastDate)) || lastDate === null){   //换天或者首次，设置initYB和lastDate
         localStorage.setItem("initYB", GameItemManager.GetInstance().GetItemByID(100002).ItemNum);
@@ -289,9 +347,7 @@ function hongBao(){
         localStorage.setItem("hbCount", 0);
     }
     var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
-    var confirmation = confirm("今天已抢"+GameGuildManager.GetInstance().SelfGuildInfo.guildBonusReceive.times+"个红包\n已经获得"+ybGain+"元宝。\n是否进入/修改抢红包设置?");
-    if (!confirmation){return main();}
-    var minhongBao = parseInt(prompt("请设置最小红包单价\n红包为500元宝，10份，则单价就是50"),10);
+    var minhongBao = parseInt(prompt("今天已抢"+GameGuildManager.GetInstance().SelfGuildInfo.guildBonusReceive.times+"个红包\n已经获得"+ybGain+"元宝。\n请设置最小红包单价\n红包为500元宝，10份，则单价就是50"),10);
     if (minhongBao === null){return main();}
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
