@@ -105,7 +105,7 @@ function checkValidUser(){
     });
 }
 function checkActive(intervalName){
-    var modifier = false;
+    var modifier = true;
     switch(intervalName){
         case "zhuLuActive":
             if (zhuLuActive){
@@ -151,6 +151,8 @@ function zhuLu(){
 
         var stopPoint = parseInt(battleCount,10) ? GameItemManager.GetInstance().GetItemByID(720027).ItemNum - battleCount : 0;
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
+        zhuLuActive = true;
+        clearInterval(zhuluInterval);
         zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
@@ -162,6 +164,7 @@ function zhuLu(){
                     GameContext.LeaveGameScene();
                     if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
                         clearInterval(zhuluInterval);
+                        zhuLuActive = false;
                         setTimeout(function () {
                             alert("逐鹿已刷完");
                             return main();
@@ -270,9 +273,11 @@ function chat(){
         }
 
     var count = 0;
-
+     shoutActive = true;
+    clearInterval(shoutInterval);
      shoutInterval = setInterval(function(){
         if (count === parseInt(chatMaxCount, 10)){
+            shoutActive = false;
             clearInterval(shoutInterval);
             setTimeout(function(){alert("发言已结束");
                 return main();}, 2000);
@@ -293,7 +298,7 @@ function shangBing(hasCityName){
         if (cityName === null){return main();}
     }else{
         var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
-        if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
+        if (currWindow === null || typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
             alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
             return;
         }
@@ -317,6 +322,8 @@ function shangBing(hasCityName){
     var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
     stopPoint = stopPoint < 0 ? 0 : stopPoint;
     // 进入上兵伐谋
+    clearInterval(shangbingInterval);
+    shangbingActive = true;
     shangbingInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
@@ -326,11 +333,13 @@ function shangBing(hasCityName){
                     GameContext.LeaveGameScene();
                     if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
                         clearInterval(shangbingInterval);
+                        shangbingActive = false;
                         setTimeout(function(){alert("上兵已刷完");return main();}, 2000);
                         return;
                     }
                     if (GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID].Country === GameGlaivesManager.GetInstance().country){
                         clearInterval(shangbingInterval);
+                        shangbingActive = false;
                         setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 2000);
                         return;
                     }
@@ -349,6 +358,8 @@ function hongBao(){
     var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
     var minhongBao = parseInt(prompt("今天已抢"+GameGuildManager.GetInstance().SelfGuildInfo.guildBonusReceive.times+"个红包\n已经获得"+ybGain+"元宝。\n请设置最小红包单价\n红包为500元宝，10份，则单价就是50"),10);
     if (minhongBao === null){return main();}
+    bonusActive = true;
+    clearInterval(bonusInterval);
     bonusInterval = setInterval(function(){
         var bonusGetter = GameGuildManager.GetInstance();
             bonusGetter.guildBonusList.breakForEach(function(e,i){
@@ -361,6 +372,7 @@ function hongBao(){
                      }
                      if (hbCount === 30){
                          clearInterval(bonusInterval);
+                         bonusActive = false;
                          var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
                          setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 2000);
                      }
@@ -532,7 +544,7 @@ function bonusReceive(){
 }
 function shangBingGongHui(){
     var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
-    if (typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesRewardWindow"){
+    if (currWindow === null || typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesRewardWindow"){
         alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开左上角的奖励窗口-点击公会奖池\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
         return;
     }
