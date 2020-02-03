@@ -153,12 +153,25 @@ function zhuLu(){
         stopPoint = stopPoint < 0 ? 0 : stopPoint;
         zhuLuActive = true;
         clearInterval(zhuluInterval);
+
+    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+    };
+
         zhuluInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
             } else {  //如果在游戏中
+                //速度自动5倍
+                proxy(ProtoBufId.LOGICMSG_CREQAUTOCHESSSETRESPONSERATE, {
+                    rate: 5
+                });
+
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                     GameContext.LeaveGameScene();
@@ -188,13 +201,12 @@ function riChang(){
 
 // 领取公会每日任务奖励,活跃值,活跃奖励
     var taskIDList = [401, 402, 403, 1001, 1002, 1003, 1004];
-    for (taskID of taskIDList) {
-        TaskManager.GetInstance().GetTaskReward(taskID);
-    }
     for (var taskID = 1101; taskID < 1120; taskID++) {
         TaskManager.GetInstance().GetTaskReward(taskID);
     }
-
+    for (taskID of taskIDList) {
+        TaskManager.GetInstance().GetTaskReward(taskID);
+    }
 // 每日抽取免费将印
     proxy(ProtoBufId.CMSG_CREQGENERALSEALCHESTOPEN, { type: 1 });
 
@@ -324,10 +336,22 @@ function shangBing(hasCityName){
     // 进入上兵伐谋
     clearInterval(shangbingInterval);
     shangbingActive = true;
+
+    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+    };
     shangbingInterval = setInterval(function () {
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
                 GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
             }else{  //如果在游戏中
+                //速度自动5倍
+                proxy(ProtoBufId.LOGICMSG_CREQAUTOCHESSSETRESPONSERATE, {
+                    rate: 5
+                });
+
                 //牌局中出现结算按钮，离开游戏
                 if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
                     GameContext.LeaveGameScene();
