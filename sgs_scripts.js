@@ -328,8 +328,6 @@ function shangBing(hasCityName){
             return a.DefenderNum - b.DefenderNum;    // sort by length
         }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3).slice(0, 10);
     }
-    var jiangLing = prompt("选择出战将灵（数字：第几个）");
-    if (jiangLing === null){return main();}else{var jiangLingID = parseInt(jiangLing)-1;}
     var cityID = -1;
     if (hasCityName === 1){
         var mapCities = GameGlaivesManager.GetInstance().mapCitys;
@@ -341,15 +339,23 @@ function shangBing(hasCityName){
     }else if(hasCityName === 0){
         cityID = currWindow.cityVo.CityID;
     }else if (hasCityName === 2){   //查找空关
-        var message = "可进攻的空关有:\n";
-        sortedCities.forEach(function(city,index){
-            message += (city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
-        })
-        var index= parseInt(prompt(message));
-        index = index? index: -1;
-        if (index === -1){return main();}else{cityID = sortedCities[(index-1)].CityID;}
+        if (sortedCities.length === 0){
+            alert("所有城池免战中,没有找到空关");
+            return main();
+        }else{
+            var message = "可进攻的空关有:\n";
+            sortedCities.forEach(function(city,index){
+                message += (city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
+            })
+            var index= parseInt(prompt(message));
+            index = index? index: -1;
+            if (index === -1){return main();}else{cityID = sortedCities[(index-1)].CityID;}
+        }
     }
     if (cityID === -1){alert("没有找到城池");return main();}
+    var jiangLing = prompt("选择出战将灵（数字：第几个）");
+    var jiangLingID = 0;
+    if (jiangLing === null){return main();}else{jiangLingID = parseInt(jiangLing)-1;}
     var battleCount = prompt("请输入上兵次数，不限请输入0");
     if (battleCount === null){return main();}
     var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
