@@ -29,7 +29,7 @@ function checkValidUser(){
             };
             AV.Cloud.run('recordUID', paramsJson).then(function () {
                 main = function(){
-                    var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n上兵攻城:输入城池名6/读取窗口7/找空关8\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+                    var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
                     switch (type){
                         case "1":
                             zhuLu();
@@ -55,6 +55,9 @@ function checkValidUser(){
                         case "8":
                             shangBing(2);
                             break;
+                        case "9":
+                            zidongSB();
+                            break;
                         case null:
                             break;
                         default:
@@ -71,7 +74,7 @@ function checkValidUser(){
             alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
-                var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n上兵攻城:输入城池名6/读取窗口7/找空关8\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+                var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
                 switch (type){
                     case "1":
                         zhuLu();
@@ -96,6 +99,9 @@ function checkValidUser(){
                         break;
                     case "8":
                         shangBing(2);
+                        break;
+                    case "9":
+                        zidongSB();
                         break;
                     case null:
                         break;
@@ -325,9 +331,10 @@ function shangBing(hasCityName){
         }
     }else if (hasCityName === 2){   //查找空关
         var cities = GameGlaivesManager.GetInstance().mapCitys;
+        var selfCountry = GameGlaivesManager.GetInstance().country;
         sortedCities = cities.sort(function(a, b) {
             return a.DefenderNum - b.DefenderNum;    // sort by length
-        }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3).slice(0, 10);
+        }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3 && city.Country !== selfCountry).slice(0, 10);
     }
     var cityID = -1;
     if (hasCityName === 1){
@@ -397,6 +404,62 @@ function shangBing(hasCityName){
             }
         }
         }, 1000);
+}
+function zidongSB(){
+    var liangcao = GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
+    if (liangcao === 0){
+        alert("您当前没有粮草，稍后为您打开主菜单");
+        return main();
+    }
+    if (!checkActive("shangbingActive")){return main();}
+    var jiangLing = prompt("选择出战将灵（数字：第几个）");
+    var jiangLingID = 0;
+    if (jiangLing === null){return main();}else{jiangLingID = parseInt(jiangLing)-1;}
+    var battleCount = prompt("请输入上兵次数，不限请输入0");
+    if (battleCount === null){return main();}
+    var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
+    stopPoint = stopPoint < 0 ? 0 : stopPoint;
+    // 进入上兵伐谋
+    clearInterval(shangbingInterval);
+    shangbingActive = true;
+    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+    };
+    shangbingInterval = setInterval(function () {
+        if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
+                clearInterval(shangbingInterval);
+                shangbingActive = false;
+                setTimeout(function(){alert("上兵已刷完");return main();}, 500);
+            }else{
+                var cityID;
+                var sortedCities = [];
+                var cities = GameGlaivesManager.GetInstance().mapCitys;
+                var selfCountry = GameGlaivesManager.GetInstance().country;
+                sortedCities = cities.sort(function(a, b) {
+                    return a.DefenderNum - b.DefenderNum;    // sort by length
+                }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3 && city.Country !== selfCountry).slice(0, 2);
+                if (sortedCities.length !== 0){
+                    cityID = sortedCities[0].CityID;
+                    GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                }
+            }
+        }else{  //如果在游戏中
+            //速度自动5倍
+            if (StorageUtils.getNumber("gameSpeedRate") !== 5){
+                proxy(ProtoBufId.LOGICMSG_CREQAUTOCHESSSETRESPONSERATE, {
+                    rate: 5
+                });
+            }
+            //牌局中出现结算按钮，离开游戏
+            if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
+                GameContext.LeaveGameScene();
+            }
+        }
+    }, 1000);
 }
 function hongBao(){
     if (!checkActive("bonusActive")){return main();}
