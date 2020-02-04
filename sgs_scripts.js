@@ -334,7 +334,7 @@ function shangBing(hasCityName){
         var selfCountry = GameGlaivesManager.GetInstance().country;
         sortedCities = cities.sort(function(a, b) {
             return a.DefenderNum - b.DefenderNum;    // sort by length
-        }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3 && city.Country !== selfCountry).slice(0, 10);
+        }).filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && city.CityType !== 1 && city.CityStatusType <= 2 && city.Country !== selfCountry).slice(0, 10);
     }
     var cityID = -1;
     if (hasCityName === 1){
@@ -353,7 +353,7 @@ function shangBing(hasCityName){
         }else{
             var message = "可进攻的空关有:\n";
             sortedCities.forEach(function(city,index){
-                message += (city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
+                message += (city.Country+city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
             })
             var index= parseInt(prompt(message));
             index = index? index: -1;
@@ -441,7 +441,7 @@ function zidongSB(){
                 var selfCountry = GameGlaivesManager.GetInstance().country;
                 sortedCities = cities.sort(function(a, b) {
                     return a.DefenderNum - b.DefenderNum;    // sort by length
-                }).filter(city => city.CityType !== 1 && city.CityStatusType !== 3 && city.Country !== selfCountry).slice(0, 2);
+                }).filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && city.CityType !== 1 && city.CityStatusType <= 2 && city.Country !== selfCountry).slice(0, 2);
                 if (sortedCities.length !== 0){
                     cityID = sortedCities[0].CityID;
                     GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
