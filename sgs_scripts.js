@@ -168,18 +168,19 @@ function zhuLu(){
         };
 
         zhuluInterval = setInterval(function () {
-            if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
-                clearInterval(zhuluInterval);
-                zhuLuActive = false;
-                setTimeout(function () {
-                    alert("逐鹿已刷完");
-                    return main();
-                }, 500);
-            }
             if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-                var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
-                var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
-                NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
+                if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
+                    clearInterval(zhuluInterval);
+                    zhuLuActive = false;
+                    setTimeout(function () {
+                        alert("逐鹿已刷完");
+                        return main();
+                    }, 500);
+                }else{
+                    var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                    var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
+                    NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
+                }
             } else {  //如果在游戏中
                 //如果速度不为5,加速到5
                 if (StorageUtils.getNumber("gameSpeedRate") !== 5){
@@ -371,30 +372,30 @@ function shangBing(hasCityName){
         GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
     };
     shangbingInterval = setInterval(function () {
-        if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
-            clearInterval(shangbingInterval);
-            shangbingActive = false;
-            setTimeout(function(){alert("上兵已刷完");return main();}, 500);
-        }
-        if (GameGlaivesManager.GetInstance().mapCitys[cityID].Country === GameGlaivesManager.GetInstance().country){
-            clearInterval(shangbingInterval);
-            shangbingActive = false;
-            setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 500);
-        }
-            if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+        if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
+                clearInterval(shangbingInterval);
+                shangbingActive = false;
+                setTimeout(function(){alert("上兵已刷完");return main();}, 500);
+            }else if (GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID].Country === GameGlaivesManager.GetInstance().country){
+                clearInterval(shangbingInterval);
+                shangbingActive = false;
+                setTimeout(function(){alert("当前城池已属于己方势力");return main();}, 500);
+            }else{
                 GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
-            }else{  //如果在游戏中
-                //速度自动5倍
-                if (StorageUtils.getNumber("gameSpeedRate") !== 5){
-                    proxy(ProtoBufId.LOGICMSG_CREQAUTOCHESSSETRESPONSERATE, {
-                        rate: 5
-                    });
-                }
-                //牌局中出现结算按钮，离开游戏
-                if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
-                    GameContext.LeaveGameScene();
-                }
             }
+        }else{  //如果在游戏中
+            //速度自动5倍
+            if (StorageUtils.getNumber("gameSpeedRate") !== 5){
+                proxy(ProtoBufId.LOGICMSG_CREQAUTOCHESSSETRESPONSERATE, {
+                    rate: 5
+                });
+            }
+            //牌局中出现结算按钮，离开游戏
+            if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
+                GameContext.LeaveGameScene();
+            }
+        }
         }, 1000);
 }
 function hongBao(){
