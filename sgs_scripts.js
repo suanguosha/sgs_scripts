@@ -12,7 +12,7 @@ $(document).ready(function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
     });
     if (typeof SceneManager === "undefined"){
-        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){}
         alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
     }else{
         checkValidUser();
@@ -66,11 +66,11 @@ function checkValidUser(){
                 };
                 main();
             },function(){
-                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
+                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
                 alert("绑定三国杀账号失败,请联系QQ:2891532094");
             });
         }else if (userID !== user.get("uid")){
-            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
+            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
             alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
@@ -112,7 +112,7 @@ function checkValidUser(){
             main();
         }
     },function(){
-        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
         alert("登录失败，请联系QQ:2891532094");
     });
 }
@@ -240,6 +240,26 @@ function riChang(){
         count: cornucopiaCount
     });
 
+    //获取出征任务
+    proxy(ProtoBufId.CMSG_CREQGENERALSPRITETASKSET, {
+        pkID: pkID,
+        count: cornucopiaCount
+    });
+
+    //选择出征任务
+    var elfTasks = GeneralElfManager.GetInstance().taskElfInfo.taskIDs;
+    var sortedTasks = [];
+    for (elfTask of elfTasks){
+        sortedTasks.push([elfTask, GameSpriteConfig.GetInstance().GetTaskVOByTaskID(elfTask).TaskCategoryType]);
+    }
+    sortedTasks =  sortedTasks.sort(function(a, b) {
+        return a[1] - b[1];
+    });
+    proxy(ProtoBufId.CMSG_CREQGENERALSPRITETASKSTART, {
+        pkID: pkID,
+        taskID: sortedTasks[0][0]
+    });
+
     //上兵伐谋获取每天粮草
     GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyEveryDaySupply();
 
@@ -249,7 +269,16 @@ function riChang(){
     }
 // 领取工会战奖励
     GameGuildManager.GetInstance().ReqGuildBattleUserWinTimesReward();
-    setTimeout(function(){alert("每日签到/活跃，公会敲鼓/任务/争霸赛，免费将印/三国秀，将灵聚宝盆/出征，上兵粮草领取完毕");return main();}, 2000);
+
+//领取邮件
+    var inbox = MailManager.GetInstance().inboxList;
+    inbox.forEach(function(mail){
+        if (mail.hasAttach !== undefined && isAttachReceive !== true){
+            MailManager.GetInstance().ReqGift(mail.emailID, mail.attaches.sign);
+        }
+    });
+
+    setTimeout(function(){alert("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");return main();}, 500);
 }
 function chat(){
     if (!checkActive("shoutActive")){return main();}
