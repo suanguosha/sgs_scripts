@@ -159,7 +159,11 @@
       <workItem from="1580779965038" duration="2191000" />
       <workItem from="1580782333185" duration="260000" />
       <workItem from="1580822367814" duration="2383000" />
-      <workItem from="1580828960516" duration="3030000" />
+      <workItem from="1580828960516" duration="3211000" />
+      <workItem from="1580835304490" duration="368000" />
+      <workItem from="1580869658509" duration="3153000" />
+      <workItem from="1580873165938" duration="93000" />
+      <workItem from="1580930469565" duration="1156000" />
     </task>
     <servers />
   </component>
@@ -204,7 +208,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/参考资料/新游卡20191229(参考资料).js</url>
           <line>36709</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

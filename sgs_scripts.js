@@ -12,7 +12,7 @@ $(document).ready(function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
     });
     if (typeof SceneManager === "undefined"){
-        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){}
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};shangBingProtect();
         alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”，然后重开");
     }else{
         checkValidUser();
@@ -66,11 +66,11 @@ function checkValidUser(){
                 };
                 main();
             },function(){
-                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
+                main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};shangBingProtect();
                 alert("绑定三国杀账号失败,请联系QQ:2891532094");
             });
         }else if (userID !== user.get("uid")){
-            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
+            main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};shangBingProtect();
             alert("一个代码杀只允许绑定一个三国杀");
         }else{
             main = function(){
@@ -112,7 +112,7 @@ function checkValidUser(){
             main();
         }
     },function(){
-        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};
+        main = function(){};zhuLu = function(){};riChang = function(){};shangBing = function(){};chat = function(){};hongBao = function(){};gongHui = function(){};todayDrum = function(){};weekContribution = function(){};weekBattle = function(){};monthBattle = function(){};bonusReceive = function(){};shangBingGongHui= function(){};zidongSB= function(){};shangBingProtect();
         alert("登录失败，请联系QQ:2891532094");
     });
 }
@@ -273,7 +273,7 @@ function riChang(){
 //领取邮件
     var inbox = MailManager.GetInstance().inboxList;
     inbox.forEach(function(mail){
-        if (mail.hasAttach !== undefined && isAttachReceive !== true){
+        if (mail.hasAttach !== undefined && mail.isAttachReceive !== true){
             MailManager.GetInstance().ReqGift(mail.emailID, mail.attaches.sign);
         }
     });
@@ -382,7 +382,7 @@ function shangBing(hasCityName){
         }else{
             var message = "可进攻的空关有:\n";
             sortedCities.forEach(function(city,index){
-                message += (city.Country+city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
+                message += (toCountry(city.Country)+city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/进攻输入"+ (index+1) + "\n");
             })
             var index= parseInt(prompt(message));
             index = index? index: -1;
@@ -441,8 +441,12 @@ function zidongSB(){
         return main();
     }
     if (!checkActive("shangbingActive")){return main();}
-    var jiangLing = prompt("选择出战将灵（数字：第几个）");
+    var cityType = parseInt(prompt("进攻全城池1,只进攻郡城+关隘2,只进攻关隘3"));
+    if (cityType === null){return main();}
+    var shouJun = parseInt(prompt("守军数量少于等于多少时进攻?\n代码杀会自动帮您找守军最少的城池进攻\n如果守军最少城池不满足守军数量要求,则会继续等待"));
+    if (shouJun === null){return main();}
     var jiangLingID = 0;
+    var jiangLing = prompt("选择出战将灵（数字：第几个）");
     if (jiangLing === null){return main();}else{jiangLingID = parseInt(jiangLing)-1;}
     var battleCount = prompt("请输入上兵次数，不限请输入0");
     if (battleCount === null){return main();}
@@ -467,10 +471,9 @@ function zidongSB(){
                 var cityID;
                 var sortedCities = [];
                 var cities = GameGlaivesManager.GetInstance().mapCitys;
-                var selfCountry = GameGlaivesManager.GetInstance().country;
-                sortedCities = cities.sort(function(a, b) {
+                sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && city.CityType > cityType && city.DefenderNum <= shouJun).sort(function(a, b) {
                     return a.DefenderNum - b.DefenderNum;    // sort by length
-                }).filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && city.CityType !== 1 && city.CityStatusType <= 2 && city.Country !== selfCountry).slice(0, 2);
+                }).slice(0, 2);
                 if (sortedCities.length !== 0){
                     cityID = sortedCities[0].CityID;
                     GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
@@ -527,7 +530,7 @@ function hongBao(){
 function gongHui(){
     $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
         $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
-            var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5,上兵排行6");
+            var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5,上兵排行6,上兵免战7");
             switch (type){
                 case "1":
                     todayDrum();
@@ -546,6 +549,9 @@ function gongHui(){
                     break;
                 case "6":
                     shangBingGongHui();
+                    break;
+                case "7":
+                    shangBingProtect();
                     break;
                 default:
                     main();
@@ -714,4 +720,58 @@ function shangBingGongHui(){
         });
     });
 }
+function shangBingProtect(){
+    isGoodCountry = function(t) {
+        if (!t || t.CityType == GuildGlaivesCityEnum.CTDuCheng || t.Country == GameGlaivesManager.GetInstance().country){ return !1;}
+        for (var e, i = t.BeforeCityID ? t.BeforeCityID.length : 0, n = 0; i > n; n++){
+            if (e = GameGlaivesManager.GetInstance().GetMapCity(t.BeforeCityID[n]), e && e.Country == GameGlaivesManager.GetInstance().country) {return !0;}
+        }
+        return !1;
+    }
+
+    getTimeGap = function(time){
+        var timeGap = time - Math.round((new Date()).getTime() / 1000);
+        var date = new Date(timeGap * 1000);
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return minutes + "分" + seconds+ "秒";
+    }
+
+    var now = Math.round((new Date()).getTime() / 1000);
+    var cities = GameGlaivesManager.GetInstance().mapCitys;
+    var sortedCities = [];
+    sortedCities = cities.sort(function(a, b) {
+        return a.GetProtectTime() - b.GetProtectTime();
+    }).filter(city => isGoodCountry(city) && (city.GetProtectTime() > now));
+    if (sortedCities.length !== 0){
+        var message = "免战城池名单如下:\n";
+        sortedCities.forEach(function(city,index){
+            message += (toCountry(city.Country)+city.NodeName + "/守军" + city.DefenderNum + "人/(城防:"+ (city.DefenceTotal-city.DefenceDestroy)+"/"+city.DefenceTotal + ")/免战剩余时间:"+getTimeGap(city.GetProtectTime())+"\n");
+        })
+        prompt(message);
+    }else{
+        alert("没有城池是免战的");
+    }
+}
+function toCountry(id){
+    switch (id){
+        case 1:
+            return "魏国";
+            break;
+        case 2:
+            return "蜀国";
+            break;
+        case 3:
+            return "吴国";
+            break;
+        case 4:
+            return "群雄";
+            break;
+    }
+}
+
+
+
+
+
 
