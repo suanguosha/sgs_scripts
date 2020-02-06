@@ -24,7 +24,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1WODo21phjc71Tj4jhJ1RHkWErE" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -40,6 +40,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../zhongma-calc" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -164,6 +165,13 @@
       <workItem from="1580869658509" duration="3153000" />
       <workItem from="1580873165938" duration="93000" />
       <workItem from="1580930469565" duration="1156000" />
+      <workItem from="1580938433843" duration="1637000" />
+      <workItem from="1580999885938" duration="683000" />
+      <workItem from="1581007805732" duration="830000" />
+      <workItem from="1581015533950" duration="5272000" />
+      <workItem from="1581021401746" duration="843000" />
+      <workItem from="1581022410023" duration="208000" />
+      <workItem from="1581022706673" duration="169000" />
     </task>
     <servers />
   </component>
@@ -183,11 +191,20 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
   <component name="WindowStateProjectService">
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1580771126631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1580771126631" />
+    <state x="276" y="55" key="SettingsEditor" timestamp="1581019153069">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="276" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581019153069" />
     <state x="408" y="29" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580763579109">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
