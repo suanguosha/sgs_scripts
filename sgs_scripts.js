@@ -442,6 +442,32 @@ function getJiangLing(){
         return 0;
     }
 }
+function zidongStation(){ //TODO: 自动驻守
+    var spriteList = GameGlaivesManager.GetInstance().GetGlaivesSpriteList();
+    var freeSprite = [];
+    spriteList.forEach(function(elf,index){
+        if (elf.cityID === 0){
+            freeSprite.push([index,
+                GeneralElfManager.GetInstance().GetElfInfoByPKID(elf.spritePKID).rateType]
+            );
+        }
+    });
+
+    freeSprite.forEach(function(elf){
+        var sortedCities = [];
+        var cities = GameGlaivesManager.GetInstance().mapCitys;
+        GameGlaivesManager.GetInstance().mapCitys[111].SpriteRateType
+        sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityDefend(city) === true
+            && elf[1] >= city.SpriteRateType).sort(function(a, b) {
+            return a.CityType - b.CityType;    // 按照citytype,谁低(级别高)谁先
+        }).slice(0, 10);
+        if (sortedCities.length === 0){alert("没有可驻守城池");return main();}else{
+            var topCityID = sortedCities[0];
+            GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyStation(elf[0],topCityID);
+        }
+    });
+    alert("已经为每个将灵住进最高规格的城池!");
+}
 //公会
 function gongHui(){}
 function todayDrum(){
@@ -645,7 +671,7 @@ function constructMain(type){
     if (type === "personal"){
         destroy("guild");
         main = function(){
-            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4\n上兵攻城:输入城名5/读取窗口6/显示空关7/自动刷空8/修改默认出战将灵9\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4\n上兵攻城:输入城名5/读取窗口6/显示空关7/自动刷空8/修改出战将灵9/自动驻扎11\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
             switch (type){
                 case "1":
                     zhuLu();
@@ -676,10 +702,15 @@ function constructMain(type){
                     break;
                 case "10":
                     stopInterval();
+                    break;
+                case "11":
+                    zidongStation();
+                    break;
                 case null:
                     break;
                 default:
                     main();
+                    break;
             }
         };
         main();
@@ -723,7 +754,7 @@ function constructMain(type){
         gongHui();
     }else{
         main = function(){
-            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会管理5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9/修改默认将灵11\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会管理5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9/修改出战将灵11/自动驻扎12\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
             switch (type){
                 case "1":
                     zhuLu();
@@ -754,12 +785,18 @@ function constructMain(type){
                     break;
                 case "10":
                     stopInterval();
+                    break;
                 case "11":
                     setJiangLing();
+                    break;
+                case "12":
+                    zidongStation();
+                    break;
                 case null:
                     break;
                 default:
                     main();
+                    break;
             }
         };
         gongHui = function () {
@@ -932,6 +969,7 @@ function destroy(type = "all"){
         zidongSB= function(){};
         setJiangLing = function(){};
         getJiangLing = function(){};
+        zidongStation= function(){};
 
         //公会功能
         gongHui = function(){};
@@ -972,6 +1010,7 @@ function destroy(type = "all"){
         zidongSB= function(){};
         setJiangLing = function(){};
         getJiangLing = function(){};
+        zidongStation= function(){};
     }
 }
 
