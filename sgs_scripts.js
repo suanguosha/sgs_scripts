@@ -16,6 +16,7 @@ $(document).ready(function(){
     }
     $.getScript("https://unpkg.com/hotkeys-js/dist/hotkeys.min.js",function(){
         hotkeys('ctrl+m,ctrl+shift+m', function (){main();});
+        hotkeys('ctrl+g,ctrl+shift+g', function (){gongHui();});
     });
 });
 
@@ -273,12 +274,8 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
 
     //设置出战将灵和次数
     if (cityID === -1){alert("没有找到城池");return main();}
-    var jiangLingID = parseInt(prompt("选择出战将灵（数字：第几个）"))-1;
+    var jiangLingID = getJiangLing();
     if (jiangLingID > 4 || jiangLingID < 0){return main();}
-    var battleCount = prompt("请输入上兵次数，不限请输入0");
-    if (battleCount === null){return main();}
-    var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
-    stopPoint = stopPoint < 0 ? 0 : stopPoint;
     // 进入上兵伐谋
     clearInterval(shangbingInterval);
     shangbingActive = true;
@@ -293,7 +290,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
 
     shangbingInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint
+            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === 0
                 || (!GameGlaivesManager.GetInstance().IsCityAttack(GameGlaivesManager.GetInstance().mapCityDic.Maps[cityID]))){   //如果次数到了/不能进攻
                 stopInterval(2);
                 setTimeout(function(){return main();}, 500);
@@ -321,23 +318,24 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     }, 1000);
 }
 function zidongSB(){
+    var attackMode = 0;
     var liangcao = GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
     if (liangcao === 0){
         alert("您当前没有粮草，稍后为您打开主菜单");
         return main();
     }
     if (!checkActive("shangbingActive")){return main();}
-    var cityType = parseInt(prompt("进攻城池类型:全城池1,郡城+关隘2,仅限关隘3,仅限郡城4,仅限州城5,州城+郡城6"));
-    if (cityType === null || cityType > 6 || cityType < 1){return main();}
-    var shouJun = parseInt(prompt("守军数量少于等于多少时进攻?\n代码杀会自动帮您找守军最少的城池进攻\n如果守军最少城池仍不满足守军数量要求,则会继续等待"));
+    var shouJun = parseInt(prompt("守军数量少于等于几进攻?\n代码杀会帮您找守军最少的城池进攻\n如果没有城池满足守军数量下限,则继续等待"));
     if (shouJun === null){return main();}
-    var jiangLingID = 0;
-    var jiangLing = prompt("选择出战将灵（数字：第几个）");
-    if (jiangLing === null){return main();}else{jiangLingID = parseInt(jiangLing)-1;}
-    var battleCount = prompt("请输入上兵次数，不限请输入0");
-    if (battleCount === null){return main();}
-    var stopPoint = parseInt(battleCount,10) ? (GameItemManager.GetInstance().GetItemByID(730102).ItemNum - (battleCount*20)) : 0;
-    stopPoint = stopPoint < 0 ? 0 : stopPoint;
+    var cityType = parseInt(prompt("混合进攻:全城池1,郡城+关隘2,州城+郡城6\n针对进攻:仅限关隘3,仅限郡城4,仅限州城5"));
+    if (cityType === null || cityType > 6 || cityType < 1){return main();
+    }else if (cityType === 2 || cityType === 6 || cityType ===1){
+        attackMode = parseInt(prompt("咸鱼模式1(满足守军数量中守军最少)\n大佬模式2(满足守军数量中城池级别最高中城防最少)"));
+    }
+
+    var jiangLingID = getJiangLing();
+    if (jiangLingID > 4 || jiangLingID < 0){return main();}
+
     // 进入上兵伐谋
     clearInterval(shangbingInterval);
     shangbingActive = true;
@@ -349,7 +347,7 @@ function zidongSB(){
     };
     shangbingInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
-            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === stopPoint){
+            if (GameItemManager.GetInstance().GetItemByID(730102).ItemNum === 0){
                 stopInterval(2);
                 setTimeout(function(){return main();}, 500);
             }else{
@@ -358,10 +356,17 @@ function zidongSB(){
                 var cities = GameGlaivesManager.GetInstance().mapCitys;
                 sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && isCitySatisfied(city,cityType,shouJun)).sort(function(a, b) {
                     return a.DefenderNum - b.DefenderNum;    // sort by length
-                }).slice(0, 2);
+                }).slice(0, 10);
                 if (sortedCities.length !== 0){
-                    cityID = sortedCities[0].CityID;
-                    GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                    if (attackMode === 2){
+                        sortedCities = sortedCities.sort(function(a, b) {
+                            return b.CityType - a.CityType;});
+                        cityID = sortedCities[0].CityID;
+                        GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                    }else{
+                        cityID = sortedCities[0].CityID;
+                        GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                    }
                 }
             }
         }else{  //如果在游戏中
@@ -417,40 +422,28 @@ function hongBao(){
         });
     },1000);
 }
-
-//公会
-function gongHui(){
-    $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
-        $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
-            var type = prompt("请选择考勤模式：每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5,上兵排行6,上兵免战7");
-            switch (type){
-                case "1":
-                    todayDrum();
-                    break;
-                case "2":
-                    weekContribution();
-                    break;
-                case "3":
-                    weekBattle();
-                    break;
-                case "4":
-                    monthBattle();
-                    break;
-                case "5":
-                    bonusReceive();
-                    break;
-                case "6":
-                    shangBingGongHui();
-                    break;
-                case "7":
-                    shangBingProtect();
-                    break;
-                default:
-                    main();
-                    break;
-            }
-        });});
+function setJiangLing(){
+    var message = "";
+    var currjiangLingID = parseInt(localStorage.getItem("defaultJL"));
+    if (currjiangLingID <= 4 && currjiangLingID >= 0){message += "当前默认出战将灵为"+(currjiangLingID+1)+"号位\n";}
+    var jiangLing = prompt(message+ "请选择上兵模式的默认出战将灵（数字：第几个）");
+    var jiangLingID;
+    if (jiangLing === null){return main();}else{
+        jiangLingID = parseInt(jiangLing)-1;
+        localStorage.setItem("defaultJL",jiangLingID);
+        return jiangLingID;
+    }
 }
+function getJiangLing(){
+    var currjiangLingID = parseInt(localStorage.getItem("defaultJL"));
+    if (currjiangLingID <6 && currjiangLingID > 0){
+        return currjiangLingID;
+    }else{
+        return 0;
+    }
+}
+//公会
+function gongHui(){}
 function todayDrum(){
     var copy = confirm("是否将该玩家的本日敲鼓次数一并复制？");
     var userList = [];
@@ -613,6 +606,8 @@ function shangBingGongHui(){
     });
 }
 function shangBingProtect(){
+    var cityType = parseInt(prompt("混合免战:全城池1,郡城+关隘2,州城+郡城6/针对免战:仅限关隘3,仅限郡城4,仅限州城5"));
+    if (cityType === null || cityType > 6 || cityType < 1){return;}
     isGoodCountry = function(t) {
         if (!t || t.CityType == GuildGlaivesCityEnum.CTDuCheng || t.Country == GameGlaivesManager.GetInstance().country){ return !1;}
         for (var e, i = t.BeforeCityID ? t.BeforeCityID.length : 0, n = 0; i > n; n++){
@@ -634,7 +629,7 @@ function shangBingProtect(){
     var sortedCities = [];
     sortedCities = cities.sort(function(a, b) {
         return a.GetProtectTime() - b.GetProtectTime();
-    }).filter(city => isGoodCountry(city) && (city.GetProtectTime() > now));
+    }).filter(city => isGoodCountry(city) && city.GetProtectTime() > now && isCitySatisfied(city, cityType));
     if (sortedCities.length !== 0){
         var message = "免战城池名单如下:\n";
         sortedCities.forEach(function(city,index){
@@ -646,68 +641,195 @@ function shangBingProtect(){
     }
 }
 
-function constructMain(){
-    main = function(){
-        var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会考勤5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
-        switch (type){
-            case "1":
-                zhuLu();
-                break;
-            case "2":
-                riChang();
-                break;
-            case "3":
-                chat();
-                break;
-            case "4":
-                hongBao();
-                break;
-            case "5":
-                gongHui();
-                break;
-            case "6":
-                shangBing(1);
-                break;
-            case "7":
-                shangBing(0);
-                break;
-            case "8":
-                shangBing(2);
-                break;
-            case "9":
-                zidongSB();
-                break;
-            case "10":
-                stopInterval();
-            case null:
-                break;
-            default:
-                main();
-        }
-    };
-    main();
+function constructMain(type){
+    if (type === "personal"){
+        destroy("guild");
+        main = function(){
+            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4\n上兵攻城:输入城名5/读取窗口6/显示空关7/自动刷空8/修改默认出战将灵9\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+            switch (type){
+                case "1":
+                    zhuLu();
+                    break;
+                case "2":
+                    riChang();
+                    break;
+                case "3":
+                    chat();
+                    break;
+                case "4":
+                    gongHui();
+                    break;
+                case "5":
+                    shangBing(1);
+                    break;
+                case "6":
+                    shangBing(0);
+                    break;
+                case "7":
+                    shangBing(2);
+                    break;
+                case "8":
+                    zidongSB();
+                    break;
+                case "9":
+                    setJiangLing();
+                    break;
+                case "10":
+                    stopInterval();
+                case null:
+                    break;
+                default:
+                    main();
+            }
+        };
+        main();
+    }else if(type === "guild"){
+        destroy("personal");
+        gongHui = function () {
+            $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
+                $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
+                    var type = prompt("公会考勤:每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5\n上兵指挥:免战城池倒计时6,积分排行7\n快捷键:ctrl+G或ctrl+shift+G 打开菜单 / ESC 关闭菜单");
+                    switch (type){
+                        case "1":
+                            todayDrum();
+                            break;
+                        case "2":
+                            weekContribution();
+                            break;
+                        case "3":
+                            weekBattle();
+                            break;
+                        case "4":
+                            monthBattle();
+                            break;
+                        case "5":
+                            bonusReceive();
+                            break;
+                        case "6":
+                            shangBingProtect();
+                            break;
+                        case "7":
+                            shangBingGongHui();
+                            break;
+                        case null:
+                            break;
+                        default:
+                            gongHui();
+                            break;
+                    }
+                });
+            });
+        };
+        gongHui();
+    }else{
+        main = function(){
+            var type = prompt("请选择:自动逐鹿1/一键日常2/自动发言3/挂机红包4/公会管理5\n上兵攻城:输入城名6/读取窗口7/显示空关8/自动刷空9/修改默认将灵11\n停止循环脚本10\n快捷键:ctrl+M或ctrl+shift+M 打开菜单 / ESC 关闭菜单");
+            switch (type){
+                case "1":
+                    zhuLu();
+                    break;
+                case "2":
+                    riChang();
+                    break;
+                case "3":
+                    chat();
+                    break;
+                case "4":
+                    hongBao();
+                    break;
+                case "5":
+                    gongHui();
+                    break;
+                case "6":
+                    shangBing(1);
+                    break;
+                case "7":
+                    shangBing(0);
+                    break;
+                case "8":
+                    shangBing(2);
+                    break;
+                case "9":
+                    zidongSB();
+                    break;
+                case "10":
+                    stopInterval();
+                case "11":
+                    setJiangLing();
+                case null:
+                    break;
+                default:
+                    main();
+            }
+        };
+        gongHui = function () {
+            $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
+                $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
+                    var type = prompt("公会考勤:每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5\n上兵指挥:免战城池倒计时6,积分排行7");
+                    switch (type){
+                        case "1":
+                            todayDrum();
+                            break;
+                        case "2":
+                            weekContribution();
+                            break;
+                        case "3":
+                            weekBattle();
+                            break;
+                        case "4":
+                            monthBattle();
+                            break;
+                        case "5":
+                            bonusReceive();
+                            break;
+                        case "6":
+                            shangBingProtect();
+                            break;
+                        case "7":
+                            shangBingGongHui();
+                            break;
+                        case null:
+                            break;
+                        default:
+                            main();
+                            break;
+                    }
+                });
+            });
+        };
+        main();
+    }
 }
-function checkValidUser(){
+function checkValidUser(){  //个人版personal:所有个人功能(一人一号),公会版guild:所有公会功能(支持多号),全功能版total(所有功能,一人一号)
     var { Query, User } = AV;
     AV.User.logOut();
     AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword")).then(function(user){  //登录成功
-        var userID = UserData.self.userBrief.userID;
-        if (typeof user.get("uid") === "undefined"){    //如果是新号,没有绑定过游卡userid
-            var paramsJson = {
-                uid: userID
-            };
-            AV.Cloud.run('recordUID', paramsJson).then(function () {    //如果绑定完毕
-                constructMain();
-            },function(){
+        if (user.get("userType") === "personal" || user.get("userType") === "total"){ //如果是个人账号
+            var userID = UserData.self.userBrief.userID;
+            if (typeof user.get("uid") === "undefined"){    //如果没有绑定过游卡userid
+                var paramsJson = {
+                    uid: userID
+                };
+                AV.Cloud.run('recordUID', paramsJson).then(function () {    //如果绑定完毕
+                    constructMain(user.get("userType"));
+                },function(){
+                    destroy();
+                    alert("绑定游卡账号失败,请重试或联系客服");
+                });
+            }else if (userID !== user.get("uid")){  //如果userid和代码杀的uid对不上
                 destroy();
-                alert("绑定游卡账号失败,请重试或联系客服");
-            });
-        }else if (userID !== user.get("uid")){  //如果userid和代码杀的uid对不上
-            destroy();
-            alert("一个代码杀会员只能绑定一个游卡账号");
-        }else{  //如果是老号并登录成功
-            constructMain();
+                alert("一个代码杀会员只能绑定一个游卡账号");
+            }else{  //如果是老号并登录成功
+                if (user.get("userType") === "personal"){
+                    constructMain("personal");
+                }else{
+                    constructMain("total");
+                }
+            }
+        }else if (user.get("userType") === "guild"){   //如果是公会账号
+            constructMain("guild");
         }
+
     },function(){   //登录失败
         destroy();
         alert("登录失败，请重试或联系客服");
@@ -784,8 +906,8 @@ function toCountry(id){
             break;
     }
 }
-function isCitySatisfied(city, cityType, shouJun){
-    switch (cityType){
+function isCitySatisfied(city, cityType, shouJun = 50){
+    switch (cityType){  //全城池1,郡城+关隘2,州城+郡城6针对进攻:仅限关隘3,仅限郡城4,仅限州城5
         case 1:
         case 2:
         case 3:
@@ -795,37 +917,62 @@ function isCitySatisfied(city, cityType, shouJun){
         case 5:
             return city.CityType === 2 && city.DefenderNum <= shouJun;
         case 6:
-            return (city.CityType ===2 || city.CityType ===3) && city.DefenderNum <= shouJun;
+            return (city.CityType === 2 || city.CityType === 3) && city.DefenderNum <= shouJun;
     }
 }
-function destroy(){
-    //个人功能
-    main = function(){};
-    zhuLu = function(){};
-    riChang = function(){};
-    shangBing = function(){};
-    chat = function(){};
-    hongBao = function(){};
-    zidongSB= function(){};
+function destroy(type = "all"){
+    if (type === "all"){
+        //个人功能
+        main = function(){};
+        zhuLu = function(){};
+        riChang = function(){};
+        shangBing = function(){};
+        chat = function(){};
+        hongBao = function(){};
+        zidongSB= function(){};
+        setJiangLing = function(){};
+        getJiangLing = function(){};
 
-    //公会功能
-    gongHui = function(){};
-    todayDrum = function(){};
-    weekContribution = function(){};
-    weekBattle = function(){};
-    monthBattle = function(){};
-    bonusReceive = function(){};
-    shangBingGongHui= function(){};
-    shangBingProtect = function(){};
+        //公会功能
+        gongHui = function(){};
+        todayDrum = function(){};
+        weekContribution = function(){};
+        weekBattle = function(){};
+        monthBattle = function(){};
+        bonusReceive = function(){};
+        shangBingGongHui= function(){};
+        shangBingProtect = function(){};
 
-    //杂项
-    checkValidUser = function(){};
-    checkActive = function(){};
-    stopInterval = function(){};
-    constructMain = function(){};
-    toCountry = function(){};
-    isCitySatisfied = function(){};
-    destroy = function(){};
+        //杂项
+        checkValidUser = function(){};
+        checkActive = function(){};
+        stopInterval = function(){};
+        constructMain = function(){};
+        toCountry = function(){};
+        isCitySatisfied = function(){};
+        destroy = function(){};
+    }else if(type === "guild"){
+        //公会功能
+        gongHui = function(){};
+        todayDrum = function(){};
+        weekContribution = function(){};
+        weekBattle = function(){};
+        monthBattle = function(){};
+        bonusReceive = function(){};
+        shangBingGongHui= function(){};
+        shangBingProtect = function(){};
+    }else if (type === "personal"){
+        //个人功能
+        main = function(){};
+        zhuLu = function(){};
+        riChang = function(){};
+        shangBing = function(){};
+        chat = function(){};
+        hongBao = function(){};
+        zidongSB= function(){};
+        setJiangLing = function(){};
+        getJiangLing = function(){};
+    }
 }
 
 

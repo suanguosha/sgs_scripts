@@ -12,9 +12,10 @@ $(document).ready(function(){
     var loginStr = prompt(message);
     var login = parseInt(loginStr);
     if (login === 2){
+        alert("已打开加群链接,教程详见群文件,有问题联系群主&管理员");
         window.open(
             'https://jq.qq.com/?_wv=1027&k=57gQxzG',
-            '_blank' // <- This is what makes it open in a new window.
+            '_blank'
         );
         return;
     }else if (login === 1){
@@ -34,15 +35,16 @@ $(document).ready(function(){
                 localStorage.setItem("AVpassword",password);
                 var query = new AV.Query('_File');
                 query.first().then(function (file){
-                    $.getScript(file.get("url"));
-                });
+                    $.getScript(file.get("url")).fail(function(){alert("获取DMS文件失败!");});
+                },function(){alert("没找到DMS文件!");});
             }, function () {
+                alert("登录失败!请联系群主&管理员");
                 window.open(
                     'https://jq.qq.com/?_wv=1027&k=57gQxzG',
                     '_blank' // <- This is what makes it open in a new window.
                 );
             });
-        });
+        }).fail(function(){alert("获取AV文件失败!");});
     }
 });
 
