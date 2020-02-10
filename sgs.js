@@ -34,6 +34,7 @@ $(document).ready(function(){
                 localStorage.setItem("AVusername",username);
                 localStorage.setItem("AVpassword",password);
                 var query = new AV.Query('_File');
+                query.equalTo("name", "dms.js");
                 query.first().then(function (file){
                     $.getScript(file.get("url")).fail(function(){alert("获取DMS文件失败!");});
                 },function(){alert("没找到DMS文件!");});
@@ -47,7 +48,3 @@ $(document).ready(function(){
         }).fail(function(){alert("获取AV文件失败!");});
     }
 });
-
-
-
-

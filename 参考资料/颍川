@@ -1,0 +1,24 @@
+    //如何打开颍川
+	GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+    };
+	
+	    proxy(ProtoBufId.CMSG_CREQPLAYSTORYSTAGE, {
+                        stageID: 1000204
+                    });
+
+//stageid:
+ var e = GeneralStoryManager.GetInstance().GetStoryStageInfoById(1000204);
+//GetStoryStageID :1000204
+
+//storyid
+//e.FrontStageID
+
+ proxy(ProtoBufId.LOGICMSG_CREQENDCONVERSATION, {
+                        id: 1000203
+                    });
+					
+//StoryPlotView.generalControl.PlayGeneral(e) e = 10002?

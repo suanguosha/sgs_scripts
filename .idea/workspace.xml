@@ -44,8 +44,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\sgs_scripts" />
       <recent name="C:\sgs_scripts\参考资料" />
+      <recent name="C:\sgs_scripts" />
       <recent name="E:\sgs_scripts" />
     </key>
   </component>
@@ -177,6 +177,22 @@
       <workItem from="1581082974212" duration="8551000" />
       <workItem from="1581103206964" duration="2793000" />
       <workItem from="1581109469510" duration="2918000" />
+      <workItem from="1581113963223" duration="544000" />
+      <workItem from="1581170205915" duration="684000" />
+      <workItem from="1581170986942" duration="3874000" />
+      <workItem from="1581174950896" duration="43000" />
+      <workItem from="1581210016011" duration="618000" />
+      <workItem from="1581256342931" duration="2979000" />
+      <workItem from="1581259839108" duration="963000" />
+      <workItem from="1581292057711" duration="3830000" />
+      <workItem from="1581296172809" duration="328000" />
+      <workItem from="1581354828231" duration="1624000" />
+      <workItem from="1581361683574" duration="823000" />
+      <workItem from="1581362838959" duration="115000" />
+      <workItem from="1581367685781" duration="5000" />
+      <workItem from="1581367984993" duration="1158000" />
+      <workItem from="1581369727098" duration="3463000" />
+      <workItem from="1581374835386" duration="416000" />
     </task>
     <servers />
   </component>
@@ -202,6 +218,10 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581374882399">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1581374882399" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1580771126631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
