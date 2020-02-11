@@ -1,4 +1,3 @@
-@@ -1,723 +0,0 @@
 var zhuluInterval;
 var shoutInterval;
 var shangbingInterval;
