@@ -1,3 +1,4 @@
+@@ -1,723 +0,0 @@
 var zhuluInterval;
 var shoutInterval;
 var shangbingInterval;
@@ -694,29 +695,28 @@ function loadGongHui(){
     },function(){alert("没找到公会管理模块!");});
 }
 function destroy(){
-        //个人功能
-        main = function(){};
-        zhuLu = function(){};
-        riChang = function(){};
-        shangBing = function(){};
-        chat = function(){};
-        hongBao = function(){};
-        zidongSB= function(){};
-        setJiangLing = function(){};
-        getJiangLing = function(){};
-        zidongStation= function(){};
+    //个人功能
+    main = function(){};
+    zhuLu = function(){};
+    riChang = function(){};
+    shangBing = function(){};
+    chat = function(){};
+    hongBao = function(){};
+    zidongSB= function(){};
+    setJiangLing = function(){};
+    getJiangLing = function(){};
+    zidongStation= function(){};
 
-        //杂项
-        checkValidUser = function(){};
-        checkActive = function(){};
-        stopInterval = function(){};
-        constructMain = function(){};
-        toCountry = function(){};
-        isCitySatisfied = function(){};
-        loadGongHui= function(){};
-        destroy = function(){};
+    //杂项
+    checkValidUser = function(){};
+    checkActive = function(){};
+    stopInterval = function(){};
+    constructMain = function(){};
+    toCountry = function(){};
+    isCitySatisfied = function(){};
+    loadGongHui= function(){};
+    destroy = function(){};
 }
-
 
 
 

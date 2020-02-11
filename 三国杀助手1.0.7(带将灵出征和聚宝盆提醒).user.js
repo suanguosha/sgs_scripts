@@ -31,27 +31,25 @@ if (window.location.host === "web.sanguosha.com"){
         //自动复制代码
         window.onclick = function(){
             navigator.clipboard.writeText("$.ajax('https://daimasha.github.io/sgs/sgs.js', {dataType: 'jsonp'})");
-            if (localStorage.getItem("elfReminder") !== "null"){
-                GM_setValue("elfReminder",localStorage.getItem("elfReminder"));
-                localStorage.setItem("elfReminder",null);
-            }
+            GM_setValue("elfReminder",localStorage.getItem("elfReminder"));
         }
     }
 }
 window.onload = () => {
+    var pushback = [];
     GM.getValue("elfReminder").then(function(reminder){
         var currTime = Math.round((new Date()).getTime() / 1000);
         var elfReminder = JSON.parse(reminder);
         console.log(elfReminder);
         var leftReminder = [];
-        elfReminder.forEach(function (elf) {
+        elfReminder.forEach(function (elf,index) {
             var notified = false;
             if (currTime > parseInt(elf[1])){
-                GM_notification(elf[0]+ '的聚宝盆可以领取了',"将灵聚宝盆提醒");
+                GM_notification(elf[0]+ '的将灵可以出征了',"将灵出征提醒");
                 notified = true;
             }
             if (currTime > parseInt(elf[2])){
-                GM_notification(elf[0]+ '的将灵可以出征了',"将灵出征提醒");
+                GM_notification(elf[0]+ '的将灵可以领取聚宝盆了',"将灵聚宝盆提醒");
                 notified = true;
             }
             if (notified === false){
