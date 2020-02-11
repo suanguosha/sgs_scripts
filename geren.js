@@ -161,8 +161,33 @@ function riChang(){
             }
         }, i * 500);
     });
-
     setTimeout(function(){alert("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");return main();}, 500);
+    //设置聚宝盆和出征结束时间
+    if (localStorage.getItem("elfReminder") === null){
+        var elfReminder = [];
+        elfReminder.push([UserData.self.userBrief.account,
+            GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo),
+            GeneralElfManager.GetInstance().taskElfInfo.task.finishTime
+        ]);
+        localStorage.setItem("elfReminder", JSON.stringify(elfReminder));
+    }else{
+        var elfReminder = JSON.parse(localStorage.getItem("elfReminder"));
+        var found = false;
+        elfReminder.forEach(function (reminder) {
+            if (reminder.includes(UserData.self.userBrief.account)){
+                reminder[1] = GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo);
+                reminder[2] = GeneralElfManager.GetInstance().taskElfInfo.task.finishTime;
+                found = true;
+            }
+        });
+        if (found === false){
+            elfReminder.push([UserData.self.userBrief.account,
+                GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo),
+                GeneralElfManager.GetInstance().taskElfInfo.task.finishTime
+            ]);
+        }
+        localStorage.setItem("elfReminder", JSON.stringify(elfReminder));
+    }
 }
 function chat(){
     if (!checkActive("shoutActive")){return main();}

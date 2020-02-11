@@ -1,38 +1,47 @@
-//公会
-function gongHui(){
+var scriptReady = false;
+$(document).ready(function(){
     $.getScript("//unpkg.com/xlsx/dist/shim.min.js",function(){
         $.getScript("//unpkg.com/xlsx/dist/xlsx.full.min.js",function(){
-            var type = prompt("公会考勤:每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5\n上兵指挥:免战城池倒计时6,积分排行7");
-            switch (type){
-                case "1":
-                    todayDrum();
-                    break;
-                case "2":
-                    weekContribution();
-                    break;
-                case "3":
-                    weekBattle();
-                    break;
-                case "4":
-                    monthBattle();
-                    break;
-                case "5":
-                    bonusReceive();
-                    break;
-                case "6":
-                    shangBingProtect();
-                    break;
-                case "7":
-                    shangBingGongHui();
-                    break;
-                case null:
-                    break;
-                default:
-                    main();
-                    break;
-            }
+            scriptReady = true;
         });
     });
+});
+
+//公会
+function gongHui(){
+    if (scriptReady !== true){
+        alert("公会管理加载中,请稍后");
+        return main();
+    }
+    var type = prompt("公会考勤:每日三鼓1，七日贡献2，本周胜场3，本月胜场4，抢红包名单5\n上兵指挥:免战城池倒计时6,积分排行7");
+    switch (type){
+        case "1":
+            todayDrum();
+            break;
+        case "2":
+            weekContribution();
+            break;
+        case "3":
+            weekBattle();
+            break;
+        case "4":
+            monthBattle();
+            break;
+        case "5":
+            bonusReceive();
+            break;
+        case "6":
+            shangBingProtect();
+            break;
+        case "7":
+            shangBingGongHui();
+            break;
+        case null:
+            break;
+        default:
+            main();
+            break;
+    }
 }
 function todayDrum(){
     var copy = confirm("是否将该玩家的本日敲鼓次数一并复制？");
