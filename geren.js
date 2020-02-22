@@ -6,6 +6,7 @@ var zhuLuActive = false;
 var shoutActive = false;
 var shangbingActive = false;
 var bonusActive = false;
+var lastSBAction = 0;
 
 $(document).ready(function(){
     //检查框架
@@ -321,7 +322,11 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
                 stopInterval(2);
                 setTimeout(function(){return main();}, 500);
             }else{
-                GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                lastSBAction = (lastSBAction === 0)? (Date.now() -50000): lastSBAction;
+                if ((Date.now() - lastSBAction)/1000 > 32) {
+                    GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID, cityID);
+                    lastSBAction = Date.now();
+                }
             }
         }else{  //如果在游戏中
             //自动提速
@@ -380,21 +385,26 @@ function zidongSB(){
                 stopInterval(2);
                 setTimeout(function(){return main();}, 500);
             }else{
-                var cityID;
-                var sortedCities = [];
-                var cities = GameGlaivesManager.GetInstance().mapCitys;
-                sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && isCitySatisfied(city,cityType,shouJun,DefenceTotal)).sort(function(a, b) {
-                    return a.DefenderNum - b.DefenderNum;    // sort by length
-                }).slice(0, 10);
-                if (sortedCities.length !== 0){
-                    if (attackMode === 2){
-                        sortedCities = sortedCities.sort(function(a, b) {
-                            return b.CityType - a.CityType;});
-                        cityID = sortedCities[0].CityID;
-                        GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
-                    }else{
-                        cityID = sortedCities[0].CityID;
-                        GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID,cityID);
+                lastSBAction = (lastSBAction === 0)? (Date.now() -50000): lastSBAction;
+                if ((Date.now() - lastSBAction)/1000 > 32) {
+                    var cityID;
+                    var sortedCities = [];
+                    var cities = GameGlaivesManager.GetInstance().mapCitys;
+                    sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true && isCitySatisfied(city, cityType, shouJun, DefenceTotal)).sort(function (a, b) {
+                        return a.DefenderNum - b.DefenderNum;    // sort by length
+                    }).slice(0, 10);
+                    if (sortedCities.length !== 0) {
+                        if (attackMode === 2) {
+                            sortedCities = sortedCities.sort(function (a, b) {
+                                return b.CityType - a.CityType;
+                            });
+                            cityID = sortedCities[0].CityID;
+                            GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID, cityID);
+                        } else {
+                            cityID = sortedCities[0].CityID;
+                            GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyBattle(jiangLingID, cityID);
+                        }
+                        lastSBAction = Date.now();
                     }
                 }
             }
@@ -489,24 +499,27 @@ function zidongStation(){
         return main();
     }
     shangbingInterval = setInterval(function(){
-        spriteList = GameGlaivesManager.GetInstance().GetGlaivesSpriteList();
-        if (spriteList.every(function(elf){return elf.cityID !== 0;})){
+        if (freeSprite.length === 0){
             stopInterval(2);
             setTimeout(function(){return main();}, 500);
         }
-        freeSprite.forEach(function(elf,index){
-            var sortedCities = [];
-            var cities = GameGlaivesManager.GetInstance().mapCitys;
-            sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityDefend(city) === true
-                && elf[1] >= city.SpriteRateType).sort(function(a, b) {
-                return a.CityType - b.CityType;    // 按照citytype,谁低(级别高)谁先
-            }).slice(0, 10);
-            if (sortedCities.length !== 0){
-                var topCityID = sortedCities[0].CityID;
-                GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyStation(elf[0],topCityID);
+        var elf = freeSprite[0];
+        var sortedCities = [];
+        var cities = GameGlaivesManager.GetInstance().mapCitys;
+        sortedCities = cities.filter(city => GameGlaivesManager.GetInstance().IsCityDefend(city) === true
+            && elf[1] >= city.SpriteRateType).sort(function(a, b) {
+            return a.CityType - b.CityType;    // 按照citytype,谁低(级别高)谁先
+        }).slice(0, 10);
+        if (sortedCities.length !== 0){
+            var topCityID = sortedCities[0].CityID;
+            GameGlaivesManager.GetInstance().ReqGlaivesOfStrategyStation(elf[0],topCityID);
+            freeSprite.shift();
+            if (freeSprite.length === 0){
+                stopInterval(2);
+                setTimeout(function(){return main();}, 500);
             }
-        });
-    },1000);
+        }
+    },5000);
 }
 
 function constructMain(){
@@ -574,7 +587,7 @@ function checkValidUser(){  //个人版personal:所有功能(一人一号,检查
                     loadGongHui();
                 },function(){
                     destroy();
-                    alert("绑定游卡账号失败,请重试或联系客服");
+                    alert("个人用户绑定游卡账号失败,请重试或联系客服");
                 });
             }else if (userAccount !== user.get("userAccount")[0]){  //如果userid和代码杀的uid对不上
                 destroy();
@@ -587,12 +600,26 @@ function checkValidUser(){  //个人版personal:所有功能(一人一号,检查
             var account = UserData.self.userBrief.account;
             var nickname = UserData.self.userBrief.nickname;
             var userList = user.get("userList");
+            var allowedUser = user.get("allowedUser");
             if (userList.includes(account) || userList.includes(nickname)){
                 constructMain();
                 loadGongHui();
             }else{
-                destroy();
-                alert("该账号共享成员不包括您\n请联系账号主人添加");
+                if (userList.length < allowedUser) {
+                    var paramsJson = {
+                        userAccount: account
+                    };
+                    AV.Cloud.run('addSharedUser', paramsJson).then(function () {    //如果绑定完毕
+                        constructMain();
+                        loadGongHui();
+                    }, function () {
+                        destroy();
+                        alert("共享用户添加游卡账号失败,请重试或联系客服");
+                    });
+                }else{
+                    destroy();
+                    alert("该账号共享人数已满\n请联系账号主人扩容");
+                }
             }
         }
     },function(){   //登录失败
@@ -690,7 +717,11 @@ function loadGongHui(){
     var query = new AV.Query('_File');
     query.equalTo("name", "ghs.js");
     query.first().then(function (file){
-        $.getScript(file.get("url")).fail(function(){alert("公会管理模块加载失败!");});
+        $.getScript(file.get("url")).fail(function(){
+            $.getScript("https://gitee.com/LDY681/sgs/raw/master/ghs.js").fail(function(){
+                alert("获取公会管理模块失败!");
+            });
+        });
     },function(){alert("没找到公会管理模块!");});
 }
 function destroy(){

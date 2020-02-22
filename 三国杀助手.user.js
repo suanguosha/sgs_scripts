@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         三国杀助手
 // @namespace    http://tampermonkey.net/
-// @version      1.0.6
+// @version      1.0.7
 // @description  代码杀，我爱杀！
 // @author       DaiMaSha
 // @match        http*://web.sanguosha.com/*
@@ -24,7 +24,7 @@ if (window.location.protocol !== "https:") {
     };
 
     //自动复制代码
-    window.onclick = function(){
+    document.getElementById("newGoInGame").onclick = function(){
         navigator.clipboard.writeText("$.ajax('https://daimasha.github.io/sgs/sgs.js', {dataType: 'jsonp'})");
     }
 }
