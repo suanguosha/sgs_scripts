@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BoilerList" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -224,6 +224,8 @@
       <workItem from="1582590270630" duration="1865000" />
       <workItem from="1582592773421" duration="519000" />
       <workItem from="1582593371459" duration="15000" />
+      <workItem from="1582656917366" duration="4359000" />
+      <workItem from="1582662812487" duration="822000" />
     </task>
     <servers />
   </component>

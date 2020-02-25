@@ -46,8 +46,8 @@ function gongHui(){
 function todayDrum(){
     var copy = confirm("是否将该玩家的本日敲鼓次数一并复制？");
     var userList = [];
-    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    game.GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
     userList.forEach(function(userID){
         if (maps[userID].drumsTimes < 3){
@@ -75,8 +75,8 @@ function weekContribution(){
     var copy = confirm("是否将该玩家的本周贡献一并复制？");
     var contri = parseInt(contribution);
     var userList = [];
-    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    game.GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
     userList.forEach(function(userID){
         if (maps[userID].contribution < contri){
@@ -103,8 +103,8 @@ function weekBattle(){
     var copy = confirm("是否将该玩家的本周胜场一并复制？");
     var battleWin = parseInt(battle);
     var userList = [];
-    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    game.GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
     userList.forEach(function(userID){
         if (maps[userID].battleWinTimes < battleWin){
@@ -131,8 +131,8 @@ function monthBattle(){
     var copy = confirm("是否将该玩家的本月胜场一并复制？");
     var battleWinMo = parseInt(battleMo);
     var userList = [];
-    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    game.GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
     userList.forEach(function(userID){
         if (maps[userID].dataStatistics.currentMonth.battleWinTimesTotal < battleWinMo){
@@ -156,8 +156,8 @@ function monthBattle(){
 }
 function bonusReceive(){
     var userList = [];
-    GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    game.GameGuildManager.GetInstance().guildUserList.forEach(function(userID){userList.push(parseInt(userID));});
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var tempList = [];
     userList.forEach(function(userID){
         if (maps[userID].guildBonusReceive !== null){
@@ -176,12 +176,12 @@ function bonusReceive(){
     XLSX.writeFile(wb, filename);
 }
 function shangBingGongHui(){
-    var currWindow = WindowManager.GetInstance().lastPopupGameWindow;
+    var currWindow = game.WindowManager.GetInstance().lastPopupGameWindow;
     if (currWindow === null || typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesRewardWindow"){
         alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开左上角的奖励窗口-点击公会奖池\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
         return;
     }
-    var maps = GameGuildManager.GetInstance().guildUserList.Maps;
+    var maps = game.GameGuildManager.GetInstance().guildUserList.Maps;
     var guildRankInfo = currWindow.rankInfo.userScoreRankList;
     if (guildRankInfo[0].guildRewardPool.length === 0 || guildRankInfo[0].userRewardPool.length === 0){
         alert("识别失败！\n请重新打开奖励-公会奖池（需要从窗口中读取信息）\n然后重新运行上兵脚本");
@@ -208,9 +208,9 @@ function shangBingProtect(){
     var cityType = parseInt(prompt("混合免战:全城池1,郡城+关隘2,州城+郡城6/针对免战:仅限关隘3,仅限郡城4,仅限州城5"));
     if (isNaN(cityType)){return main();}
     isGoodCountry = function(t) {
-        if (!t || t.CityType == GuildGlaivesCityEnum.CTDuCheng || t.Country == GameGlaivesManager.GetInstance().country){ return !1;}
+        if (!t || t.CityType == game.GuildGlaivesCityEnum.CTDuCheng || t.Country == game.GameGlaivesManager.GetInstance().country){ return !1;}
         for (var e, i = t.BeforeCityID ? t.BeforeCityID.length : 0, n = 0; i > n; n++){
-            if (e = GameGlaivesManager.GetInstance().GetMapCity(t.BeforeCityID[n]), e && e.Country == GameGlaivesManager.GetInstance().country) {return !0;}
+            if (e = game.GameGlaivesManager.GetInstance().GetMapCity(t.BeforeCityID[n]), e && e.Country == game.GameGlaivesManager.GetInstance().country) {return !0;}
         }
         return !1;
     }
@@ -224,7 +224,7 @@ function shangBingProtect(){
     }
 
     var now = Math.round((new Date()).getTime() / 1000);
-    var cities = GameGlaivesManager.GetInstance().mapCitys;
+    var cities = game.GameGlaivesManager.GetInstance().mapCitys;
     var sortedCities = [];
     sortedCities = cities.sort(function(a, b) {
         return a.GetProtectTime() - b.GetProtectTime();
