@@ -12,7 +12,7 @@ $(document).ready(function(){
     //检查框架
     if (typeof SceneManager === "undefined"){
         destroy();
-        alert("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”");
+        notify("您当前框架不为index.php，请自行百度“XX浏览器控制台切换框架”");
     }else{
         checkValidUser();
     }
@@ -28,7 +28,7 @@ function zhuLu(){
     if (!checkActive("zhuLuActive")){return main();}
     var tili = GameItemManager.GetInstance().GetItemByID(720027).ItemNum;
     if (tili === 0){
-        alert("您当前没有体力，稍后为您打开主菜单");
+        notify("您当前没有体力，稍后为您打开主菜单");
         return main();
     }
     var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
@@ -162,33 +162,7 @@ function riChang(){
             }
         }, i * 500);
     });
-    setTimeout(function(){alert("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");return main();}, 500);
-    //设置聚宝盆和出征结束时间
-    if (localStorage.getItem("elfReminder") === null){
-        var elfReminder = [];
-        elfReminder.push([UserData.self.userBrief.account,
-            GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo),
-            GeneralElfManager.GetInstance().taskElfInfo.task.finishTime
-        ]);
-        localStorage.setItem("elfReminder", JSON.stringify(elfReminder));
-    }else{
-        var elfReminder = JSON.parse(localStorage.getItem("elfReminder"));
-        var found = false;
-        elfReminder.forEach(function (reminder) {
-            if (reminder.includes(UserData.self.userBrief.account)){
-                reminder[1] = GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo);
-                reminder[2] = GeneralElfManager.GetInstance().taskElfInfo.task.finishTime;
-                found = true;
-            }
-        });
-        if (found === false){
-            elfReminder.push([UserData.self.userBrief.account,
-                GeneralElfManager.GetInstance().GetCornucopiaNextPeriodTime(GeneralElfManager.GetInstance().cornucopiaElfInfo.unlockCornucopiaSkillID,GeneralElfManager.GetInstance().cornucopiaElfInfo),
-                GeneralElfManager.GetInstance().taskElfInfo.task.finishTime
-            ]);
-        }
-        localStorage.setItem("elfReminder", JSON.stringify(elfReminder));
-    }
+    setTimeout(function(){notify("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");return main();}, 500);
 }
 function chat(){
     if (!checkActive("shoutActive")){return main();}
@@ -259,7 +233,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     var cities;
     var cityID = -1;
     if (liangcao === 0){
-        alert("您当前没有粮草，稍后为您打开主菜单");
+        notify("您当前没有粮草，稍后为您打开主菜单");
         return main();
     }
 
@@ -276,7 +250,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     }else if (hasCityName === 0){
         currWindow = WindowManager.GetInstance().lastPopupGameWindow;
         if (currWindow === null || typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
-            alert("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
+            notify("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
             return;
         }
         cityID = currWindow.cityVo.CityID;
@@ -286,7 +260,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
             return a.DefenderNum - b.DefenderNum;
         }).filter(city => GameGlaivesManager.GetInstance().IsCityAttack(city) === true).slice(0, 10);
         if (sortedCities.length === 0){
-            alert("所有城池免战中,没有找到空关");
+            notify("所有城池免战中,没有找到空关");
             return main();
         }else{
             var message = "可进攻的空关有:\n";
@@ -300,7 +274,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     }
 
     //设置出战将灵和次数
-    if (cityID === -1){alert("没有找到城池");return main();}
+    if (cityID === -1){notify("没有找到城池");return main();}
     var jiangLingID = getJiangLing();
     if (jiangLingID > 4 || jiangLingID < 0){return main();}
     // 进入上兵伐谋
@@ -352,7 +326,7 @@ function zidongSB(){
     var attackMode = 0;
     var liangcao = GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
     if (liangcao === 0){
-        alert("您当前没有粮草，稍后为您打开主菜单");
+        notify("您当前没有粮草，稍后为您打开主菜单");
         return main();
     }
     if (!checkActive("shangbingActive")){return main();}
@@ -455,7 +429,7 @@ function hongBao(){
                 if (hbCount === 30){
                     stopInterval(3);
                     var ybGain = GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
-                    setTimeout(function(){alert("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 500);
+                    setTimeout(function(){notify("每日30个红包已刷完，已得"+ybGain+"元宝");return main();}, 500);
                 }
             }
         });
@@ -495,7 +469,7 @@ function zidongStation(){
         }
     });
     if (freeSprite.length === 0){
-        alert("所有将灵已驻扎!");
+        notify("所有将灵已驻扎!");
         return main();
     }
     shangbingInterval = setInterval(function(){
@@ -539,7 +513,7 @@ function constructMain(){
                 hongBao();
                 break;
             case "5":
-                if (typeof gongHui === "function"){gongHui();}else{alert("公会管理模块加载中,请稍候");}
+                if (typeof gongHui === "function"){gongHui();}else{notify("公会管理模块加载中,请稍候");}
                 break;
             case "6":
                 shangBing(1);
@@ -572,6 +546,7 @@ function constructMain(){
     main();
 }
 function checkValidUser(){  //个人版personal:所有功能(一人一号,检查userAccount),公会版guild:所有功能(支持多号,检查userList)
+    notify();
     var { Query, User } = AV;
     AV.User.logOut();
     AV.User.logIn(localStorage.getItem("AVusername"), localStorage.getItem("AVpassword")).then(function(user){  //登录成功
@@ -587,11 +562,11 @@ function checkValidUser(){  //个人版personal:所有功能(一人一号,检查
                     loadGongHui();
                 },function(){
                     destroy();
-                    alert("个人用户绑定游卡账号失败,请重试或联系客服");
+                    notify("个人用户绑定游卡账号失败,请重试或联系客服");
                 });
             }else if (userAccount !== user.get("userAccount")[0]){  //如果userid和代码杀的uid对不上
                 destroy();
-                alert("一个代码杀会员只能绑定一个游卡账号");
+                notify("一个代码杀会员只能绑定一个游卡账号");
             }else{  //如果是老号并登录成功
                 constructMain();
                 loadGongHui();
@@ -614,17 +589,17 @@ function checkValidUser(){  //个人版personal:所有功能(一人一号,检查
                         loadGongHui();
                     }, function () {
                         destroy();
-                        alert("共享用户添加游卡账号失败,请重试或联系客服");
+                        notify("共享用户添加游卡账号失败,请重试或联系客服");
                     });
                 }else{
                     destroy();
-                    alert("该账号共享人数已满\n请联系账号主人扩容");
+                    notify("该账号共享人数已满\n请联系账号主人扩容");
                 }
             }
         }
     },function(){   //登录失败
         destroy();
-        alert("登录失败，请重试或联系客服");
+        notify("登录失败，请重试或联系客服");
     });
 }
 function checkActive(intervalName){
@@ -661,22 +636,22 @@ function stopInterval(intervalID = 0){
         case 1:
             zhuLuActive = false;
             clearInterval(zhuluInterval);
-            alert("逐鹿已停止(手动停止/体力没了/次数到了)");
+            notify("逐鹿已停止(手动停止/体力没了/次数到了)");
             break;
         case 2:
             shangbingActive = false;
             clearInterval(shangbingInterval);
-            alert("上兵已停止(手动停止/粮草没了/城池:是都城/属于己方/免战中/距离不足)");
+            notify("上兵已停止(手动停止/粮草没了/城池:是都城/属于己方/免战中/距离不足)");
             break;
         case 3:
             bonusActive = false;
             clearInterval(bonusInterval)
-            alert("红包已停止(手动停止/抢满30次了)");
+            notify("红包已停止(手动停止/抢满30次了)");
             break;
         case 4:
             shoutActive = false;
             clearInterval(shoutInterval);
-            alert("红包已停止(手动停止)");
+            notify("红包已停止(手动停止)");
             break;
         default:
             return main();
@@ -718,11 +693,11 @@ function loadGongHui(){
     query.equalTo("name", "ghs.js");
     query.first().then(function (file){
         $.getScript(file.get("url")).fail(function(){
-            $.getScript("https://gitee.com/LDY681/sgs/raw/master/ghs.js").fail(function(){
-                alert("获取公会管理模块失败!");
+            $.getScript("https://gitee.com/daimasha/sgs/raw/master/ghs.js").fail(function(){
+                notify("获取公会管理模块失败!");
             });
         });
-    },function(){alert("没找到公会管理模块!");});
+    },function(){notify("没找到公会管理模块!");});
 }
 function destroy(){
     //个人功能
@@ -748,6 +723,21 @@ function destroy(){
     destroy = function(){};
 }
 
+function notify(message="") {
+    if (!("Notification" in window)) {
+        if (message.length !== 0){
+            alert(message);
+        }
+    }
+    else if (Notification.permission === "granted") {
+        if (message.length !== 0){
+            var notification = new Notification(message);
+        }
+    }
+    else if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
+}
 
 
 

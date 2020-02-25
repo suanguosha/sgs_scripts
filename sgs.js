@@ -36,7 +36,11 @@ $(document).ready(function(){
                 var query = new AV.Query('_File');
                 query.equalTo("name", "dms.js");
                 query.first().then(function (file){
-                    $.getScript(file.get("url")).fail(function(){alert("获取DMS文件失败!");});
+                    $.getScript(file.get("url")).fail(function(){
+                        $.getScript("https://gitee.com/daimasha/sgs/raw/master/dms.js").fail(function () {
+                            alert("获取DMS文件失败!");
+                        })
+                    });
                 },function(){alert("没找到DMS文件!");});
             }, function () {
                 alert("登录失败!请联系群主&管理员");
