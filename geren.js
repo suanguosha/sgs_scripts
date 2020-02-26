@@ -24,8 +24,8 @@ function zhuLu(){
     if (!checkActive("zhuLuActive")){return main();}
     var tili = game.GameItemManager.GetInstance().GetItemByID(720027).ItemNum;
     if (tili === 0){
-        notify("您当前没有体力，稍后为您打开主菜单");
-        return main();
+        notify("您当前没有体力");
+        return;
     }
     var towerLevel = prompt("请输入关卡号，挑战新关卡请输入0");
     if (towerLevel === null){return main();}
@@ -156,7 +156,7 @@ function riChang(){
             }
         }, i * 500);
     });
-    setTimeout(function(){notify("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");return main();}, 500);
+    setTimeout(function(){notify("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");}, 500);
 }
 function chat(){
     if (!checkActive("shoutActive")){return main();}
@@ -225,8 +225,8 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     var cities;
     var cityID = -1;
     if (liangcao === 0){
-        notify("您当前没有粮草，稍后为您打开主菜单");
-        setTimeout(function(){return main();},500);
+        notify("您当前没有粮草");
+        return;
     }
 
     //设置cityID
@@ -242,7 +242,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     }else if (hasCityName === 0){
         currWindow = game.WindowManager.GetInstance().lastPopupGameWindow;
         if (currWindow === null || typeof currWindow === "undefined" || typeof currWindow.name === "undefined" || currWindow.name !== "GameGlaivesCityInfoWindow"){
-            notify("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本(ctrl+M/ctrl+shift+M)进行操作");
+            notify("读取信息失败！请按提示操作\n进入上兵伐谋模式-点开进攻目标的城池窗口\n然后重新呼出脚本进行操作");
             return;
         }
         cityID = currWindow.cityVo.CityID;
@@ -253,7 +253,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
         }).filter(city => game.GameGlaivesManager.GetInstance().IsCityAttack(city) === true).slice(0, 10);
         if (sortedCities.length === 0){
             notify("所有城池免战中,没有找到空关");
-            return main();
+            return;
         }else{
             var message = "可进攻的空关有:\n";
             sortedCities.forEach(function(city,index){
@@ -266,7 +266,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
     }
 
     //设置出战将灵和次数
-    if (cityID === -1){notify("没有找到城池");return main();}
+    if (cityID === -1){notify("没有找到城池");return;}
     var jiangLingID = getJiangLing();
     if (jiangLingID > 4 || jiangLingID < 0){return main();}
     // 进入上兵伐谋
@@ -317,8 +317,8 @@ function zidongSB(){
     var attackMode = 0;
     var liangcao = game.GameItemManager.GetInstance().GetItemByID(730102).ItemNum;
     if (liangcao === 0){
-        notify("您当前没有粮草，稍后为您打开主菜单");
-        return main();
+        notify("您当前没有粮草");
+        return;
     }
     if (!checkActive("shangbingActive")){return main();}
     var cityType = parseInt(prompt("混合进攻:全城池1,郡城+关隘2,州城+郡城6\n专对进攻:仅限关隘3,仅限郡城4,仅限州城5\n不输入则默认全城池"));
@@ -419,7 +419,7 @@ function hongBao(){
                 if (hbCount === 30){
                     stopInterval(3);
                     var ybGain = game.GameItemManager.GetInstance().GetItemByID(100002).ItemNum - parseInt(localStorage.getItem("initYB"));
-                    setTimeout(function(){notify("每日30个红包已刷完，已得"+ybGain+"元宝");}, 500);
+                    setTimeout(function(){notify("每日30个红包已刷完，已得"+ybGain+"元宝");return;}, 500);
                 }
             }
         });
@@ -460,7 +460,7 @@ function zidongStation(){
     });
     if (freeSprite.length === 0){
         notify("所有将灵已驻扎!");
-        return main();
+        return;
     }
     shangbingInterval = setInterval(function(){
         if (freeSprite.length === 0){
@@ -719,7 +719,14 @@ function notify(message="") {
     }
     else if (Notification.permission === "granted") {
         if (message.length !== 0){
-            var notification = new Notification(message);
+            var options = {
+                body: "点击通知即可呼出主菜单"
+            }
+            var notification = new Notification(message,options);
+            notification.onclick = function(event) {
+                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                main();
+            }
         }
     }
     else if (Notification.permission !== "granted") {
