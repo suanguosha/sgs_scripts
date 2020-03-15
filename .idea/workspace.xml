@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CS448-Project2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -229,6 +229,12 @@
       <workItem from="1582738609358" duration="1438000" />
       <workItem from="1582741038463" duration="8000" />
       <workItem from="1582743647844" duration="292000" />
+      <workItem from="1582763794599" duration="5000" />
+      <workItem from="1582993797986" duration="428000" />
+      <workItem from="1583112029371" duration="301000" />
+      <workItem from="1583181734584" duration="784000" />
+      <workItem from="1583522363382" duration="134000" />
+      <workItem from="1583676540311" duration="796000" />
     </task>
     <servers />
   </component>
@@ -258,10 +264,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1581374882399" />
-    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1582741044857">
+    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1583677346516">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1582741044857" />
+    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583677346516" />
     <state x="276" y="55" key="SettingsEditor" timestamp="1581019153069">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -270,6 +276,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="408" y="29" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1580763579109" />
+    <state x="447" y="145" width="642" height="534" key="find.popup" timestamp="1583677125792">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1583677125792" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580510434557">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
