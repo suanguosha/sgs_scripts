@@ -53,7 +53,7 @@ function zhuLu(){
             if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
                 stopInterval(1);
             }else{
-                var towerLevelID = parseInt(towerLevel, 10) ? parseInt(towerLevel, 10) : NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+                var towerLevelID = parseInt(towerLevel, 10) ? (parseInt(towerLevel, 10)+200): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
                 var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
                 NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
             }
@@ -75,7 +75,7 @@ function zhuLu(){
                 GameContext.LeaveGameScene();
             }
         }
-    },1000);
+    },2000);
 }
 function riChang(){
     var game = window.parent;
@@ -154,7 +154,7 @@ function riChang(){
             if (mail.hasAttach !== undefined && mail.isAttachReceive !== true){
                 MailManager.GetInstance().ReqGift(mail.emailID, mail.attaches.sign);
             }
-        }, i * 500);
+        }, i * 1500);
     });
     setTimeout(function(){notify("一键日常执行完毕!\n个人:每日签到/每日任务/活跃奖励/上兵粮草/邮件附件\n公会:公会3敲/公会任务/每周争霸奖励\n白嫖:免费将印/三国秀\n将灵:聚宝盆奖励/出征奖励/自动出征");}, 500);
 }
@@ -311,7 +311,7 @@ function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找�
                 GameContext.LeaveGameScene();
             }
         }
-    }, 1000);
+    }, 2000);
 }
 function zidongSB(){
     var attackMode = 0;
@@ -391,7 +391,7 @@ function zidongSB(){
                 GameContext.LeaveGameScene();
             }
         }
-    }, 1000);
+    }, 2000);
 }
 function hongBao(){
     if (!checkActive("bonusActive")){return main();}
@@ -423,7 +423,7 @@ function hongBao(){
                 }
             }
         });
-    },1000);
+    },5000);
 }
 function setJiangLing(){
     var message = "";
