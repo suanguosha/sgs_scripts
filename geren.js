@@ -51,11 +51,11 @@ function zhuLu(){
     zhuluInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
             if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === stopPoint) {
-                stopInterval(1);
+                clearInterval(zhuluInterval);
             }else{
                 var towerLevelID = parseInt(towerLevel, 10) ? (parseInt(towerLevel, 10)+200): NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
-                var generalList = NewCompeteWorldManager.GetInstance().GetBattleGeneralListForTemp(NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(towerLevelID).MaxGeneralCount);
-                NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevelID, generalList);
+                var generalList = NewCompeteWorldManager.GetInstance().tempList;
+                NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(towerLevel, generalList);
             }
         } else {  //如果在游戏中
             //自动提速
@@ -71,11 +71,53 @@ function zhuLu(){
                 }
             }
             //牌局中出现结算按钮，离开游戏
-            if (WindowManager.GetInstance().hasWindow("GameResultWindow")) {
+            if (WindowManager.GetInstance().hasWindow("NewGameResultWindow")) {
                 GameContext.LeaveGameScene();
             }
         }
     },2000);
+}
+
+function newzhuLu(){
+    zhuluInterval = setInterval(function () {
+        if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+            if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0) {
+                clearInterval(zhuluInterval);
+            }else{
+                //获取当前关卡号的方法
+                var curTowerLevelID = NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+				//获取当前关卡友方武将数量方法
+				var curTowerGeneralCount = NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(curTowerLevelID).MaxGeneralCount;
+				//获取当前关卡友方武将列表方法
+                var generallist = NewCompeteWorldManager.GetInstance().GetComboGeneralListForTemp(curTowerGeneralCount);
+                //新赛季传参不传列表了,传数量
+				NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID, curTowerGeneralCount);
+            }    
+        } else {  //如果在游戏
+            //牌局中出现结算按钮，离开游戏
+            if (WindowManager.GetInstance().hasWindow("NewGameResultWindow")) {
+                GameContext.LeaveGameScene();
+            }
+        }
+    },2000);
+}
+newzhuLu();
+
+function newsaoDang(){
+    let elfList = GeneralElfManager.GetInstance().elfList;
+    let levels = [110,115,120,130,135,140,145,155,160,165,170,180,185,190,195];
+    let legitElfs = [];
+    elfList.forEach((elf, i) => {
+        if (elf.rateType >=4 && elf.statusType.indexOf(2) !== 0 && elf.statusType.indexOf(8) !== 0){ //B以上将灵以及非出征和扫荡状态
+            legitElfs.push(elf.pkID);
+        }
+    });
+
+    legitElfs.forEach((elf, i) => {
+        setTimeout(() => {
+            NewCompeteWorldManager.GetInstance().ReqCompeteWorldSweep(levels[i],elf);
+        }, i * 1000); 
+    });
 }
 function riChang(){
     var game = window.parent;
