@@ -78,6 +78,7 @@ function zhuLu(){
     },2000);
 }
 
+//逐鹿,一关一关往下刷
 function newzhuLu(){
     zhuluInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
@@ -92,6 +93,32 @@ function newzhuLu(){
                 var generallist = NewCompeteWorldManager.GetInstance().GetComboGeneralListForTemp(curTowerGeneralCount);
                 //新赛季传参不传列表了,传数量
 				NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID, curTowerGeneralCount);
+            }    
+        } else {  //如果在游戏
+            //牌局中出现结算按钮，离开游戏
+            if (WindowManager.GetInstance().hasWindow("NewGameResultWindow")) {
+                GameContext.LeaveGameScene();
+            }
+        }
+    },2000);
+}
+newzhuLu();
+
+//逐鹿,固定刷一关
+function newzhuLu(){
+    zhuluInterval = setInterval(function () {
+        if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
+            if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0) {
+                clearInterval(zhuluInterval);
+            }else{
+                //获取当前关卡号的方法
+                var curTowerLevelID = NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
+				//获取当前关卡友方武将数量方法
+				var curTowerGeneralCount = NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(105).MaxGeneralCount;
+				//获取当前关卡友方武将列表方法
+                var generallist = NewCompeteWorldManager.GetInstance().GetComboGeneralListForTemp(curTowerGeneralCount);
+                //新赛季传参不传列表了,传数量
+				NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(105, curTowerGeneralCount);
             }    
         } else {  //如果在游戏
             //牌局中出现结算按钮，离开游戏
