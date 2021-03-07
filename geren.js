@@ -105,15 +105,53 @@ function newzhuLu(){
 newzhuLu();
 
 //逐鹿,固定刷一关
-function newzhuLu(){
+function newnewzhuLu(){
+    // 不在逐鹿天下模式下进入
+    if (SceneManager.GetInstance().CurrentScene.sceneName !== 'NewCompeteWorldScene') {
+        RoomControler.GetInstance().EnterMode(ModeIDType.MITZhuLuTianXiaNew);
+    }
+
+    //.切换逐鹿将灵（让低等级将灵出战蹭灵韵）
+    //获取B将灵中等级最高的
+    let elfList = GeneralElfManager.GetInstance().elfList;
+    let newPveElf = {level: 0, pkID: 0};
+    elfList.forEach((elf, i) => {
+        if (elf.rateType == 4 && elf.level > newPveElf.level ){ //B以上将灵以及非出征和扫荡状态
+            newPveElf.level = elf.level;
+            newPveElf.pkID = elf.pkID;
+        }
+    });
+
+    //保留原有出战主力将灵信息
+    let oldPveElfpkID = GeneralElfManager.GetInstance().pveElfInfo.pkID
+
+    //切换出战将灵为该将灵
+    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+    };
+    var proxy = function(t, e){
+        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+    };
+    proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
+        pkID: newPveElf.pkID,
+        type: 3 //出战状态
+    });
+
     zhuluInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
             if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0) {
                 clearInterval(zhuluInterval);
+
+                //重置为原先出战将灵
+                proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
+                    pkID: oldPveElfpkID,
+                    type: 3 //出战状态
+                });
             }else{
                 //获取当前关卡号的方法
                 var curTowerLevelID = NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
 				//获取当前关卡友方武将数量方法
+                //关卡选择GetInstance().GetCompeteWorldbyId(number) number: 固定数字（固定关卡）/curTowerLevelID(往上刷)
 				var curTowerGeneralCount = NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(105).MaxGeneralCount;
 				//获取当前关卡友方武将列表方法
                 var generallist = NewCompeteWorldManager.GetInstance().GetComboGeneralListForTemp(curTowerGeneralCount);
@@ -128,7 +166,7 @@ function newzhuLu(){
         }
     },2000);
 }
-newzhuLu();
+newnewzhuLu();
 
 function newsaoDang(){
     let elfList = GeneralElfManager.GetInstance().elfList;
@@ -284,6 +322,11 @@ function chat(){
         ChatManager.GetInstance().SendChatMsg(chatMessage, 0, channelType);
         count++;
     },parseFloat(chatTimeInterval)*1000);
+}
+function newChat() {
+    shoutInterval = setInterval(function(){
+        ChatManager.GetInstance().SendGuildNewRecruitMsg({level: 200, vipLevel: 7, spriteRateType: 6, guildGroupNo: 557948691});    //等级，会员等级，将灵等级，QQ群号
+    }, 10000);
 }
 function shangBing(hasCityName){    //1输入城池查找,0读取窗口,2查找空关
     if (!checkActive("shangbingActive")){return main();}
