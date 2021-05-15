@@ -126,37 +126,39 @@ function newnewzhuLu(){
     let oldPveElfpkID = GeneralElfManager.GetInstance().pveElfInfo.pkID
 
     //切换出战将灵为该将灵
-    GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
-        var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
-    };
-    var proxy = function(t, e){
-        GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
-    };
-    proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
-        pkID: newPveElf.pkID,
-        type: 3 //出战状态
-    });
-
+    if (oldPveElfpkID != newPveElf.pkID){
+        GameShopManager.GetInstance().protoProxy.fakeProxy = function(t,e){
+            var i=new ProtoVO;i.protoID=t,i.protoData=e,this.clientSocketSend(i)
+        };
+        var proxy = function(t, e){
+            GameShopManager.GetInstance().protoProxy.fakeProxy(t,e);
+        };
+        proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
+            pkID: newPveElf.pkID,
+            type: 3 //出战状态
+        });
+    }
     zhuluInterval = setInterval(function () {
         if (!SceneManager.GetInstance().CurrentScene.manager) { //如果不在游戏中
             if (GameItemManager.GetInstance().GetItemByID(720027).ItemNum === 0) {
                 clearInterval(zhuluInterval);
 
                 //重置为原先出战将灵
-                proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
-                    pkID: oldPveElfpkID,
-                    type: 3 //出战状态
-                });
+                if (oldPveElfpkID != newPveElf.pkID){
+                    proxy(ProtoBufId.CMSG_CREQGENERALSPRITESTATUSSET, {
+                        pkID: oldPveElfpkID,
+                        type: 3 //出战状态
+                    });
+                }
             }else{
-                //获取当前关卡号的方法
+                //获取当前关卡号的方法(刷固定管卡就把curTowerLevelID改为固定的)
                 var curTowerLevelID = NewCompeteWorldManager.GetInstance().competeWorldInfo.curTowerLevelID;
 				//获取当前关卡友方武将数量方法
-                //关卡选择GetInstance().GetCompeteWorldbyId(number) number: 固定数字（固定关卡）/curTowerLevelID(往上刷)
-				var curTowerGeneralCount = NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(105).MaxGeneralCount;
+				var curTowerGeneralCount = NewCompeteWorldConfig.GetInstance().GetCompeteWorldbyId(curTowerLevelID).MaxGeneralCount;
 				//获取当前关卡友方武将列表方法
                 var generallist = NewCompeteWorldManager.GetInstance().GetComboGeneralListForTemp(curTowerGeneralCount);
                 //新赛季传参不传列表了,传数量
-				NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(105, curTowerGeneralCount);
+				NewCompeteWorldManager.GetInstance().ReqCompeteWorldBattle(curTowerLevelID, curTowerGeneralCount);
             }    
         } else {  //如果在游戏
             //牌局中出现结算按钮，离开游戏
